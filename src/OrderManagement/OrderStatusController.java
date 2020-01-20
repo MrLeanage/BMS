@@ -21,10 +21,31 @@ public class OrderStatusController {
         app.setScene(scene);
         app.show();
     }
+    //internal methods
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
+    private void Billing(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/InventoryManagement/ItemStock.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
+
+        Scene scene = new Scene(home_page);
+        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
+        app.setScene(scene);
+        app.show();
+    }
+    @FXML
+    private void Products(ActionEvent event) throws IOException {
+
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
+
+        Scene scene = new Scene(home_page);
+        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
+        app.setScene(scene);
+        app.show();
+    }
+    @FXML
+    private void OrderMenu(ActionEvent event) throws IOException {
+
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
@@ -42,26 +63,16 @@ public class OrderStatusController {
         app.show();
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
+    private void SalesInfo(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-
-    /*
-    @FXML
-    private void InventoryNotification(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/InventoryManagement/OrderStatus.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
         app.setScene(scene);
         app.show();
     }
-    */
+
+
+
 }

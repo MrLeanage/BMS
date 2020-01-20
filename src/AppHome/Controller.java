@@ -24,7 +24,7 @@ public class Controller {
     @FXML
     private void CashierHome(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/InventoryManagement/ItemStock.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();

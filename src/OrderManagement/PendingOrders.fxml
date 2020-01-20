@@ -35,9 +35,9 @@
       <AnchorPane layoutX="-2.0" layoutY="90.0" prefHeight="510.0" prefWidth="1258.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="90.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="498.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="1228.0" AnchorPane.bottomAnchor="7.0" AnchorPane.topAnchor="0.0" />
-            <AnchorPane prefHeight="509.0" prefWidth="171.0">
+            <AnchorPane prefHeight="509.0" prefWidth="171.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="481.0" layoutX="23.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="145.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="481.0" layoutX="23.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="145.0" AnchorPane.topAnchor="8.0" />
                   <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="85.0" onAction="#ItemWithdraw" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #2b384b;" text="Item Withdraw" textFill="WHITE" AnchorPane.leftAnchor="23.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -93,9 +93,9 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="169.0" layoutY="-11.0" prefHeight="520.0" prefWidth="1088.0">
+            <AnchorPane layoutX="169.0" layoutY="-3.0" prefHeight="512.0" prefWidth="1088.0" AnchorPane.leftAnchor="169.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TableView layoutX="10.0" layoutY="55.0" prefHeight="382.0" prefWidth="1053.0">
+                  <TableView layoutX="9.0" layoutY="45.0" prefHeight="382.0" prefWidth="1058.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="45.0">
                     <columns>
                       <TableColumn prefWidth="32.22224426269531" text="OID" />
                       <TableColumn prefWidth="92.5555419921875" text="Menu Code " />
@@ -111,13 +111,13 @@
                         <TableColumn prefWidth="87.8887939453125" text="Action" />
                     </columns>
                   </TableView>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="30.0" layoutX="8.0" layoutY="19.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1054.0" />
-                  <Label layoutX="21.0" layoutY="21.0" text="Pending Orders" textFill="WHITE">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="30.0" layoutX="8.0" layoutY="9.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1060.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                  <Label layoutX="21.0" layoutY="11.0" text="Pending Orders" textFill="WHITE" AnchorPane.leftAnchor="21.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="59.0" layoutX="9.0" layoutY="440.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1054.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="59.0" layoutX="9.0" layoutY="430.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1057.0" />
                </children></AnchorPane>
          </children>
       </AnchorPane>

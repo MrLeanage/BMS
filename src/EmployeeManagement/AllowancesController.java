@@ -34,7 +34,7 @@ public class AllowancesController {
     @FXML
     private void OrderStatus(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/OrderManagement/OrderStatus.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/OrderManagement/Orders.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();

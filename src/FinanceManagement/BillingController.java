@@ -1,4 +1,4 @@
-package EmployeeManagement;
+package FinanceManagement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,11 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SystemUsersController {
+public class BillingController {
     @FXML
     private void LogoutSession(ActionEvent event) throws IOException {
 
@@ -21,10 +22,31 @@ public class SystemUsersController {
         app.setScene(scene);
         app.show();
     }
+    //internal methods
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
+    private void Billing(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/InventoryManagement/ItemStock.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
+
+        Scene scene = new Scene(home_page);
+        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
+        app.setScene(scene);
+        app.show();
+    }
+    @FXML
+    private void Products(ActionEvent event) throws IOException {
+
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
+
+        Scene scene = new Scene(home_page);
+        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
+        app.setScene(scene);
+        app.show();
+    }
+    @FXML
+    private void OrderMenu(ActionEvent event) throws IOException {
+
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
@@ -34,7 +56,7 @@ public class SystemUsersController {
     @FXML
     private void OrderStatus(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/OrderManagement/Orders.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/OrderManagement/OrderStatus.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
@@ -42,9 +64,9 @@ public class SystemUsersController {
         app.show();
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
+    private void SalesInfo(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/EmployeeManagement/Employee.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/FinanceManagement/Billing.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
@@ -53,33 +75,12 @@ public class SystemUsersController {
     }
     //internal methods
     @FXML
-    private void SalarySchemes(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/EmployeeManagement/SalarySchemes.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void playBeep(){
+        AudioClip note = new AudioClip(this.getClass().getResource("/lib/SoundTracks/beep-bit.wav").toString());
+        note.play();
     }
-    @FXML
-    private void Allowances(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/EmployeeManagement/Allowances.fxml"));
 
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void SystemUsers(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/EmployeeManagement/SystemUsers.fxml"));
 
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
 }

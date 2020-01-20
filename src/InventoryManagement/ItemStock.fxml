@@ -67,7 +67,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="55.0" prefHeight="40.0" prefWidth="145.0" style="-fx-border-radius: 0; -fx-background-color: #2b384b;" text="Notification" textFill="WHITE" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="55.0">
+                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="55.0" onMouseClicked="#playBeep" prefHeight="40.0" prefWidth="145.0" style="-fx-border-radius: 0; -fx-background-color: #2b384b;" text="Notification" textFill="WHITE" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="55.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderManagement.OrderStatusController">
    <children>
-      <AnchorPane layoutX="1.0" prefHeight="77.0" prefWidth="1250.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="1.0" prefHeight="77.0" prefWidth="1250.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="513.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#364760" height="64.0" layoutX="14.0" layoutY="12.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
             <AnchorPane layoutX="176.0" layoutY="9.0" prefHeight="68.0" prefWidth="1062.0">
@@ -79,7 +79,7 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="179.0" layoutY="7.0" prefHeight="510.0" prefWidth="1079.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="8.0">
+            <AnchorPane layoutX="179.0" layoutY="7.0" prefHeight="510.0" prefWidth="1079.0" AnchorPane.bottomAnchor="5.0">
                <children>
                   <TableView layoutX="9.0" layoutY="80.0" prefHeight="345.0" prefWidth="1055.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
                      <columns>
@@ -102,17 +102,17 @@
                      </font>
                   </Label>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="59.0" layoutX="9.0" layoutY="430.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1055.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" />
-                  <TextField fx:id="pBrandTextBoxSearch" prefHeight="33.0" prefWidth="912.0" promptText="Search Order by Menu Name" AnchorPane.bottomAnchor="440.0" AnchorPane.topAnchor="44.0" />
-                  <Button layoutX="920.0" layoutY="42.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="134.0" style="-fx-background-color: #040972;" text="Search" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="42.0">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
-                     </graphic>
-                  </Button>
                </children>
             </AnchorPane>
+            <TextField fx:id="pBrandTextBoxSearch" layoutX="180.0" layoutY="43.0" prefHeight="33.0" prefWidth="912.0" promptText="Search Order by Menu Name" AnchorPane.bottomAnchor="440.0" />
+            <Button layoutX="1099.0" layoutY="42.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="134.0" style="-fx-background-color: #040972;" text="Search" textFill="WHITE" AnchorPane.topAnchor="49.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
    </children>
