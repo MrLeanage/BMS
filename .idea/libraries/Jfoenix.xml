@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Jfoenix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/lib/Jfoenix" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/src/lib/Jfoenix" recursive="false" />
+  </library>
+</component>

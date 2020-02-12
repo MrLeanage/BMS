@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Fontawesomefx">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/lib/Fontawesomefx" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/src/lib/Fontawesomefx" recursive="false" />
+  </library>
+</component>
