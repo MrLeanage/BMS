@@ -31,6 +31,9 @@ public class Supplier {
 
     }
 
+    public Supplier(String sIName, String sIAddress, int sIPhone1, int sIPhone2, String sIEmail, String sIType, String sIBank, Long sIAccNo) {
+    }
+
     public String getsIID() {
         return sIID.get();
     }
@@ -52,7 +55,8 @@ public class Supplier {
     }
 
     public void setsIName(String sIName) {
-        this.sIName.set(sIName);
+
+        this.sIName = new SimpleStringProperty(sIName);
     }
 
     public String getsIAddress() {
@@ -64,7 +68,7 @@ public class Supplier {
     }
 
     public void setsIAddress(String sIAddress) {
-        this.sIAddress.set(sIAddress);
+        this.sIAddress = new SimpleStringProperty(sIAddress);
     }
 
     public int getsIPhone1() {
@@ -76,7 +80,7 @@ public class Supplier {
     }
 
     public void setsIPhone1(int sIPhone1) {
-        this.sIPhone1.set(sIPhone1);
+        this.sIPhone1 = new SimpleIntegerProperty(sIPhone1);
     }
 
     public int getsIPhone2() {
@@ -88,7 +92,7 @@ public class Supplier {
     }
 
     public void setsIPhone2(int sIPhone2) {
-        this.sIPhone2.set(sIPhone2);
+        this.sIPhone2 = new SimpleIntegerProperty(sIPhone2);
     }
 
     public String getsIEmail() {
@@ -100,7 +104,7 @@ public class Supplier {
     }
 
     public void setsIEmail(String sIEmail) {
-        this.sIEmail.set(sIEmail);
+        this.sIEmail = new SimpleStringProperty(sIEmail);
     }
 
     public String getsIType() {
@@ -112,7 +116,7 @@ public class Supplier {
     }
 
     public void setsIType(String sIType) {
-        this.sIType.set(sIType);
+        this.sIType = new SimpleStringProperty(sIType);
     }
 
     public String getsIBank() {
@@ -124,7 +128,7 @@ public class Supplier {
     }
 
     public void setsIBank(String sIBank) {
-        this.sIBank.set(sIBank);
+        this.sIBank = new SimpleStringProperty(sIBank);
     }
 
     public Long getsIAccNo() {
@@ -136,6 +140,6 @@ public class Supplier {
     }
 
     public void setsIAccNo(Long sIAccNo) {
-        this.sIAccNo.set(sIAccNo);
+        this.sIAccNo = new SimpleLongProperty(sIAccNo);
     }
 }

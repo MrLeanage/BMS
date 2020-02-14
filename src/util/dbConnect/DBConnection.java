@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
     
-    public Connection Connect(){
+    public static Connection Connect(){
         AlertPopUp popUpMsg = new AlertPopUp();
 
         try {

@@ -79,6 +79,24 @@ public class DataValidation {
 
 
     }
+    //Checking Long for not empty with same name
+
+    public static boolean TextFieldNotEmpty(Long longField){
+        //returning integer fields empty as default value
+        boolean returnVal = false;
+        if(longField.toString() != null  && !longField.toString().isEmpty()){
+            returnVal = true;
+        }
+        return returnVal;
+    }
+    public static void TextFieldNotEmpty(Long longField, Label label, String validationText){
+
+        if(!TextFieldNotEmpty(longField)){
+            label.setText(validationText);
+        }
+
+
+    }
     //email validation
     public static final Pattern VALIDEMAIL =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -94,7 +112,7 @@ public class DataValidation {
 
     public static void isValidEmail(String emailStr, Label label, String validationText) {
 
-        if(!isValidEmail(emailStr)){
+        if((!isValidEmail(emailStr))&& (!emailStr.isEmpty())){
             label.setText(validationText);
         }
     }
@@ -113,7 +131,7 @@ public class DataValidation {
 
     public static void isValidPhoneNo(String phone, Label label, String validationText){
 
-        if(!isValidPhoneNo(phone)){
+        if((!isValidPhoneNo(phone))&& (!phone.isEmpty())){
             label.setText(validationText);
         }
     }
@@ -128,7 +146,7 @@ public class DataValidation {
         }
     }
     public static void isValidNumberFormat(String number, Label label, String validationText) {
-        if(!isValidNumberFormat(number)){
+        if((!isValidNumberFormat(number)) && (!number.isEmpty())){
             label.setText(validationText);
         }
     }
