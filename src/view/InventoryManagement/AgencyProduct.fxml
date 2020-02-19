@@ -2,7 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.SupplierViewController">
+<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.AgencyProductsViewController">
    <children>
       <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -82,7 +83,7 @@
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="TH" />
                      </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="205.0" onAction="#AgencyProduct" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Agency Products" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="205.0" onAction="#AgencyProduct" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Agency Products" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -90,7 +91,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="TH" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="215.0" onAction="#Supplier" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Supplier" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="255.0">
+                  <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="215.0" onAction="#Supplier" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Supplier" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="255.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -102,59 +103,63 @@
             </AnchorPane>
             <AnchorPane layoutX="169.0" layoutY="-2.0" prefHeight="580.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="170.0" layoutY="394.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
-                  <TableView fx:id="SupplierTable" layoutX="7.0" layoutY="50.0" onMousePressed="#loadSelectedData" prefHeight="355.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="210.0" layoutY="348.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                  <TableView fx:id="AgencyProductTable" layoutX="7.0" layoutY="50.0" onMousePressed="#loadSelectedData" prefHeight="315.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                     <columns>
-                      <TableColumn fx:id="SIIDColumn" prefWidth="57.66668701171875" text="ID" />
-                      <TableColumn fx:id="SINameColumn" prefWidth="229.0" text="Supplier Name" />
-                        <TableColumn fx:id="SIAddressColumn" prefWidth="159.0" text="Address" />
-                        <TableColumn fx:id="SIPhone1Column" prefWidth="69.0" text="Phone1" />
-                        <TableColumn fx:id="SIPhone2Column" prefWidth="56.0" text="Phone 2" />
-                        <TableColumn fx:id="SIEmailColumn" prefWidth="161.6666259765625" text="Email" />
-                        <TableColumn fx:id="SITypeColumn" prefWidth="79.6666259765625" text="Type" />
-                        <TableColumn fx:id="SIBankColumn" prefWidth="142.0" text="Bank Name" />
-                        <TableColumn fx:id="SIAccNoColumn" prefWidth="123.3333740234375" text="Acc No" />
+                      <TableColumn fx:id="APIDColumn" prefWidth="57.66668701171875" text="APID" />
+                      <TableColumn fx:id="APNameColumn" prefWidth="133.44442749023438" text="Product Name" />
+                        <TableColumn fx:id="APSIDColumn" prefWidth="49.888916015625" text="SID" />
+                        <TableColumn fx:id="APSupplierNameColumn" prefWidth="160.3333740234375" text="Supplier" />
+                        <TableColumn fx:id="APUnitsColumn" prefWidth="65.55560302734375" text="Total Units" />
+                        <TableColumn fx:id="APWeightColumn" prefWidth="76.11114501953125" text="Weight/Unit" />
+                        <TableColumn fx:id="APBuyingPriceColumn" prefWidth="75.55560302734375" text="Buying Price" />
+                        <TableColumn fx:id="APMarketPriceColumn" prefWidth="82.111083984375" text="Market Price" />
+                        <TableColumn fx:id="APSellingPriceColumn" prefWidth="76.0" text="Selling Price" />
+                        <TableColumn fx:id="APManufactureDateColumn" prefWidth="69.99993896484375" text="M - Date" />
+                        <TableColumn fx:id="APExpireDateColumn" prefWidth="74.5555419921875" text="Exp - Date" />
+                        <TableColumn fx:id="APAddedDateColumn" prefWidth="77.0" text="Added Date" />
+                        <TableColumn fx:id="APDiscontinueAlertDateColumn" prefWidth="74.6666259765625" text="Alert Date" />
                     </columns>
                   </TableView>
                   <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="19.0" prefHeight="30.0" prefWidth="1080.0" promptText="Search in Here" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                      <font>
                         <Font size="13.0" />
                      </font></TextField>
-                  <Label layoutX="20.0" layoutY="406.0" prefHeight="17.0" prefWidth="171.0" text="Type : " textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <Label layoutX="10.0" layoutY="370.0" prefHeight="17.0" prefWidth="171.0" text="Product Name :" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="370.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="357.0" layoutY="405.0" text="Supplier Name :" textFill="WHITE" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="405.0">
+                  <Label layoutX="10.0" layoutY="520.0" text="Select Supplier :" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="520.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="695.0" layoutY="405.0" text="Address :" textFill="WHITE" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="405.0">
+                  <Label layoutX="335.0" layoutY="370.0" text="Total Units :" textFill="WHITE" AnchorPane.leftAnchor="335.0" AnchorPane.rightAnchor="676.0" AnchorPane.topAnchor="370.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="20.0" layoutY="459.0" text="Phone Number 1 :" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="459.0">
+                  <Label layoutX="645.0" layoutY="355.0" text="Weight/Unit :" textFill="WHITE" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="370.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="355.0" layoutY="459.0" text="Phone Number 2 :" textFill="WHITE" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="459.0">
+                  <Label layoutX="10.0" layoutY="420.0" text="Purchasing Price :" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="420.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="695.0" layoutY="459.0" text="E-mail :" textFill="WHITE" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="459.0">
+                  <Label layoutX="335.0" layoutY="420.0" text="Market Price :" textFill="WHITE" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="420.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="SINameTextField" layoutX="481.0" layoutY="405.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="405.0" />
-                  <TextField fx:id="SIAddressTextField" layoutX="776.0" layoutY="405.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="755.0" AnchorPane.topAnchor="405.0" />
-                  <TextField fx:id="SIPhone1TextField" layoutX="142.0" layoutY="459.0" prefHeight="25.0" prefWidth="200.0" promptText="0112345678" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="459.0" />
-                  <TextField fx:id="SIPhone2TextField" layoutX="481.0" layoutY="459.0" prefHeight="25.0" prefWidth="200.0" promptText="0112345678 (Optional)" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="459.0" />
-                  <TextField fx:id="SIEmailTextField" layoutX="776.0" layoutY="459.0" prefHeight="25.0" prefWidth="200.0" promptText="abc@xyz.com" AnchorPane.leftAnchor="755.0" AnchorPane.topAnchor="459.0" />
+                  <TextField fx:id="APProductNameTextBox" layoutX="140.0" layoutY="370.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="370.0" />
+                  <TextField fx:id="APUnitsTextBox" layoutX="445.0" layoutY="370.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.rightAnchor="455.0" AnchorPane.topAnchor="370.0" />
+                  <TextField fx:id="APWeightTextBox" layoutX="765.0" layoutY="370.0" prefHeight="25.0" prefWidth="190.0" promptText="KG/L" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="370.0" />
+                  <TextField fx:id="APBuyingPriceTextBox" layoutX="140.0" layoutY="420.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="420.0" />
+                  <TextField fx:id="APMarketPriceTextBox" layoutX="445.0" layoutY="420.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.rightAnchor="455.0" AnchorPane.topAnchor="420.0" />
                   <JFXButton buttonType="RAISED" layoutX="954.0" layoutY="411.0" onAction="#addData" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: f8ea03;" text="Add" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="16.0" />
@@ -170,33 +175,49 @@
                         <Font size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="828.0" layoutY="510.0" onAction="#clearFields" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #585757;" text="Clear Fields" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="140.0">
+                  <JFXButton buttonType="RAISED" layoutX="960.0" layoutY="370.0" onAction="#clearFields" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #585757;" text="Clear Fields" textFill="WHITE" AnchorPane.bottomAnchor="170.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="SITypeLabel" layoutX="20.0" layoutY="436.0" prefHeight="17.0" prefWidth="322.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" />
-                  <Label fx:id="SIAddressLabel" layoutX="695.0" layoutY="437.0" prefHeight="17.0" prefWidth="280.0" textFill="#f8ea03" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="437.0" />
-                  <Label fx:id="SIPhone2Label" layoutX="357.0" layoutY="488.0" prefHeight="17.0" prefWidth="322.0" textFill="#f8ea03" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="488.0" />
-                  <Label fx:id="SINameLabel" layoutX="357.0" layoutY="437.0" prefHeight="17.0" prefWidth="328.0" textFill="#f8ea03" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="437.0" />
-                  <Label fx:id="SIPhone1Label" layoutX="20.0" layoutY="490.0" prefHeight="17.0" prefWidth="328.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" />
-                  <Label fx:id="SIEmailLabel" layoutX="695.0" layoutY="488.0" prefHeight="17.0" prefWidth="246.0" textFill="#f8ea03" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="488.0" />
-                  <Label layoutX="20.0" layoutY="513.0" text="Bank Name :" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="513.0">
+                  <Label layoutX="640.0" layoutY="420.0" text="Selling Price :" textFill="WHITE" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="420.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="357.0" layoutY="513.0" text="Acc No :" textFill="WHITE" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="513.0">
+                  <Label layoutX="10.0" layoutY="470.0" text="Manufacture Date : " textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="470.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="SIBankTextField" layoutX="142.0" layoutY="513.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="513.0" />
-                  <TextField fx:id="SIAccNoTextField" layoutX="481.0" layoutY="513.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="513.0" />
-                  <Label fx:id="SIBankLabel" layoutX="20.0" layoutY="544.0" prefHeight="17.0" prefWidth="322.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="544.0" />
-                  <Label fx:id="SIAccNoLabel" layoutX="357.0" layoutY="544.0" prefHeight="17.0" prefWidth="323.0" textFill="#f8ea03" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="544.0" />
-                  <ChoiceBox fx:id="SITypeChoiceBox" layoutX="142.0" layoutY="405.0" prefWidth="200.0" AnchorPane.leftAnchor="135.0" />
+                  <TextField fx:id="APSellingPriceTextBox" layoutX="765.0" layoutY="420.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="420.0" />
                   <FontAwesomeIconView fill="#182c49" glyphName="SEARCH" layoutX="1054.0" layoutY="27.0" size="20" />
+                  <Label layoutX="335.0" layoutY="470.0" text="Exp Date :" textFill="WHITE" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="470.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="640.0" layoutY="470.0" text="Discon Alert Date :" textFill="WHITE" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="470.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="APManufactureDateDatePicker" editable="false" layoutX="140.0" layoutY="470.0" prefHeight="25.0" prefWidth="190.0" showWeekNumbers="true" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="760.0" AnchorPane.topAnchor="470.0" />
+                  <DatePicker fx:id="APExpDateDatePicker" editable="false" layoutX="445.0" layoutY="470.0" prefHeight="25.0" prefWidth="190.0" showWeekNumbers="true" AnchorPane.rightAnchor="455.0" AnchorPane.topAnchor="470.0" />
+                  <DatePicker fx:id="APDiscontinueAlertDatePicker" editable="false" layoutX="765.0" layoutY="470.0" prefWidth="190.0" showWeekNumbers="true" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="470.0" />
+                  <TextField fx:id="APSupplierNameTextBox" editable="false" layoutX="140.0" layoutY="520.0" prefHeight="25.0" prefWidth="130.0" promptText="Supplier Name" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="520.0" />
+                  <Button fx:id="APSelectSupplierButton" layoutX="307.0" layoutY="520.0" mnemonicParsing="false" onAction="#selectSupplier" text="Browse" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="520.0" />
+                  <Label fx:id="APProductNameLabel" layoutX="10.0" layoutY="397.0" prefHeight="21.0" prefWidth="320.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="760.0" AnchorPane.topAnchor="397.0" />
+                  <Label fx:id="APWeightLabel" layoutX="640.0" layoutY="397.0" prefHeight="21.0" prefWidth="314.0" textFill="#f8ea03" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="397.0" />
+                  <Label fx:id="APUnitsLabel" layoutX="335.0" layoutY="397.0" prefHeight="21.0" prefWidth="298.0" textFill="#f8ea03" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="397.0" />
+                  <Label fx:id="APBuyingPriceLabel" layoutX="10.0" layoutY="447.0" prefHeight="21.0" prefWidth="320.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="447.0" />
+                  <Label fx:id="APManufactureDateLabel" layoutX="10.0" layoutY="497.0" prefHeight="21.0" prefWidth="320.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="497.0" />
+                  <Label fx:id="APSupplierNameLabel" layoutX="10.0" layoutY="547.0" prefHeight="21.0" prefWidth="320.0" textFill="#f8ea03" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="547.0" />
+                  <Label fx:id="APExpDateLabel" layoutX="335.0" layoutY="497.0" prefHeight="21.0" prefWidth="298.0" textFill="#f8ea03" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="497.0" />
+                  <Label fx:id="APMarketPriceLabel" layoutX="335.0" layoutY="447.0" prefHeight="21.0" prefWidth="298.0" textFill="#f8ea03" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="447.0" />
+                  <Label fx:id="APSellingPriceLabel" layoutX="640.0" layoutY="447.0" prefHeight="21.0" prefWidth="314.0" textFill="#f8ea03" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="447.0" />
+                  <Label fx:id="APDiscontinueDateLabel" layoutX="640.0" layoutY="497.0" prefHeight="21.0" prefWidth="314.0" textFill="#f8ea03" AnchorPane.leftAnchor="640.0" AnchorPane.topAnchor="497.0" />
+                  <TextField fx:id="APSupplierIDTextBox" editable="false" layoutX="141.0" layoutY="520.0" prefHeight="25.0" prefWidth="55.0" promptText="ID" />
                </children></AnchorPane>
          </children>
       </AnchorPane>

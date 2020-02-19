@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.FoodProductController">
+<AnchorPane prefHeight="600.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.BakeryProductController">
    <children>
       <AnchorPane layoutX="11.0" layoutY="10.0" prefHeight="77.0" prefWidth="1254.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -82,7 +82,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="TASKS" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="154.0" onAction="#FoodProducts" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #029206;" text="Food Products" textFill="WHITE" AnchorPane.leftAnchor="23.0">
+                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="154.0" onAction="#FoodProducts" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #029206;" text="Bakery Products" textFill="WHITE" AnchorPane.leftAnchor="23.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

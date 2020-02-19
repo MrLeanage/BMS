@@ -43,7 +43,7 @@ public class Supplier {
     }
 
     public void setsIID(String sIID) {
-        this.sIID.set(sIID);
+        this.sIID = new SimpleStringProperty(sIID);
     }
 
     public String getsIName() {

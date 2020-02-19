@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.AgencyProductSupplierPopUPViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="400.0" layoutX="10.0" layoutY="10.0" stroke="#03244a" strokeType="INSIDE" style="-fx-fill: #d3d4d4;" width="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="27.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="325.0" prefWidth="700.0" AnchorPane.topAnchor="27.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="314.0" stroke="#03254c" strokeType="INSIDE" strokeWidth="2.0" width="690.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="62.0" layoutX="5.0" layoutY="257.0" stroke="TRANSPARENT" strokeType="INSIDE" width="690.0" />
+            <TableView fx:id="SupplierTable" layoutX="9.0" layoutY="68.0" onMousePressed="#loadSelectedData" prefHeight="186.0" prefWidth="682.0" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="68.0">
+               <columns>
+                  <TableColumn fx:id="SIIDColumn" prefWidth="57.66668701171875" text="ID" />
+                  <TableColumn fx:id="SINameColumn" prefWidth="242.33334350585938" text="Supplier Name" />
+                  <TableColumn fx:id="SIPhone1Column" prefWidth="105.66665649414062" text="Phone1" />
+                  <TableColumn fx:id="SIPhone2Column" prefWidth="105.22222900390625" text="Phone 2" />
+                  <TableColumn fx:id="SIEmailColumn" prefWidth="170.33331298828125" text="Email" />
+               </columns>
+            </TableView>
+            <Label layoutX="16.0" layoutY="270.0" text="Supplier ID :" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="265.0" />
+            <Label layoutX="246.0" layoutY="270.0" text="Supplier Name :" textFill="WHITE" AnchorPane.leftAnchor="246.0" AnchorPane.topAnchor="265.0" />
+            <Label layoutX="476.0" layoutY="270.0" text="Supplier Email :" textFill="WHITE" AnchorPane.leftAnchor="476.0" AnchorPane.topAnchor="265.0" />
+            <Label layoutX="10.0" layoutY="294.0" text="Supplier Phone 1 :" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="295.0" />
+            <Label layoutX="246.0" layoutY="295.0" text="Supplier Phone 2 :" textFill="WHITE" AnchorPane.leftAnchor="246.0" AnchorPane.topAnchor="295.0" />
+            <Label layoutX="17.0" layoutY="7.0" prefHeight="27.0" prefWidth="419.0" text="Supplier Information - Agency Product Suppliers">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="34.0" prefHeight="30.0" prefWidth="682.0" promptText="Search Agency Suppliers Here">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIconView fill="#182c49" glyphName="SEARCH" layoutX="667.0" layoutY="56.0" size="20" />
+            <TextField fx:id="SIAPIDTextBox" editable="false" layoutX="112.0" layoutY="262.0" prefHeight="17.0" prefWidth="120.0" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="262.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="SIAPPhone1TextBox" editable="false" layoutX="114.0" layoutY="291.0" prefHeight="17.0" prefWidth="120.0" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="290.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="SIAPNameTextBox" editable="false" layoutX="345.0" layoutY="262.0" prefHeight="17.0" prefWidth="120.0" AnchorPane.topAnchor="262.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="SIAPPhone2TextBox" editable="false" layoutX="345.0" layoutY="291.0" prefHeight="17.0" prefWidth="120.0" AnchorPane.topAnchor="290.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="SIAPEmailTextBox" editable="false" layoutX="564.0" layoutY="262.0" prefHeight="17.0" prefWidth="120.0" AnchorPane.topAnchor="262.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="351.0" prefHeight="48.0" prefWidth="700.0" style="-fx-background-color: #182c49;">
+         <children>
+            <Button fx:id="SIAPCloseButton" layoutX="589.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="34.0" prefWidth="67.0" style="-fx-background-color: #f61b1b;" text="Cancel" textFill="WHITE" />
+            <Button fx:id="SIAPSelectSupplierButton" layoutX="442.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnSelectedSupplier" prefHeight="34.0" prefWidth="123.0" style="-fx-background-color: f8ea03;" text="Select This Supplier" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

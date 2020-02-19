@@ -84,7 +84,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="TASKS" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="154.0" onAction="#FoodProducts" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #2b384b;" text="Food Products" textFill="WHITE" AnchorPane.leftAnchor="23.0">
+                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="154.0" onAction="#FoodProducts" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #2b384b;" text="Bakery Products" textFill="WHITE" AnchorPane.leftAnchor="23.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

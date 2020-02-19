@@ -178,7 +178,17 @@ public class SupplierViewController implements Initializable {
     @FXML
     private void FoodProducts(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/FoodProducts.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/BakeryProducts.fxml"));
+
+        Scene scene = new Scene(home_page);
+        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
+        app.setScene(scene);
+        app.show();
+    }
+    @FXML
+    private void AgencyProduct(ActionEvent event) throws IOException {
+
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/AgencyProduct.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
@@ -257,16 +267,17 @@ public class SupplierViewController implements Initializable {
     private void dataValidateMessage(){
 
         //checking for being empty
-        if(!DataValidation.TextFieldNotEmpty(SINameTextField)
-                || DataValidation.TextFieldNotEmpty(SIAddressTextField)
-                || DataValidation.TextFieldNotEmpty(Integer.parseInt(SIPhone1TextField.getText()))
-                || DataValidation.TextFieldNotEmpty(SIEmailTextField)
-                || DataValidation.TextFieldNotEmpty(SIBankTextField)
-                || DataValidation.TextFieldNotEmpty(SIAccNoTextField)){
+        if(!(DataValidation.TextFieldNotEmpty(SIPhone1TextField)
+                && DataValidation.TextFieldNotEmpty(SIEmailTextField)
+                && DataValidation.TextFieldNotEmpty(SIBankTextField)
+                && DataValidation.TextFieldNotEmpty(SINameTextField.getText())
+                && DataValidation.TextFieldNotEmpty(SIAddressTextField.getText())
+                && DataValidation.TextFieldNotEmpty(SIAccNoTextField))) {
 
-            DataValidation.TextFieldNotEmpty(SINameTextField, SINameLabel,"Supplier Name is Required");
-            DataValidation.TextFieldNotEmpty(SIAddressTextField,SIAddressLabel,"Supplier Address is Required");
-            DataValidation.TextFieldNotEmpty(SIPhone1TextField.getText(), SIPhone1Label, "Phone number is Required");
+
+            DataValidation.TextFieldNotEmpty(SINameTextField, SINameLabel, "Supplier Name is Required");
+            DataValidation.TextFieldNotEmpty(SIAddressTextField, SIAddressLabel, "Supplier Address is Required");
+            DataValidation.TextFieldNotEmpty(SIPhone1TextField, SIPhone1Label, "Phone number is Required");
             DataValidation.TextFieldNotEmpty(SIEmailTextField, SIEmailLabel, "Email Address is Required");
             DataValidation.TextFieldNotEmpty(SIBankTextField, SIBankLabel, "Bank name is Required");
             DataValidation.TextFieldNotEmpty(SIAccNoTextField, SIAccNoLabel, "Bank Account No is required");

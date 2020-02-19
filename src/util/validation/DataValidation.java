@@ -1,9 +1,9 @@
 package util.validation;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +26,7 @@ public class DataValidation {
     }
 
     //Checking TextAreas for not empty with same name
-    public static boolean TextFieldNotEmpty(TextArea textArea){
+    public static boolean TextAreaNotEmpty(TextArea textArea){
         //returning text area empty as default value
         boolean returnVal = false;
         if(textArea.getText() != null  && !textArea.getText().isEmpty()){
@@ -36,7 +36,7 @@ public class DataValidation {
     }
     public static void TextFieldNotEmpty(TextArea textArea, Label label, String validationText){
 
-        if(!TextFieldNotEmpty(textArea)){
+        if(!TextAreaNotEmpty(textArea)){
             label.setText(validationText);
         }
 
@@ -95,6 +95,20 @@ public class DataValidation {
             label.setText(validationText);
         }
 
+    }
+    public static boolean TextFieldNotEmpty(Float floatField){
+        //returning integer fields empty as default value
+        boolean returnVal = false;
+        if(floatField.toString() != null  && !floatField.toString().isEmpty()){
+            returnVal = true;
+        }
+        return returnVal;
+    }
+    public static void TextFieldNotEmpty(Float floatField, Label label, String validationText){
+
+        if(!TextFieldNotEmpty(floatField)){
+            label.setText(validationText);
+        }
 
     }
     //email validation
@@ -136,14 +150,38 @@ public class DataValidation {
         }
     }
     //checking for integer number
-    public static  final Pattern VALIDINTEGER    = Pattern.compile("\\d+$");
+    public static  final Pattern VALIDINTEGER = Pattern.compile("\\d+$");
+    public static  final Pattern VALIDFLOAT = Pattern.compile("[+-]?([0-9]*[.])?[0-9]+$");
     public static boolean isValidNumberFormat(String number) {
-        Matcher matcher = VALIDINTEGER.matcher(number);
-        if(matcher.matches()){
-            return true;
-        }else{
-            return false;
+        int numberCheck = 0;
+        try{
+            Integer.parseInt(number);
+            numberCheck = 1;
+        }catch(NumberFormatException ex){
+
         }
+        try{
+            Float.parseFloat(number);
+            numberCheck = 2;
+        }catch(NumberFormatException ex){
+
+        }
+        if(numberCheck == 1){
+            Matcher matcher = VALIDINTEGER.matcher(number);
+            if(matcher.matches()){
+                return true;
+            }else{
+                return false;
+            }
+        }else if(numberCheck == 2){
+            Matcher matcher = VALIDFLOAT.matcher(number);
+            if(matcher.matches()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
     public static void isValidNumberFormat(String number, Label label, String validationText) {
         if((!isValidNumberFormat(number)) && (!number.isEmpty())){
@@ -158,9 +196,56 @@ public class DataValidation {
         }
         return returnVal;
     }
-    public static void isValidMaximumLength(String data, int maxLength, Label label, String validationtext){
+    public static void isValidMaximumLength(String data, int maxLength, Label label, String validationText){
         if(!isValidMaximumLength(data,maxLength)){
-            label.setText(validationtext);
+            label.setText(validationText);
         }
+    }
+    public static boolean DatePickerNotEmpty(DatePicker date){
+        if(!(date.getValue() == null || date.getValue().toString().isEmpty())){
+            return true;
+        }
+        return false;
+    }
+    public static void DatePickerNotEmpty(DatePicker date, Label label, String validationText){
+        if(!DatePickerNotEmpty(date)){
+            label.setText(validationText);
+        }
+    }
+    public static Callback hideOldDates(){
+        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                        LocalDate today = LocalDate.now();
+                        setDisable(empty || item.compareTo(today) < 0);
+                    }
+
+                };
+            }
+
+        };
+        return  callB;
+    }
+    public static Callback hideFutureDates(){
+        Callback<DatePicker, DateCell> callB = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                        LocalDate today = LocalDate.now();
+                        setDisable(empty || item.compareTo(today) > 0);
+                    }
+
+                };
+            }
+
+        };
+        return  callB;
     }
 }

@@ -2,6 +2,7 @@ package util.userAlerts;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class AlertPopUp {
@@ -13,6 +14,13 @@ public class AlertPopUp {
         msg.setContentText("Database Connection Failed, Exception code in:"+ ex );
         msg.showAndWait();
 
+    }
+    public static void sqlRecordNotFound(String text){
+        Alert successMsg = new Alert(Alert.AlertType.ERROR);
+        successMsg.setTitle("Database Record not Found!..");
+        successMsg.setHeaderText(null);
+        successMsg.setContentText("Database Record not Found for "+ text);
+        successMsg.showAndWait();
     }
     public static void sqlQueryError(Exception ex){
         Alert msg = new Alert(Alert.AlertType.ERROR);
@@ -79,14 +87,15 @@ public class AlertPopUp {
         Alert successMsg = new Alert(Alert.AlertType.INFORMATION);
         successMsg.setTitle("Please Select..");
         successMsg.setHeaderText(null);
-        successMsg.setContentText("Please Select a "+ text + "record to Delete..");
+        successMsg.setContentText("Please Select a "+ text + " record to Delete..");
         successMsg.showAndWait();
     }
     public static void generalError(Exception ex){
+        String classMethod = new Object(){}.getClass().getEnclosingMethod().getName();
         Alert msg = new Alert(Alert.AlertType.ERROR);
         msg.setTitle("Error Occured!..");
         msg.setHeaderText(null);
-        msg.setContentText("Error Occured, Try Again!..Exception found in Mouse click :"+ ex );
+        msg.setContentText("Error Occured, Try Again!..Check method "+classMethod + "Exception found with Mouse click :"+ ex );
         //msg.showAndWait();
     }
 }
