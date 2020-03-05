@@ -1,6 +1,6 @@
 package view.InventoryManagement;
 
-import controller.BakeryProductController;
+import services.BakeryProductServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -275,10 +275,10 @@ public class BakeryProductViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
 
         ObservableList<BakeryProduct> bakeryProductsData;
-        bakeryProductsData = bakeryProductController.loadData();
+        bakeryProductsData = bakeryProductServices.loadData();
 
         //Setting cell value factory to table view
         BPIDColumn.setCellValueFactory(new PropertyValueFactory<>("bPID"));
@@ -307,7 +307,7 @@ public class BakeryProductViewController implements Initializable {
 
         clearLabels();
         BakeryProduct bakeryProductModel = new BakeryProduct();
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
 
         if(dataValidate()){
 
@@ -318,7 +318,7 @@ public class BakeryProductViewController implements Initializable {
             bakeryProductModel.setbPPrice(Float.parseFloat(BPPriceTextField.getText()));
             bakeryProductModel.setbPStatus(BPStatusChoiceBox.getValue());
 
-            Boolean resultVal = bakeryProductController.insertData(bakeryProductModel);
+            Boolean resultVal = bakeryProductServices.insertData(bakeryProductModel);
             if(resultVal){
                 refreshTable();
             }
@@ -362,7 +362,7 @@ public class BakeryProductViewController implements Initializable {
 
         clearLabels();
         BakeryProduct bakeryProductModel = new BakeryProduct();
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
 
         try{
             if(!(existingBakeryProductModel.getbPID().isEmpty() )){
@@ -377,7 +377,7 @@ public class BakeryProductViewController implements Initializable {
                     bakeryProductModel.setbPDescription(BPDescriptionTextArea.getText());
                     bakeryProductModel.setbPPrice(Float.parseFloat(BPPriceTextField.getText()));
                     bakeryProductModel.setbPStatus(BPStatusChoiceBox.getValue());
-                    boolean resultVal = bakeryProductController.updateData(bakeryProductModel);
+                    boolean resultVal = bakeryProductServices.updateData(bakeryProductModel);
                     if(resultVal){
                         refreshTable();
                     }
@@ -396,7 +396,7 @@ public class BakeryProductViewController implements Initializable {
 
         int ID;
         BakeryProduct bakeryProductModel;
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
         bakeryProductModel = BakeryProductsTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -406,7 +406,7 @@ public class BakeryProductViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Bakery Product");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = bakeryProductController.deleteData(ID);
+                    Boolean resultVal = bakeryProductServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -420,9 +420,9 @@ public class BakeryProductViewController implements Initializable {
     }
     public void searchTable(){
 
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
         //Retrieving sorted data from Main Controller
-        SortedList<BakeryProduct> sortedData = bakeryProductController.searchTable(SearchTextBox);
+        SortedList<BakeryProduct> sortedData = bakeryProductServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(BakeryProductsTable.comparatorProperty());

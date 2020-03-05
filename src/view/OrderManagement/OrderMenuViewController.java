@@ -1,7 +1,6 @@
 package view.OrderManagement;
 
-import controller.BakeryProductController;
-import controller.OrderMenuController;
+import services.OrderMenuServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -18,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.BakeryProduct;
 import model.OrderMenu;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
@@ -334,10 +332,10 @@ public class OrderMenuViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
 
         ObservableList<OrderMenu> orderMenuData;
-        orderMenuData = orderMenuController.loadData();
+        orderMenuData = orderMenuServices.loadData();
 
         //Setting cell value factory to table view
         OMIIDColumn.setCellValueFactory(new PropertyValueFactory<>("oMIID"));
@@ -366,7 +364,7 @@ public class OrderMenuViewController implements Initializable {
 
         clearLabels();
         OrderMenu orderMenuModel = new OrderMenu();
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
 
         if(dataValidate()){
 
@@ -377,7 +375,7 @@ public class OrderMenuViewController implements Initializable {
             orderMenuModel.setoMIPrice(Float.parseFloat(OMIPriceTextField.getText()));
             orderMenuModel.setoMIStatus(OMIStatusChoiceBox.getValue());
 
-            Boolean resultVal = orderMenuController.insertData(orderMenuModel);
+            Boolean resultVal = orderMenuServices.insertData(orderMenuModel);
             if(resultVal){
                 refreshTable();
             }
@@ -421,7 +419,7 @@ public class OrderMenuViewController implements Initializable {
 
         clearLabels();
         OrderMenu orderMenuModel = new OrderMenu();
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
 
         try{
             if(!(existingOrderMenuProductModel.getoMIID().isEmpty() )){
@@ -436,7 +434,7 @@ public class OrderMenuViewController implements Initializable {
                     orderMenuModel.setoMIWeight(Float.parseFloat(OMIWeightTextField.getText()));
                     orderMenuModel.setoMIPrice(Float.parseFloat(OMIPriceTextField.getText()));
                     orderMenuModel.setoMIStatus(OMIStatusChoiceBox.getValue());
-                    boolean resultVal = orderMenuController.updateData(orderMenuModel);
+                    boolean resultVal = orderMenuServices.updateData(orderMenuModel);
                     if(resultVal){
                         refreshTable();
                     }
@@ -455,7 +453,7 @@ public class OrderMenuViewController implements Initializable {
 
         int ID;
         OrderMenu orderMenuModel;
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
         orderMenuModel = OrderMenuTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -466,7 +464,7 @@ public class OrderMenuViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Order Menu Item");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = orderMenuController.deleteData(ID);
+                    Boolean resultVal = orderMenuServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -480,9 +478,9 @@ public class OrderMenuViewController implements Initializable {
     }
     public void searchTable(){
 
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
         //Retrieving sorted data from Main Controller
-        SortedList<OrderMenu> sortedData = orderMenuController.searchTable(SearchTextBox);
+        SortedList<OrderMenu> sortedData = orderMenuServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(OrderMenuTable.comparatorProperty());

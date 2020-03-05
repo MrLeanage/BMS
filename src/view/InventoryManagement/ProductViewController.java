@@ -1,6 +1,6 @@
 package view.InventoryManagement;
 
-import controller.BakeryProductController;
+import services.BakeryProductServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -15,13 +15,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.BakeryProduct;
-import util.userAlerts.AlertPopUp;
-import util.utility.UtilityMethod;
-import util.validation.DataValidation;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ProductViewController implements Initializable {
@@ -191,10 +187,10 @@ public class ProductViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
 
         ObservableList<BakeryProduct> bakeryProductsData;
-        bakeryProductsData = bakeryProductController.loadData();
+        bakeryProductsData = bakeryProductServices.loadData();
 
         //Setting cell value factory to table view
         BPIDColumn.setCellValueFactory(new PropertyValueFactory<>("bPID"));
@@ -218,9 +214,9 @@ public class ProductViewController implements Initializable {
 
     public void searchTable(){
 
-        BakeryProductController bakeryProductController = new BakeryProductController();
+        BakeryProductServices bakeryProductServices = new BakeryProductServices();
         //Retrieving sorted data from Main Controller
-        SortedList<BakeryProduct> sortedData = bakeryProductController.searchTable(SearchTextBox);
+        SortedList<BakeryProduct> sortedData = bakeryProductServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(BakeryProductsTable.comparatorProperty());

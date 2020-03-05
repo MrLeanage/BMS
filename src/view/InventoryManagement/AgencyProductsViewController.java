@@ -1,6 +1,6 @@
 package view.InventoryManagement;
 
-import controller.AgencyProductController;
+import services.AgencyProductServices;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -149,7 +149,7 @@ public class AgencyProductsViewController implements Initializable {
 
 
     /**
-     * Initializes the controller class.
+     * Initializes the services class.
      * @param url
      * @param rb
      */
@@ -441,10 +441,10 @@ public class AgencyProductsViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        AgencyProductController agencyProductController = new AgencyProductController();
+        AgencyProductServices agencyProductServices = new AgencyProductServices();
         
         ObservableList<AgencyProduct> agencyProductData;
-        agencyProductData = agencyProductController.loadData();
+        agencyProductData = agencyProductServices.loadData();
         
         //Setting cell value factory to table view
 
@@ -479,7 +479,7 @@ public class AgencyProductsViewController implements Initializable {
 
         clearLabels();
         AgencyProduct agencyProductModel = new AgencyProduct();
-        AgencyProductController agencyProductController = new AgencyProductController();
+        AgencyProductServices agencyProductServices = new AgencyProductServices();
 
         if(dataValidate()){
 
@@ -496,7 +496,7 @@ public class AgencyProductsViewController implements Initializable {
             agencyProductModel.setaPADate(String.valueOf(LocalDate.now()));
             agencyProductModel.setaPDADate(String.valueOf(APDiscontinueAlertDatePicker.getValue()));
 
-            Boolean resultVal = agencyProductController.insertData(agencyProductModel);
+            Boolean resultVal = agencyProductServices.insertData(agencyProductModel);
             if(resultVal){
                 refreshTable();
             }
@@ -538,7 +538,7 @@ public class AgencyProductsViewController implements Initializable {
 
         clearLabels();
         AgencyProduct agencyProductModel;
-        AgencyProductController agencyProductController = new AgencyProductController();
+        AgencyProductServices agencyProductServices = new AgencyProductServices();
 
         if(dataValidate()){
             //getting selected ID
@@ -556,7 +556,7 @@ public class AgencyProductsViewController implements Initializable {
             agencyProductModel.setaPEDate(String.valueOf(APExpDateDatePicker.getValue()));
             agencyProductModel.setaPDADate(String.valueOf(APDiscontinueAlertDatePicker.getValue()));
 
-            boolean resultVal = agencyProductController.updateData(agencyProductModel);
+            boolean resultVal = agencyProductServices.updateData(agencyProductModel);
             if(resultVal){
                 refreshTable();
             }
@@ -571,7 +571,7 @@ public class AgencyProductsViewController implements Initializable {
 
         int ID;
         AgencyProduct agencyProductModel;
-        AgencyProductController agencyProductController = new AgencyProductController();
+        AgencyProductServices agencyProductServices = new AgencyProductServices();
         agencyProductModel = AgencyProductTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -581,7 +581,7 @@ public class AgencyProductsViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Bakery Product");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = agencyProductController.deleteData(ID);
+                    Boolean resultVal = agencyProductServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -597,9 +597,9 @@ public class AgencyProductsViewController implements Initializable {
     }
     public void searchTable(){
 
-        AgencyProductController agencyProductController = new AgencyProductController();
+        AgencyProductServices agencyProductServices = new AgencyProductServices();
         //Retrieving sorted data from Main Controller
-        SortedList<AgencyProduct> sortedData = agencyProductController.searchTable(SearchTextBox);
+        SortedList<AgencyProduct> sortedData = agencyProductServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(AgencyProductTable.comparatorProperty());

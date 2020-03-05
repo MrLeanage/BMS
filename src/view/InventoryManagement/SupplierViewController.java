@@ -1,6 +1,6 @@
 package view.InventoryManagement;
 
-import controller.SupplierController;
+import services.SupplierServices;
 import javafx.collections.transformation.SortedList;
 import model.Supplier;
 import util.playAudio.Audio;
@@ -29,7 +29,7 @@ import util.validation.DataValidation;
 
 public class SupplierViewController implements Initializable {
     /**
-     * Initializes the controller class.
+     * Initializes the services class.
      * @param url
      * @param rb
      */
@@ -317,10 +317,10 @@ public class SupplierViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        SupplierController supplierController = new SupplierController();
+        SupplierServices supplierServices = new SupplierServices();
         
         ObservableList<Supplier> supplierData;
-        supplierData = supplierController.loadData();
+        supplierData = supplierServices.loadData();
         
         //Setting cell value factory to table view
         SIIDColumn.setCellValueFactory(new PropertyValueFactory<>("sIID"));
@@ -349,7 +349,7 @@ public class SupplierViewController implements Initializable {
     private void addData(ActionEvent event) throws Exception{
         clearLabels();
         Supplier supplierModel = new Supplier();
-        SupplierController supplierController = new SupplierController();
+        SupplierServices supplierServices = new SupplierServices();
 
         if(dataValidate()){
 
@@ -362,7 +362,7 @@ public class SupplierViewController implements Initializable {
             supplierModel.setsIAccNo(Long.parseLong(SIAccNoTextField.getText()));
             supplierModel.setsIType(SITypeChoiceBox.getValue());
 
-            Boolean resultVal = supplierController.insertData(supplierModel);
+            Boolean resultVal = supplierServices.insertData(supplierModel);
             if(resultVal){
                 refreshTable();
             }
@@ -398,7 +398,7 @@ public class SupplierViewController implements Initializable {
         clearLabels();
         PreparedStatement ps = null;
         Supplier supplierModel;
-        SupplierController supplierController = new SupplierController();
+        SupplierServices supplierServices = new SupplierServices();
 
         if(dataValidate()){
             //getting selected ID
@@ -413,7 +413,7 @@ public class SupplierViewController implements Initializable {
             supplierModel.setsIAccNo(Long.parseLong(SIAccNoTextField.getText()));
             supplierModel.setsIType(SITypeChoiceBox.getValue());
 
-            boolean resultVal = supplierController.updateData(supplierModel);
+            boolean resultVal = supplierServices.updateData(supplierModel);
             if(resultVal){
                 refreshTable();
             }
@@ -426,7 +426,7 @@ public class SupplierViewController implements Initializable {
     private void deleteData(){
         int ID;
         Supplier supplierModel;
-        SupplierController supplierController = new SupplierController();
+        SupplierServices supplierServices = new SupplierServices();
         supplierModel = SupplierTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -436,7 +436,7 @@ public class SupplierViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Supplier Information");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = supplierController.deleteData(ID);
+                    Boolean resultVal = supplierServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -450,9 +450,9 @@ public class SupplierViewController implements Initializable {
     }
     public void searchTable(){
 
-        SupplierController supplierController = new SupplierController();
+        SupplierServices supplierServices = new SupplierServices();
         //Retrieving sorted data from Main Controller
-        SortedList<Supplier> sortedData = supplierController.searchTable(SearchTextBox);
+        SortedList<Supplier> sortedData = supplierServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(SupplierTable.comparatorProperty());

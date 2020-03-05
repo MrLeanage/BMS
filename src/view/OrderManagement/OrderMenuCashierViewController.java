@@ -1,7 +1,6 @@
 package view.OrderManagement;
 
-import controller.OrderMenuController;
-import javafx.collections.FXCollections;
+import services.OrderMenuServices;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -13,24 +12,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.OrderMenu;
 import util.userAlerts.AlertPopUp;
-import util.utility.UtilityMethod;
-import util.validation.DataValidation;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class OrderMenuCashierViewController implements Initializable {
 
@@ -225,10 +217,10 @@ public class OrderMenuCashierViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
 
         ObservableList<OrderMenu> orderMenuData;
-        orderMenuData = orderMenuController.loadData();
+        orderMenuData = orderMenuServices.loadData();
 
         //Setting cell value factory to table view
         OMIIDColumn.setCellValueFactory(new PropertyValueFactory<>("oMIID"));
@@ -319,9 +311,9 @@ public class OrderMenuCashierViewController implements Initializable {
 
     public void searchTable(){
 
-        OrderMenuController orderMenuController = new OrderMenuController();
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
         //Retrieving sorted data from Main Controller
-        SortedList<OrderMenu> sortedData = orderMenuController.searchTable(SearchTextBox);
+        SortedList<OrderMenu> sortedData = orderMenuServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(OrderMenuTable.comparatorProperty());

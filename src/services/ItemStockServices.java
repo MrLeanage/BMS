@@ -1,29 +1,25 @@
-package controller;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import model.ItemStock;
 import util.dbConnect.DBConnection;
-import util.playAudio.Audio;
 import util.query.ItemStockQueries;
 import util.query.PurchaseProductQueries;
 import util.query.SupplierQueries;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
-public class ItemStockController {
+public class ItemStockServices {
     private DBConnection dbcon;
 
 

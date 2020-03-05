@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import model.BakeryProduct;
 import model.OrderMenu;
 import util.dbConnect.DBConnection;
-import util.query.BakeryProductQueries;
 import util.query.OrderMenuQueries;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
@@ -16,7 +15,7 @@ import util.utility.UtilityMethod;
 import java.io.*;
 import java.sql.*;
 
-public class OrderMenuController {
+public class OrderMenuServices {
 
 
 

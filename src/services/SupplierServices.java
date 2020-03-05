@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +12,6 @@ import util.playAudio.Audio;
 import util.query.SupplierQueries;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
-import view.InventoryManagement.SupplierViewController;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -21,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SupplierController implements Initializable {
+public class SupplierServices implements Initializable {
     private DBConnection dbcon;
     private static PreparedStatement ps;
 
@@ -32,7 +31,7 @@ public class SupplierController implements Initializable {
     private ObservableList<Supplier> supplierData;
 
     /**
-     * Initializes the controller class.
+     * Initializes the services class.
      * @param location
      * @param resources
      */

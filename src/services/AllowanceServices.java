@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,10 +6,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TextField;
 import model.Allowance;
-import model.BakeryProduct;
 import util.dbConnect.DBConnection;
 import util.query.AllowanceQueries;
-import util.query.BakeryProductQueries;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 
@@ -18,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AllowanceController {
+public class AllowanceServices {
 
 
 

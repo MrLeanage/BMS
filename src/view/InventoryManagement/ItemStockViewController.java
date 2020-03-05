@@ -1,6 +1,6 @@
 package view.InventoryManagement;
 
-import controller.ItemStockController;
+import services.ItemStockServices;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -136,7 +136,7 @@ public class ItemStockViewController implements Initializable {
     private Label IMinQuantityLimitLabel;
 
     /**
-     * Initializes the controller class.
+     * Initializes the services class.
      * @param url
      * @param rb
      */
@@ -406,10 +406,10 @@ public class ItemStockViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        ItemStockController itemStockController = new ItemStockController();
+        ItemStockServices itemStockServices = new ItemStockServices();
         
         ObservableList<ItemStock> itemStocktData;
-        itemStocktData = itemStockController.loadData();
+        itemStocktData = itemStockServices.loadData();
         
         //Setting cell value factory to table view
         IIDColumn.setCellValueFactory(new PropertyValueFactory<>("iID"));
@@ -443,7 +443,7 @@ public class ItemStockViewController implements Initializable {
 
         clearLabels();
         ItemStock itemStockModel = new ItemStock();
-        ItemStockController itemStockController = new ItemStockController();
+        ItemStockServices itemStockServices = new ItemStockServices();
 
         if(dataValidate()){
 
@@ -457,7 +457,7 @@ public class ItemStockViewController implements Initializable {
             itemStockModel.setiSID(ISupplierIDTextField.getText());
             itemStockModel.setiAddedDate(String.valueOf(LocalDate.now()));
 
-            Boolean resultVal = itemStockController.insertData(itemStockModel);
+            Boolean resultVal = itemStockServices.insertData(itemStockModel);
             if(resultVal){
                 refreshTable();
             }
@@ -507,7 +507,7 @@ public class ItemStockViewController implements Initializable {
 
         clearLabels();
         ItemStock itemStockModel = new ItemStock();
-        ItemStockController itemStockController = new ItemStockController();
+        ItemStockServices itemStockServices = new ItemStockServices();
 
         try{
             if(!(existingItemStockModel.getiID().isEmpty() )){
@@ -525,7 +525,7 @@ public class ItemStockViewController implements Initializable {
                     itemStockModel.setiBuyingPrice(Float.parseFloat(IBuyingPriceTextField.getText()));
                     itemStockModel.setiMinQuantityLimit(Integer.parseInt(IMinQuantityLimitTextField.getText()));
                     itemStockModel.setiExpireDate(String.valueOf(IExpireDateDatePicker.getValue()));
-                    boolean resultVal = itemStockController.updateData(existingItemStockModel, itemStockModel);
+                    boolean resultVal = itemStockServices.updateData(existingItemStockModel, itemStockModel);
                     if(resultVal){
                         refreshTable();
                     }
@@ -543,7 +543,7 @@ public class ItemStockViewController implements Initializable {
 
         int ID;
         ItemStock itemStockModel;
-        ItemStockController itemStockController = new ItemStockController();
+        ItemStockServices itemStockServices = new ItemStockServices();
         itemStockModel = ItemStockTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -553,7 +553,7 @@ public class ItemStockViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Item Stock");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = itemStockController.deleteData(ID);
+                    Boolean resultVal = itemStockServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -569,9 +569,9 @@ public class ItemStockViewController implements Initializable {
     }
     public void searchTable(){
 
-        ItemStockController itemStockController = new ItemStockController();
+        ItemStockServices itemStockServices = new ItemStockServices();
         //Retrieving sorted data from Main Controller
-        SortedList<ItemStock> sortedData = itemStockController.searchTable(SearchTextBox);
+        SortedList<ItemStock> sortedData = itemStockServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(ItemStockTable.comparatorProperty());

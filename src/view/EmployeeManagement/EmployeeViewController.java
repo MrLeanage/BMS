@@ -1,8 +1,6 @@
 package view.EmployeeManagement;
 
-import controller.AllowanceController;
-import controller.EmployeeController;
-import javafx.beans.property.StringProperty;
+import services.EmployeeServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -18,13 +16,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.Allowance;
 import model.Employee;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -353,10 +349,10 @@ public class EmployeeViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        EmployeeController employeeController = new EmployeeController();
+        EmployeeServices employeeServices = new EmployeeServices();
 
         ObservableList<Employee> employeesData;
-        employeesData = employeeController.loadData();
+        employeesData = employeeServices.loadData();
 
         //Setting cell value factory to table view
         EIDColumn.setCellValueFactory(new PropertyValueFactory<>("eID"));
@@ -439,7 +435,7 @@ public class EmployeeViewController implements Initializable {
 
         clearLabels();
         Employee employeeModel = new Employee();
-        EmployeeController employeeController = new EmployeeController();
+        EmployeeServices employeeServices = new EmployeeServices();
 
         if(dataValidate()){
 
@@ -453,7 +449,7 @@ public class EmployeeViewController implements Initializable {
             employeeModel.seteBankName(EBankNameTextBox.getText());
             employeeModel.seteAccNo(Integer.parseInt(EAccNoTextBox.getText()));
             employeeModel.seteBSSID(EBSSIDTextBox.getText());
-            boolean resultVal = employeeController.insertData(employeeModel);
+            boolean resultVal = employeeServices.insertData(employeeModel);
             if(resultVal){
                 refreshTable();
             }
@@ -501,7 +497,7 @@ public class EmployeeViewController implements Initializable {
 
         clearLabels();
         Employee employeeModel = new Employee();
-        EmployeeController employeeController = new EmployeeController();
+        EmployeeServices employeeServices = new EmployeeServices();
 
         try{
             if(!(existingEmployeeModel.geteID().isEmpty() )){
@@ -519,7 +515,7 @@ public class EmployeeViewController implements Initializable {
                     employeeModel.seteAccNo(Integer.parseInt(EAccNoTextBox.getText()));
                     employeeModel.seteBSSID(EBSSIDTextBox.getText());
                     employeeModel.setePhone(Integer.parseInt(EPhoneTextBox.getText()));
-                    boolean resultVal = employeeController.updateData(employeeModel);
+                    boolean resultVal = employeeServices.updateData(employeeModel);
                     if(resultVal){
                         refreshTable();
                     }
@@ -538,7 +534,7 @@ public class EmployeeViewController implements Initializable {
 
         int ID;
         Employee employeeModel;
-        EmployeeController employeeController = new EmployeeController();
+        EmployeeServices employeeServices = new EmployeeServices();
         employeeModel = EmployeeTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -548,7 +544,7 @@ public class EmployeeViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Employee Info");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = employeeController.deleteData(ID);
+                    Boolean resultVal = employeeServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -562,9 +558,9 @@ public class EmployeeViewController implements Initializable {
     }
     public void searchTable(){
 
-        EmployeeController employeeController = new EmployeeController();
+        EmployeeServices employeeServices = new EmployeeServices();
         //Retrieving sorted data from Main Controller
-        SortedList<Employee> sortedData = employeeController.searchTable(SearchTextBox);
+        SortedList<Employee> sortedData = employeeServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(EmployeeTable.comparatorProperty());

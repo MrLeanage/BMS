@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ProductSupplierPopUPController implements Initializable {
+public class ProductSupplierPopUPServices implements Initializable {
     private DBConnection dbcon;
     private static PreparedStatement ps;
     private static String supplierType;
@@ -27,7 +27,7 @@ public class ProductSupplierPopUPController implements Initializable {
 
 
     /**
-     * Initializes the controller class.
+     * Initializes the services class.
      * @param location
      * @param resources
      */

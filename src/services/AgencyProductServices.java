@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class AgencyProductController  {
+public class AgencyProductServices {
     private DBConnection dbcon;
     private ObservableList<AgencyProduct> agencyProductsData;
 

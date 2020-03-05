@@ -1,6 +1,6 @@
 package view.EmployeeManagement;
 
-import controller.AllowanceController;
+import services.AllowanceServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -244,7 +244,7 @@ public class AllowancesViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        AllowanceController allowancesController = new AllowanceController();
+        AllowanceServices allowancesController = new AllowanceServices();
 
         ObservableList<Allowance> allowanceData;
         allowanceData = allowancesController.loadData();
@@ -274,7 +274,7 @@ public class AllowancesViewController implements Initializable {
 
         clearLabels();
         Allowance allowanceModel = new Allowance();
-        AllowanceController allowancesController = new AllowanceController();
+        AllowanceServices allowancesController = new AllowanceServices();
 
         if(dataValidate()){
 
@@ -324,7 +324,7 @@ public class AllowancesViewController implements Initializable {
 
         clearLabels();
         Allowance allowanceModel = new Allowance();
-        AllowanceController allowancesController = new AllowanceController();
+        AllowanceServices allowancesController = new AllowanceServices();
 
         try{
             if(!(existingAllowaneModel.getaID().isEmpty() )){
@@ -356,7 +356,7 @@ public class AllowancesViewController implements Initializable {
 
         int ID;
         Allowance allowanceModel;
-        AllowanceController allowancesController = new AllowanceController();
+        AllowanceServices allowancesController = new AllowanceServices();
         allowanceModel = AllowanceTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -380,7 +380,7 @@ public class AllowancesViewController implements Initializable {
     }
     public void searchTable(){
 
-        AllowanceController allowancesController = new AllowanceController();
+        AllowanceServices allowancesController = new AllowanceServices();
         //Retrieving sorted data from Main Controller
         SortedList<Allowance> sortedData = allowancesController.searchTable(SearchTextBox);
 

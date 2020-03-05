@@ -1,6 +1,6 @@
 package view.InventoryManagement;
 
-import controller.ProductSupplierPopUPController;
+import services.ProductSupplierPopUPServices;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class AgencySupplierPopUPViewController implements Initializable {
 
     /**
-     * Initializes the controller class.
+     * Initializes the services class.
      * @param url
      * @param rb
      */
@@ -78,11 +78,11 @@ public class AgencySupplierPopUPViewController implements Initializable {
     private void loadData() {
         //getting data from main Controller
 
-        ProductSupplierPopUPController productSupplierPopUPController = new ProductSupplierPopUPController();
+        ProductSupplierPopUPServices productSupplierPopUPServices = new ProductSupplierPopUPServices();
 
         ObservableList<Supplier> supplierData;
-        productSupplierPopUPController.setSupplierType("'Agency'");
-        supplierData = productSupplierPopUPController.loadData();
+        productSupplierPopUPServices.setSupplierType("'Agency'");
+        supplierData = productSupplierPopUPServices.loadData();
 
         //Setting cell value factory to table view
         SIIDColumn.setCellValueFactory(new PropertyValueFactory<>("sIID"));
@@ -115,9 +115,9 @@ public class AgencySupplierPopUPViewController implements Initializable {
     }
     public void searchTable(){
 
-        ProductSupplierPopUPController productSupplierPopUPController = new ProductSupplierPopUPController();
+        ProductSupplierPopUPServices productSupplierPopUPServices = new ProductSupplierPopUPServices();
         //Retrieving sorted data from Main Controller
-        SortedList<Supplier> sortedData = productSupplierPopUPController.searchTable(SearchTextBox);
+        SortedList<Supplier> sortedData = productSupplierPopUPServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(SupplierTable.comparatorProperty());

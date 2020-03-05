@@ -1,8 +1,6 @@
 package view.EmployeeManagement;
 
-import controller.AllowanceController;
-import controller.SalarySchemeController;
-import javafx.collections.FXCollections;
+import services.SalarySchemeServices;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -15,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Allowance;
 import model.SalaryScheme;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
@@ -215,10 +212,10 @@ public class SalarySchemeViewController implements Initializable {
     //load data from Main Controller to View table
     private void loadData() {
         //getting data from main Controller
-        SalarySchemeController salarySchemeController = new SalarySchemeController();
+        SalarySchemeServices salarySchemeServices = new SalarySchemeServices();
 
         ObservableList<SalaryScheme> salarySchemesData;
-        salarySchemesData = salarySchemeController.loadData();
+        salarySchemesData = salarySchemeServices.loadData();
 
         //Setting cell value factory to table view
         BSSIDColumn.setCellValueFactory(new PropertyValueFactory<>("bSSID"));
@@ -244,14 +241,14 @@ public class SalarySchemeViewController implements Initializable {
 
         clearLabels();
         SalaryScheme salarySchemeModel = new SalaryScheme();
-        SalarySchemeController salarySchemeController = new SalarySchemeController();
+        SalarySchemeServices salarySchemeServices = new SalarySchemeServices();
 
         if(dataValidate()){
 
             salarySchemeModel.setbSSTitle(BSSTitleTextBox.getText());
             salarySchemeModel.setbSSAmount(Float.parseFloat(BSSAmountTextBox.getText()));
             salarySchemeModel.setbSSAddedDate(String.valueOf(LocalDate.now()));
-            Boolean resultVal = salarySchemeController.insertData(salarySchemeModel);
+            Boolean resultVal = salarySchemeServices.insertData(salarySchemeModel);
             if(resultVal){
                 refreshTable();
             }
@@ -291,7 +288,7 @@ public class SalarySchemeViewController implements Initializable {
 
         clearLabels();
         SalaryScheme salarySchemeModel = new SalaryScheme();
-        SalarySchemeController salarySchemeController = new SalarySchemeController();
+        SalarySchemeServices salarySchemeServices = new SalarySchemeServices();
 
         try{
             if(!(existingSalarySchemeModel.getbSSID().isEmpty() )){
@@ -303,7 +300,7 @@ public class SalarySchemeViewController implements Initializable {
                     salarySchemeModel.setbSSTitle(BSSTitleTextBox.getText());
                     salarySchemeModel.setbSSAmount(Float.parseFloat(BSSAmountTextBox.getText()));
                     salarySchemeModel.setbSSAddedDate(String.valueOf(LocalDate.now()));
-                    boolean resultVal = salarySchemeController.updateData(salarySchemeModel);
+                    boolean resultVal = salarySchemeServices.updateData(salarySchemeModel);
                     if(resultVal){
                         refreshTable();
                     }
@@ -322,7 +319,7 @@ public class SalarySchemeViewController implements Initializable {
 
         int ID;
         SalaryScheme salarySchemeModel;
-        SalarySchemeController salarySchemeController = new SalarySchemeController();
+        SalarySchemeServices salarySchemeServices = new SalarySchemeServices();
         salarySchemeModel = BasicSalarySchemeTable.getSelectionModel().getSelectedItem();
 
         //checking for null ID Selection with try
@@ -332,7 +329,7 @@ public class SalarySchemeViewController implements Initializable {
                 Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Salary Scheme");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
-                    Boolean resultVal = salarySchemeController.deleteData(ID);
+                    Boolean resultVal = salarySchemeServices.deleteData(ID);
                     if(resultVal){
                         refreshTable();
                     }
@@ -346,9 +343,9 @@ public class SalarySchemeViewController implements Initializable {
     }
     public void searchTable(){
 
-        SalarySchemeController salarySchemeController = new SalarySchemeController();
+        SalarySchemeServices salarySchemeServices = new SalarySchemeServices();
         //Retrieving sorted data from Main Controller
-        SortedList<SalaryScheme> sortedData = salarySchemeController.searchTable(SearchTextBox);
+        SortedList<SalaryScheme> sortedData = salarySchemeServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(BasicSalarySchemeTable.comparatorProperty());
