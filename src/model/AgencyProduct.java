@@ -1,7 +1,6 @@
 package model;
 
 import javafx.beans.property.*;
-import sun.java2d.pipe.SpanShapeRenderer;
 import util.utility.UtilityMethod;
 
 public class AgencyProduct {

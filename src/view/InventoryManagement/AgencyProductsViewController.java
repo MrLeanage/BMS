@@ -147,6 +147,7 @@ public class AgencyProductsViewController implements Initializable {
     @FXML
     private Label APDiscontinueDateLabel;
 
+
     /**
      * Initializes the controller class.
      * @param url
@@ -396,25 +397,30 @@ public class AgencyProductsViewController implements Initializable {
     private void selectSupplier(ActionEvent event){
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("AgencyProductSupplierPopUP.fxml"));
+        loader.setLocation(getClass().getResource("EmployeeSalarySchemePopUP.fxml"));
+
         try{
             loader.load();
+
         }catch (IOException ex){
-            Logger.getLogger(AgencyProductSupplierPopUPViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AgencySupplierPopUPViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AgencySupplierPopUPViewController agencySupplierPopUPViewController = loader.getController();
+
+
         Parent p = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(p));
         stage.setResizable(false);
-
         stage.showAndWait();
+
         try{
-            System.out.println(supplier.getsIName());
             APSupplierIDTextBox.setText(supplier.getsIID());
             APSupplierNameTextBox.setText(supplier.getsIName());
         }catch(NullPointerException ex){
             AlertPopUp.generalError(ex);
         }
+
 
     }
     //getting selected supplier from popup
@@ -428,7 +434,7 @@ public class AgencyProductsViewController implements Initializable {
             this.supplier = supplierInfo;
             resultval = true;
         }catch(NullPointerException ex){
-            System.out.println(ex);
+            AlertPopUp.generalError(ex);
         }
        return resultval;
     }
@@ -572,7 +578,7 @@ public class AgencyProductsViewController implements Initializable {
         try{
             ID = UtilityMethod.seperateID(agencyProductModel.getaPID());
             if(ID != 0){
-                Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Agency Product");
+                Optional<ButtonType> action = AlertPopUp.deleteConfirmation("Bakery Product");
                 //Checking for confirmation
                 if(action.get() == ButtonType.OK){
                     Boolean resultVal = agencyProductController.deleteData(ID);
@@ -602,8 +608,4 @@ public class AgencyProductsViewController implements Initializable {
 
 
     }
-
-
-
-
 }

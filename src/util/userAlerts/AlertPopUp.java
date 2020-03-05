@@ -60,6 +60,13 @@ public class AlertPopUp {
         msg.setContentText(text +" not Updated, Try Again!..SQL Exception found in :"+ ex );
         msg.showAndWait();
     }
+    public static void selectRowToUpdate(String text){
+        Alert successMsg = new Alert(Alert.AlertType.INFORMATION);
+        successMsg.setTitle("Please Select..");
+        successMsg.setHeaderText(null);
+        successMsg.setContentText("Please Select a "+ text + " record to Update..");
+        successMsg.showAndWait();
+    }
     public static void deleteSuccesfull(String text){
         Alert msg = new Alert(Alert.AlertType.INFORMATION);
         msg.setTitle("Successfull..");

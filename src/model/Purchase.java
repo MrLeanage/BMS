@@ -3,17 +3,21 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Purchase {
-    StringProperty pID = null;
-    StringProperty pItemID = null;
-    StringProperty pSupplierID = null;
-    StringProperty pPurchaseDate = null;
-    StringProperty pStatus = null;
+import java.time.LocalDate;
 
-    public Purchase(String pID, String pItemID, String pSupplierID, String pPurchaseDate, String pStatus) {
+public class Purchase {
+    private StringProperty pID = null;
+    private StringProperty pItemID = null;
+    private StringProperty pSupplierID = null;
+    private StringProperty pType = null;
+    private StringProperty pPurchaseDate = null;
+    private StringProperty pStatus = null;
+
+    public Purchase(String pID, String pItemID, String pSupplierID, String pType, String pPurchaseDate, String pStatus) {
         this.pID = new SimpleStringProperty(pID);
         this.pItemID = new SimpleStringProperty(pItemID);
         this.pSupplierID = new SimpleStringProperty(pSupplierID);
+        this.pType = new SimpleStringProperty(pType);
         this.pPurchaseDate = new SimpleStringProperty(pPurchaseDate);
         this.pStatus = new SimpleStringProperty(pStatus);
     }
@@ -54,8 +58,20 @@ public class Purchase {
         this.pSupplierID = new SimpleStringProperty(pSupplierID);
     }
 
+    public String getpType() {
+        return pType.get();
+    }
+
+    public StringProperty pTypeProperty() {
+        return pType;
+    }
+
+    public void setpType(String pType) {
+        this.pType = new SimpleStringProperty(pType);
+    }
+
     public String getpPurchaseDate() {
-        return pPurchaseDate.get();
+        return String.valueOf(LocalDate.now());
     }
 
     public StringProperty pPurchaseDateProperty() {

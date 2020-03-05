@@ -82,6 +82,16 @@ public class WithdrawedItemsController {
         app.setScene(scene);
         app.show();
     }
+    @FXML
+    private void OrderMenu(ActionEvent event) throws IOException {
+
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersMenuSupervisor.fxml"));
+
+        Scene scene = new Scene(home_page);
+        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
+        app.setScene(scene);
+        app.show();
+    }
 
 
 

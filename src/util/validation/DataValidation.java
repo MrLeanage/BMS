@@ -1,6 +1,8 @@
 package util.validation;
 
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 import java.time.LocalDate;
@@ -111,6 +113,24 @@ public class DataValidation {
         }
 
     }
+    public static boolean ImageFieldNotEmpty(ImageView imageView){
+        boolean returnVal = false;
+        try{
+            if(!(imageView.getImage() == null) || !(imageView.getImage().isError())){
+                returnVal = true;
+            }
+        }catch (NullPointerException ex){
+
+        }
+
+        return returnVal;
+    }
+    public static void ImageFieldNotEmpty(ImageView imageView, Label label, String validationText){
+
+        if(!ImageFieldNotEmpty(imageView)){
+            label.setText(validationText);
+        }
+    }
     //email validation
     public static final Pattern VALIDEMAIL =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -198,6 +218,32 @@ public class DataValidation {
     }
     public static void isValidMaximumLength(String data, int maxLength, Label label, String validationText){
         if(!isValidMaximumLength(data,maxLength)){
+            label.setText(validationText);
+        }
+    }
+
+    public static  final Pattern VALIDOLDNIC = Pattern.compile("^[0-9]{9}[vVxX]$");
+    public static  final Pattern VALIDNEWNIC = Pattern.compile("^[1-2]{1}[0-9]{11}$");
+
+    public static boolean isValidNIC(TextField textField){
+        if(isValidNumberFormat(textField.getText())){
+            Matcher matcher = VALIDNEWNIC.matcher(textField.getText());
+            if(matcher.matches()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            Matcher matcher = VALIDOLDNIC.matcher(textField.getText());
+            if(matcher.matches()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    public static void isValidNIC(TextField textField, Label label, String validationText){
+        if(!(isValidNIC(textField))){
             label.setText(validationText);
         }
     }

@@ -4,49 +4,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import model.AgencyProduct;
-import model.Supplier;
 import util.dbConnect.DBConnection;
-import util.playAudio.Audio;
 import util.query.AgencyProductQueries;
 import util.query.PurchaseProductQueries;
 import util.query.SupplierQueries;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
-import view.InventoryManagement.AgencyProductsViewController;
-import view.InventoryManagement.SupplierViewController;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
-public class AgencyProductController implements Initializable {
+public class AgencyProductController  {
     private DBConnection dbcon;
-
-
-
-    Audio play = new Audio();
-
-
     private ObservableList<AgencyProduct> agencyProductsData;
 
-    /**
-     * Initializes the controller class.
-     * @param location
-     * @param resources
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        dbcon = new DBConnection();
-        loadData();
 
-    }
     public  ObservableList<AgencyProduct> loadData(){
         try {
             Connection conn = DBConnection.Connect();
@@ -55,11 +32,11 @@ public class AgencyProductController implements Initializable {
 
             while (rsLoadAgencyProduct.next()) {
                 try{
-                    ResultSet rsFindPurchaseData = conn.createStatement().executeQuery(PurchaseProductQueries.FIND_PURCHASE_DATA_QUERRY +rsLoadAgencyProduct.getString(1));
+                    ResultSet rsFindPurchaseData = conn.createStatement().executeQuery(PurchaseProductQueries.FIND_PURCHASE_AGENCY_DATA_QUERRY + rsLoadAgencyProduct.getString(1));
                     while(rsFindPurchaseData.next()){
                         if(!(rsFindPurchaseData.getString(1).isEmpty() || rsFindPurchaseData.getString(1).equals(null))){
                             try{
-                                ResultSet rsFindSupplierData = conn.createStatement().executeQuery(SupplierQueries.FIND_SUPPLIER_DATA_QUERY +rsFindPurchaseData.getString(3));
+                                ResultSet rsFindSupplierData = conn.createStatement().executeQuery(SupplierQueries.FIND_SUPPLIER_DATA_QUERY + rsFindPurchaseData.getString(3));
                                 while (rsFindSupplierData.next()){
                                     if(!(rsFindSupplierData.getString(1).isEmpty() || rsFindSupplierData.getString(1).equals(null))){
 
@@ -114,8 +91,9 @@ public class AgencyProductController implements Initializable {
                         psPurchase = conn.prepareStatement(PurchaseProductQueries.INSERT_PURCHASE_DATA_QUERRY);
                         psPurchase.setInt(1, rsLastAgencyProduct.getInt(1));
                         psPurchase.setInt(2, UtilityMethod.seperateID(agencyProduct.getaPSupplierID()));
-                        psPurchase.setString(3, String.valueOf(LocalDate.now()));
-                        psPurchase.setString(4,"Pending");
+                        psPurchase.setString(3, "Agency");
+                        psPurchase.setString(4, String.valueOf(LocalDate.now()));
+                        psPurchase.setString(5,"Pending");
                         psPurchase.execute();
                         AlertPopUp.insertSuccesfully("Agency Product");
                         resultval = true;
@@ -156,7 +134,7 @@ public class AgencyProductController implements Initializable {
             status = true;
             if(status){
                 try{
-                        psPurchase = conn.prepareStatement(PurchaseProductQueries.UPDATE_PURCHASE_DATA_QUERRY);
+                        psPurchase = conn.prepareStatement(PurchaseProductQueries.UPDATE_PURCHASE_AGENCY_DATA_QUERRY);
                         psPurchase.setInt(1, UtilityMethod.seperateID(agencyProduct.getaPSupplierID()));
                         psPurchase.setString(2,String.valueOf(LocalDate.now()));
                         psPurchase.setInt(3, UtilityMethod.seperateID(agencyProduct.getaPID()));
@@ -186,7 +164,7 @@ public class AgencyProductController implements Initializable {
             psAgencyProduct.setInt(1, itemID);
             psAgencyProduct.executeUpdate();
             try{
-                psPurchase = conn.prepareStatement(PurchaseProductQueries.DELETE_PURCHASE_DATA_QUERRY);
+                psPurchase = conn.prepareStatement(PurchaseProductQueries.DELETE_PURCHASE_AGENCY_DATA_QUERRY);
                 psPurchase.setInt(1, itemID);
                 psPurchase.executeUpdate();
                 AlertPopUp.deleteSuccesfull("Agency Product");
@@ -215,7 +193,7 @@ public class AgencyProductController implements Initializable {
 
             while (rsLoadAgencyProduct.next()) {
                 try{
-                    ResultSet rsFindPurchaseData = conn.createStatement().executeQuery(PurchaseProductQueries.FIND_PURCHASE_DATA_QUERRY +rsLoadAgencyProduct.getString(1));
+                    ResultSet rsFindPurchaseData = conn.createStatement().executeQuery(PurchaseProductQueries.FIND_PURCHASE_AGENCY_DATA_QUERRY +rsLoadAgencyProduct.getString(1));
                     while(rsFindPurchaseData.next()){
                         if(!(rsFindPurchaseData.getString(1).isEmpty() || rsFindPurchaseData.getString(1).equals(null))){
                             try{
