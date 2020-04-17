@@ -6,7 +6,6 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -160,31 +159,30 @@
                      </font>
                   </Text>
                   <ComboBox fx:id="YearChoiceBox" layoutX="141.0" layoutY="439.0" onAction="#loadFilteredData" prefHeight="25.0" prefWidth="150.0" promptText="Select Year" AnchorPane.leftAnchor="141.0" />
-                  <ComboBox fx:id="CategoryChoiceBox" layoutX="141.0" layoutY="535.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Select Category" AnchorPane.leftAnchor="141.0" />
+                  <ComboBox fx:id="CategoryComboBox" layoutX="141.0" layoutY="535.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Select Category" AnchorPane.leftAnchor="141.0" />
                   <Text fill="WHITE" layoutX="16.0" layoutY="548.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Category :" wrappingWidth="150.33330672979355" AnchorPane.leftAnchor="16.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
                   <ComboBox fx:id="MonthChoiceBox" layoutX="141.0" layoutY="487.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Select Month" AnchorPane.leftAnchor="141.0" />
-                  <Button layoutX="309.0" layoutY="534.0" mnemonicParsing="false" onAction="#loadFilteredData" prefHeight="25.0" prefWidth="151.0" text="Add Filter" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="90.0" layoutX="306.0" layoutY="438.0" stroke="TRANSPARENT" strokeType="INSIDE" width="323.0" />
-                  <Label layoutX="389.0" layoutY="454.0" text="Sold Items    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="123.0" layoutX="306.0" layoutY="438.0" stroke="TRANSPARENT" strokeType="INSIDE" width="323.0" />
+                  <Label layoutX="320.0" layoutY="470.0" text="Sold Items    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="389.0" layoutY="485.0" text="Total Sales    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
+                  <Label layoutX="320.0" layoutY="509.0" text="Total Sales    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="SoldItemsLabel" layoutX="490.0" layoutY="456.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
+                  <Label fx:id="SoldItemsLabel" layoutX="430.0" layoutY="472.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="TotalSalesLabel" layoutX="490.0" layoutY="486.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
+                  <Label fx:id="TotalSalesLabel" layoutX="430.0" layoutY="510.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -199,20 +197,18 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="473.0" layoutY="534.0" mnemonicParsing="false" onAction="#resetFilters" prefHeight="25.0" prefWidth="151.0" text="Reset Filters" />
-                  <ChoiceBox fx:id="StatPeriodChoiceBox" layoutX="770.0" layoutY="438.0" prefHeight="25.0" prefWidth="301.0" AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="438.0" />
                   <Label layoutX="655.0" layoutY="438.0" text="Select Period :" textFill="WHITE" AnchorPane.leftAnchor="655.0" AnchorPane.topAnchor="438.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="930.0" layoutY="466.0" mnemonicParsing="false" onAction="#loadStatFilterData" prefHeight="25.0" prefWidth="141.0" text="Add Filters" AnchorPane.topAnchor="477.0" />
-                  <ChoiceBox fx:id="StatCategoryChoiceBox" layoutX="780.0" layoutY="477.0" prefWidth="150.0" AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="477.0" />
                   <Label layoutX="660.0" layoutY="479.0" text="Category        :" textFill="WHITE" AnchorPane.leftAnchor="655.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="StatCategoryComboBox" layoutX="770.0" layoutY="465.0" onAction="#loadStatFilterData" prefWidth="301.0" AnchorPane.topAnchor="477.0" />
+                  <ComboBox fx:id="StatPeriodComboBox" layoutX="770.0" layoutY="426.0" onAction="#loadStatFilterData" prefWidth="301.0" AnchorPane.topAnchor="438.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="580.0" prefWidth="1090.0" visible="false" AnchorPane.leftAnchor="170.0" />

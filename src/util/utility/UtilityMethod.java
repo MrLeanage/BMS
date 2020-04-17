@@ -209,7 +209,9 @@ public class UtilityMethod {
     public static Integer seperateIntegerFromString(String stringIntegerMixedText){
 
         String numberOnly = stringIntegerMixedText.replaceAll("[^0-9]", "");
-
+        if(numberOnly.equals("")){
+            numberOnly = "1";
+        }
         return Integer.parseInt(numberOnly);
     }
     public static String seperateLettersFromText(String stringMixedText){

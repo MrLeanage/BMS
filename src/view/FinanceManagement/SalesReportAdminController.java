@@ -63,7 +63,7 @@ public class SalesReportAdminController implements Initializable {
     private ComboBox<Integer> YearChoiceBox;
 
     @FXML
-    private ComboBox<String> CategoryChoiceBox;
+    private ComboBox<String> CategoryComboBox;
 
     @FXML
     private ComboBox<String> MonthChoiceBox;
@@ -88,10 +88,10 @@ public class SalesReportAdminController implements Initializable {
     private NumberAxis YAXISChart;
 
     @FXML
-    private ChoiceBox<String> StatPeriodChoiceBox;
+    private ComboBox<String> StatPeriodComboBox;
 
     @FXML
-    private ChoiceBox<String> StatCategoryChoiceBox;
+    private ComboBox<String> StatCategoryComboBox;
 
 
     private LinkedList<SalesItem> salesItemLinkedList = new LinkedList<>();
@@ -259,13 +259,15 @@ public class SalesReportAdminController implements Initializable {
         YearChoiceBox.setItems(choiceBoxYears);
 
         //default value
-        CategoryChoiceBox.setValue("All Products");
-        CategoryChoiceBox.setItems(categoryList);
+        CategoryComboBox.setValue("All Products");
+        CategoryComboBox.setItems(categoryList);
 
         SalesPeriodLabel.setText(month + " "+ year + " - "+"All Products");
 
         //setting data for stat table choice boxes
         ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
+        choiceBoxTimePeriod.add("This Month");
+        choiceBoxTimePeriod.add("Last 2 Months");
         for(int i = 3; i <= getChartData("All Products").size(); i++){
             //adding Month Sorting lists up to 18 months from 3 months to 3 months
             if((i % 3 == 0) && (i <= 18)){
@@ -273,12 +275,12 @@ public class SalesReportAdminController implements Initializable {
             }
         }
         //default value
-        StatPeriodChoiceBox.setValue("Last 3 Months");
-        StatPeriodChoiceBox.setItems(choiceBoxTimePeriod);
+        StatPeriodComboBox.setValue("Last 3 Months");
+        StatPeriodComboBox.setItems(choiceBoxTimePeriod);
 
         ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Products","Agency Products", "Bakery Products", "Orders", "All Comparision");
-        StatCategoryChoiceBox.setValue("All Comparision");
-        StatCategoryChoiceBox.setItems(chartCategoryList);
+        StatCategoryComboBox.setValue("All Comparision");
+        StatCategoryComboBox.setItems(chartCategoryList);
 
         //loading All Comparision data to chart for last 3 months
         getFilteredChartData(3, "All Comparision");
@@ -315,26 +317,18 @@ public class SalesReportAdminController implements Initializable {
             month = MonthChoiceBox.getValue();
         }
 
-        if(CategoryChoiceBox.getValue().equals("All Products")){
+        if(CategoryComboBox.getValue().equals("All Products")){
             category = "None";
-        }else if(CategoryChoiceBox.getValue().equals("Agency Products")){
+        }else if(CategoryComboBox.getValue().equals("Agency Products")){
             category = "Agency Product";
-        }else if(CategoryChoiceBox.getValue().equals("Bakery Products")){
+        }else if(CategoryComboBox.getValue().equals("Bakery Products")){
             category = "Bakery Product";
         }else{
             category = "Order";
         }
-        SalesPeriodLabel.setText(MonthChoiceBox.getValue() + " "+ year + " - "+CategoryChoiceBox.getValue());
+        SalesPeriodLabel.setText(MonthChoiceBox.getValue() + " "+ year + " - "+CategoryComboBox.getValue());
 
         loadData();
-
-    }
-    @FXML
-    private void resetFilters(){
-        year = -1;
-        month = "-1";
-        loadData();
-        SalesPeriodLabel.setText("");
 
     }
     private void calculateSales(LinkedList<SalesItem> salesItemsList){
@@ -350,8 +344,8 @@ public class SalesReportAdminController implements Initializable {
 
     @FXML
     private void loadStatFilterData(ActionEvent actionEvent){
-        int noOfMonths = UtilityMethod.seperateIntegerFromString(StatPeriodChoiceBox.getValue());
-        String type = StatCategoryChoiceBox.getValue();
+        int noOfMonths = UtilityMethod.seperateIntegerFromString(StatPeriodComboBox.getValue());
+        String type = StatCategoryComboBox.getValue();
         getFilteredChartData(noOfMonths, type);
     }
     private void getFilteredChartData(int noOfMonths, String type){
@@ -362,11 +356,19 @@ public class SalesReportAdminController implements Initializable {
         XYChart.Series order = new XYChart.Series<>();
 
         int size = getChartData(type).size();
-        int startIndex = size - noOfMonths;
+        //declaring starting index of linked list to access relevant month data from the last record to show last month record last at chart
+        int startIndex;
+        if(size < 3){
+            startIndex = 0;
+        }else{
+            startIndex = size - noOfMonths;
+        }
+
         String typeBakery = "Bakery Product";
         String typeAgency = "Agency Product";
         String typeOrder = "Order Product";
         String typeAll = "All Products";
+        //executing loop from 0 to no of months
         for(int i = 0; i < noOfMonths ; i++){
 
                 All.getData().add(new XYChart.Data(getChartData(typeAll).get(startIndex + i).getDataYear()+ " " + getChartData(typeAll).get(startIndex + i).getDataMonth(), getChartData(typeAll).get(startIndex + i).getDataValue()));
@@ -398,7 +400,7 @@ public class SalesReportAdminController implements Initializable {
 
     }
     //getting chart data according to type
-    private LinkedList<ChartData> getChartData(String type){
+    protected LinkedList<ChartData> getChartData(String type){
         ObservableList<ChartData> chartDataList = FXCollections.observableArrayList();
         LinkedList<ChartData> chartDataLinkedList;
         double totalSales = 0;
@@ -420,7 +422,7 @@ public class SalesReportAdminController implements Initializable {
                         totalSales += salesItem.getsITotalAmount();
                     }
                 }
-                //setting chart data to a observable list array ex:
+                //setting chart data to a ChartData object ex:
                     // "2020", "January", 11000, "Agency Product"
                     // "2020", "February", 12000, "Agency Product"
                     // "2020", "March", 13000, "Agency Product"

@@ -241,7 +241,7 @@ public class PurchasesReportAdminController implements Initializable {
         app.setScene(scene);
         app.show();
     }
-    //load sales dates to choiceboxes and Chart
+    //load purchase dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
 
         ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
@@ -252,7 +252,7 @@ public class PurchasesReportAdminController implements Initializable {
 
         ObservableList<String> categoryList = FXCollections.observableArrayList("All Items","Agency Items", "Stock Items");
         PurchaseServices purchaseServices = new PurchaseServices();
-        //getting all Sales Items with billing Date
+        //getting all purchases
         ObservableList<Purchase> dateObservableList;
         dateObservableList = purchaseServices.loadData();
 

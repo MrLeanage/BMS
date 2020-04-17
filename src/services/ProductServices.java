@@ -18,12 +18,9 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class ProductServices {
-
-
-    private LinkedList<SalesItem> productsDataList = new LinkedList<>();
-
     public LinkedList<SalesItem> loadData(){
         //Retreiving all data from database
+        LinkedList<SalesItem> productsDataList = new LinkedList<>();
         ObservableList<SalesItem> salesBakeryData = null;
         ObservableList<SalesItem> salesAgencyData = null;
         try {
@@ -48,8 +45,9 @@ public class ProductServices {
 
     public SortedList<SalesItem> searchTable(TextField searchTextField){
         //Retreiving all data from database
-        ObservableList<SalesItem> salesBakeryData = null;
-        ObservableList<SalesItem> salesAgencyData = null;
+        LinkedList<SalesItem> productsDataList = new LinkedList<>();
+        ObservableList<SalesItem> salesBakeryData;
+        ObservableList<SalesItem> salesAgencyData;
         try {
             Connection conn = DBConnection.Connect();
             salesBakeryData = FXCollections.observableArrayList();
@@ -104,6 +102,7 @@ public class ProductServices {
     }
     public SortedList<SalesItem> billingSearchTable(TextField searchTextField){
         //Retreiving all data from database
+        LinkedList<SalesItem> productsDataList = new LinkedList<>();
         ObservableList<SalesItem> salesBakeryData = null;
         ObservableList<SalesItem> salesAgencyData = null;
         try {
