@@ -39,6 +39,14 @@ public class AlertPopUp {
         msg.showAndWait();
 
     }
+    public static void emptyInsertionFailed(String text){
+        Alert msg = new Alert(Alert.AlertType.ERROR);
+        msg.setTitle("No Records Found");
+        msg.setHeaderText(null);
+        msg.setContentText(text);
+        msg.showAndWait();
+
+    }
     public static void insertionFailed(Exception ex, String text){
         Alert msg = new Alert(Alert.AlertType.ERROR);
         msg.setTitle("Error Occured!..");
@@ -53,12 +61,26 @@ public class AlertPopUp {
         msg.setContentText(text + " Updated Successfully.. " );
         msg.showAndWait();
     }
+    public static void updateFailed(String text){
+        Alert msg = new Alert(Alert.AlertType.ERROR);
+        msg.setTitle("Error Occured!..");
+        msg.setHeaderText(null);
+        msg.setContentText(text +" not Updated, Try Again!.." );
+        msg.showAndWait();
+    }
     public static void updateFailed(Exception ex, String text){
         Alert msg = new Alert(Alert.AlertType.ERROR);
         msg.setTitle("Error Occured!..");
         msg.setHeaderText(null);
         msg.setContentText(text +" not Updated, Try Again!..SQL Exception found in :"+ ex );
         msg.showAndWait();
+    }
+    public static void selectRow(String text){
+        Alert successMsg = new Alert(Alert.AlertType.INFORMATION);
+        successMsg.setTitle("Please Select..");
+        successMsg.setHeaderText(null);
+        successMsg.setContentText("Please Select a "+ text);
+        successMsg.showAndWait();
     }
     public static void selectRowToUpdate(String text){
         Alert successMsg = new Alert(Alert.AlertType.INFORMATION);
@@ -103,6 +125,22 @@ public class AlertPopUp {
         msg.setTitle("Error Occured!..");
         msg.setHeaderText(null);
         msg.setContentText("Error Occured, Try Again!..Check method "+classMethod + "Exception found with Mouse click :"+ ex );
-        //msg.showAndWait();
+        msg.showAndWait();
+    }
+    public static void generalError(String text){
+        String classMethod = new Object(){}.getClass().getEnclosingMethod().getName();
+        Alert msg = new Alert(Alert.AlertType.ERROR);
+        msg.setTitle("Error Occured!..");
+        msg.setHeaderText(null);
+        msg.setContentText("Error Occured While Completing "+ text +" request, Try Again!.." );
+        msg.showAndWait();
+    }
+    public static void noRecordFound(String text){
+        String classMethod = new Object(){}.getClass().getEnclosingMethod().getName();
+        Alert msg = new Alert(Alert.AlertType.WARNING);
+        msg.setTitle("No Records Found");
+        msg.setHeaderText(null);
+        msg.setContentText("No "+ text +" records found for Your Request" );
+        msg.showAndWait();
     }
 }

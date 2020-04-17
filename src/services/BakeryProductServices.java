@@ -36,6 +36,28 @@ public class BakeryProductServices {
         }
         return bakeryProductsData;
     }
+    public  BakeryProduct loadSpecificData(String id){
+        BakeryProduct bakeryProduct = new BakeryProduct();
+        try {
+            Connection conn = DBConnection.Connect();
+            bakeryProductsData = FXCollections.observableArrayList();
+            PreparedStatement psLoadBakeryProduct = conn.prepareStatement(BakeryProductQueries.LOAD_BAKERY_PRODUCT_DATA_QUERY);
+            psLoadBakeryProduct.setInt(1, UtilityMethod.seperateID(id));
+            ResultSet rsLoadBakeryProduct = psLoadBakeryProduct.executeQuery();
+            while (rsLoadBakeryProduct.next()) {
+                bakeryProduct.setbPID(rsLoadBakeryProduct.getString(1));
+                bakeryProduct.setbPName(rsLoadBakeryProduct.getString(2));
+                bakeryProduct.setbPType(rsLoadBakeryProduct.getString(3));
+                bakeryProduct.setbPWeight(rsLoadBakeryProduct.getFloat(4));
+                bakeryProduct.setbPDescription(rsLoadBakeryProduct.getString(5));
+                bakeryProduct.setbPPrice(rsLoadBakeryProduct.getFloat(6));
+                bakeryProduct.setbPStatus(rsLoadBakeryProduct.getString(7));
+            }
+        } catch (SQLException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        }
+        return bakeryProduct;
+    }
 
     public boolean insertData(BakeryProduct bakeryProduct) throws  Exception{
         PreparedStatement psBakeryProduct = null;
@@ -51,11 +73,11 @@ public class BakeryProductServices {
             psBakeryProduct.setFloat(5, bakeryProduct.getbPPrice());
             psBakeryProduct.setString(6, bakeryProduct.getbPStatus());
             psBakeryProduct.execute();
-            AlertPopUp.insertSuccesfully("Bakery Product");
+            AlertPopUp.insertSuccesfully("Bakery SalesItem");
             resultval = true;
 
         } catch (SQLException ex) {
-            AlertPopUp.insertionFailed(ex, "Bakery Product");
+            AlertPopUp.insertionFailed(ex, "Bakery SalesItem");
         }
         finally{
             psBakeryProduct.close();
@@ -79,11 +101,11 @@ public class BakeryProductServices {
             psBackeryProduct.setString(6, bakeryProduct.getbPStatus());
             psBackeryProduct.setInt(7, UtilityMethod.seperateID(bakeryProduct.getbPID()));
             psBackeryProduct.execute();
-            AlertPopUp.updateSuccesfully("Bakery Product");
+            AlertPopUp.updateSuccesfully("Bakery SalesItem");
             resultVal = true;
 
         } catch (SQLException ex) {
-            AlertPopUp.updateFailed(ex, "Bakery Product");
+            AlertPopUp.updateFailed(ex, "Bakery SalesItem");
 
         } finally {
             psBackeryProduct.close();
@@ -98,11 +120,11 @@ public class BakeryProductServices {
             psBakeryProduct = conn.prepareStatement(BakeryProductQueries.DELETE_ITEM_STOCK_DATA_QUERY);
             psBakeryProduct.setInt(1, itemID);
             psBakeryProduct.executeUpdate();
-            AlertPopUp.deleteSuccesfull("Bakery Product");
+            AlertPopUp.deleteSuccesfull("Bakery SalesItem");
             resultVal = true;
 
         }catch (SQLException ex) {
-            AlertPopUp.deleteFailed(ex, "Bakery Product");
+            AlertPopUp.deleteFailed(ex, "Bakery SalesItem");
         }finally{
             psBakeryProduct.close();
         }

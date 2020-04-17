@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FinanceManagement.SalesCounterAdminController">
+   <children>
+      <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutX="14.0" layoutY="12.0" stroke="TRANSPARENT" strokeType="INSIDE" width="160.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane layoutX="176.0" layoutY="9.0" prefHeight="70.0" prefWidth="1062.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutY="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1085.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
+                  <JFXButton buttonType="RAISED" layoutX="535.0" layoutY="15.0" onAction="#OrderStatus" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Order Management" textFill="WHITE" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="13.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="797.0" layoutY="14.0" onAction="#Employees" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Employee Management" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="13.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="15.0" onAction="#SalesCounter" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #029206;" text="Finance Management" textFill="WHITE" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="13.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" defaultButton="true" layoutX="12.0" layoutY="16.0" onAction="#ItemStock" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 2; -fx-background-color: #2b384b;" text="Inventory Management" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="23.0" layoutY="33.0" size="18" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="10.0" />
+            <Label layoutX="35.0" layoutY="9.0" prefHeight="25.0" prefWidth="82.0" text="User " textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="91.0" layoutY="55.0" onAction="#LogoutSession" style="-fx-background-color: #0a0270;" text="Logout" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="575.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="1250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane prefHeight="580.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="565.0" layoutX="10.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="37.0" layoutX="24.0" layoutY="9.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                  <Label layoutX="21.0" layoutY="15.0" text="Inventory Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="55.0" onAction="#SalesCounter" prefHeight="40.0" prefWidth="155.0" style="-fx-border-radius: 0; -fx-background-color: #029206;" text="Sales Counter" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="55.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                     </graphic></JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="105.0" onAction="#SalesReport" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Sales Report" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="105.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="BOOK" />
+                     </graphic></JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" onAction="#PurchasesReport" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Purchases" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="154.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                     </graphic></JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="204.0" onAction="#PaySheet" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="PaySheets" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="254.0" onAction="#PayRoll" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Pay Roll" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="305.0" onAction="#OtherExpenses" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Other Expenses" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="355.0" onAction="#IncomeStatement" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Income Statement" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="179.0" layoutY="8.0" prefHeight="580.0" prefWidth="1090.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="94.0" layoutY="499.0" stroke="BLACK" strokeType="INSIDE" width="745.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="37.0" stroke="TRANSPARENT" strokeType="INSIDE" width="745.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="565.0" layoutX="746.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="330.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                  <Label layoutX="13.0" layoutY="11.0" text="Sales Counter" textFill="WHITE" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="11.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton buttonType="RAISED" layoutX="561.0" layoutY="481.0" onAction="#claimSales" prefHeight="80.0" prefWidth="179.0" style="-fx-background-color: #029206;" text="Claim Sales" textFill="WHITE" AnchorPane.bottomAnchor="15.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="202.0" layoutY="531.0" onAction="#clearSalesList" prefHeight="34.0" prefWidth="117.0" style="-fx-background-color: #585757;" text="Clear " textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="202.0" AnchorPane.topAnchor="531.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="83.0" layoutX="327.0" layoutY="482.0" stroke="TRANSPARENT" strokeType="INSIDE" width="220.0" AnchorPane.bottomAnchor="15.0" />
+                  <Label layoutX="388.0" layoutY="489.0" prefHeight="25.0" prefWidth="139.0" text="TOTAL SALES" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="TotalAmountLabel" alignment="CENTER" layoutX="338.0" layoutY="511.0" prefHeight="38.0" prefWidth="188.0" text="Rs : 0.00" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="495.0" text="Total Items :" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="522.0" text="Date           :" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane prefHeight="499.0" prefWidth="760.0">
+                     <children>
+                        <TableView fx:id="BillingTable" prefHeight="428.0" prefWidth="745.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+                           <columns>
+                              <TableColumn fx:id="BIDColumn" prefWidth="104.66668701171875" text="Product ID" />
+                              <TableColumn fx:id="BNameColumn" prefWidth="253.33334350585938" text="Product Name" />
+                              <TableColumn fx:id="BWeightColumn" minWidth="0.0" prefWidth="83.77774047851562" text="Unit Weight" />
+                              <TableColumn fx:id="BPriceColumn" prefWidth="107.77777099609375" text="Unit Price" />
+                              <TableColumn fx:id="BQuantityColumn" prefWidth="78.11114501953125" text="Qty" />
+                              <TableColumn fx:id="BTotalColumn" prefWidth="118.888916015625" text="Total" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                  <TableView fx:id="UserTable" layoutX="761.0" layoutY="50.0" onMouseClicked="#loadSelectedData" prefHeight="343.0" prefWidth="310.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="50.0">
+                     <columns>
+                        <TableColumn fx:id="UIDColumn" prefWidth="61.6666259765625" text="User ID" />
+                        <TableColumn fx:id="UNameColumn" prefWidth="169.4443359375" text="User Name" />
+                        <TableColumn fx:id="UStatusColumn" prefWidth="74.5556640625" text="Status" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="SearchTextBox" layoutX="761.0" layoutY="13.0" prefHeight="30.0" prefWidth="310.0" promptText="Search in Cashier Here" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="13.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+                  <FontAwesomeIconView fill="#182c49" glyphName="SEARCH" layoutX="1047.0" layoutY="36.0" size="20" />
+                  <JFXButton buttonType="RAISED" layoutX="906.0" layoutY="512.0" onAction="#loadSalesData" prefHeight="49.0" prefWidth="165.0" style="-fx-background-color: #f8ea03;" text="Get User Sales" AnchorPane.rightAnchor="19.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#182c49" glyphName="SEARCH" size="30" wrappingWidth="40.49999702721834" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="761.0" layoutY="514.0" onAction="#clearField" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: #585757;" text="Clear Fields" textFill="WHITE" AnchorPane.rightAnchor="195.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="766.0" layoutY="408.0" prefHeight="21.0" prefWidth="117.0" text="User ID :" textFill="WHITE" AnchorPane.leftAnchor="766.0" AnchorPane.topAnchor="408.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="766.0" layoutY="451.0" prefHeight="27.0" prefWidth="103.0" text="User Name :" textFill="WHITE" AnchorPane.leftAnchor="766.0" AnchorPane.topAnchor="451.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="UNameTextbox" editable="false" layoutX="923.0" layoutY="451.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="451.0" />
+                  <TextField fx:id="UIDTextbox" editable="false" layoutX="923.0" layoutY="408.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="408.0" />
+                  <Label fx:id="TotalItemLabel" layoutX="109.0" layoutY="498.0" prefHeight="17.0" prefWidth="154.0" text="0" textFill="WHITE" AnchorPane.leftAnchor="109.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="DateLabel" layoutX="106.0" layoutY="523.0" prefHeight="25.0" prefWidth="92.0" textFill="WHITE" AnchorPane.leftAnchor="106.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

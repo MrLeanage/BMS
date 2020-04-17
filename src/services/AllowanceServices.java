@@ -7,14 +7,12 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TextField;
 import model.Allowance;
 import util.dbConnect.DBConnection;
+import util.query.AllowancePayQueries;
 import util.query.AllowanceQueries;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AllowanceServices {
 
@@ -35,6 +33,25 @@ public class AllowanceServices {
             AlertPopUp.sqlQueryError(ex);
         }
         return allowancesData;
+    }
+    public Allowance loadSpecificData(String id){
+        Allowance allowance = null;
+        try {
+            Connection conn = DBConnection.Connect();
+            PreparedStatement psLoadAllowance = conn.prepareStatement(AllowanceQueries.LOAD_SPECIFIC_ALLOWANCE_DATA_QUERY);
+            psLoadAllowance.setInt(1, UtilityMethod.seperateID(id));
+            ResultSet rsLoadBakeryProduct = psLoadAllowance.executeQuery();
+            while (rsLoadBakeryProduct.next()) {
+                allowance.setaID(rsLoadBakeryProduct.getString(1));
+                allowance.setaTitle(rsLoadBakeryProduct.getString(2));
+                allowance.setaDescription(rsLoadBakeryProduct.getString(3));
+                allowance.setaType(rsLoadBakeryProduct.getString(4));
+                allowance.setaValue(rsLoadBakeryProduct.getFloat(5));
+            }
+        } catch (SQLException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        }
+        return allowance;
     }
 
     public boolean insertData(Allowance allowance) throws  Exception{

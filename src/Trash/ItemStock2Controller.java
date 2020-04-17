@@ -34,7 +34,7 @@ public class ItemStock2Controller {
     @FXML
     private void OrderStatus(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/Orders.fxml"));
+        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
 
         Scene scene = new Scene(home_page);
         Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();

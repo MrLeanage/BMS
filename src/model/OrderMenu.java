@@ -1,9 +1,7 @@
 package model;
 
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import util.utility.UtilityMethod;
@@ -12,17 +10,17 @@ import java.io.File;
 import java.io.FileInputStream;
 
 public class OrderMenu {
-    StringProperty oMIID = null;
-    ImageView oMIImage = null;
-    StringProperty oMIName = null;
-    StringProperty oMIDescription = null;
-    FloatProperty oMIWeight = null;
-    FloatProperty oMIPrice = null;
-    StringProperty oMIStatus = null;
+    private StringProperty oMIID = null;
+    private ObjectProperty<ImageView> oMIImage;
+    private StringProperty oMIName = null;
+    private StringProperty oMIDescription = null;
+    private FloatProperty oMIWeight = null;
+    private FloatProperty oMIPrice = null;
+    private StringProperty oMIStatus = null;
 
     public OrderMenu(String oMIID, ImageView oMIImage, String oMIName, String oMIDescription, Float oMIWeight, Float oMIPrice, String oMIStatus) {
         this.oMIID = new SimpleStringProperty(UtilityMethod.addPrefix("OMP",oMIID));
-        this.oMIImage = oMIImage;
+        this.oMIImage = new SimpleObjectProperty<>(oMIImage);
         this.oMIName = new SimpleStringProperty(oMIName);
         this.oMIDescription = new SimpleStringProperty(oMIDescription);
         this.oMIWeight = new SimpleFloatProperty(oMIWeight);
@@ -47,12 +45,15 @@ public class OrderMenu {
     }
 
     public ImageView getoMIImage() {
+        return oMIImage.get();
+    }
+    public ObjectProperty<ImageView> oMIImageProperty() {
         return oMIImage;
     }
-
     public void setoMIImage(ImageView oMIImage) {
-        this.oMIImage = oMIImage;
+        this.oMIImage = new SimpleObjectProperty<>(oMIImage);
     }
+
 
     public String getoMIName() {
         return oMIName.get();

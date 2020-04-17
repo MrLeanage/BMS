@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OrderManagement.OrderMenuViewController">
+<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OrderManagement.OrderMenuSupervisorController">
    <children>
       <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -54,7 +54,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="183.0" onAction="#PendingOrders" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Pending Orders" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="183.0" onAction="#PendingOrders" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="New Orders" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -86,7 +86,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="PAUSE" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="385.0" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Order Menu" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="385.0" onAction="#OrderMenu" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Order Menu" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -99,7 +99,7 @@
             <AnchorPane layoutX="169.0" layoutY="-2.0" prefHeight="580.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="210.0" layoutY="348.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
-                  <TableView fx:id="OrderMenuTable" layoutX="7.0" layoutY="50.0" onMouseClicked="#loadSelectedData" onMousePressed="#loadSelectedModelData" prefHeight="315.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <TableView fx:id="OrderMenuTable" layoutX="7.0" layoutY="50.0" onMouseClicked="#loadSelectedData" onMousePressed="#loadSelectedModelData" prefHeight="315.0" prefWidth="1080.0" stylesheets="@../../lib/css/bss-ui.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                     <columns>
                       <TableColumn fx:id="OMIIDColumn" prefWidth="64.00003051757812" text="ID" />
                       <TableColumn fx:id="OMIImageColumn" prefWidth="134.3333740234375" />

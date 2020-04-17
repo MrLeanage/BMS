@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.AgencySupplierPopUPViewController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InventoryManagement.AgencySupplierPopUPController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="400.0" layoutX="10.0" layoutY="10.0" stroke="#03244a" strokeType="INSIDE" style="-fx-fill: #d3d4d4;" width="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="27.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

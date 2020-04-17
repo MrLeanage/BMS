@@ -1,25 +1,22 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import util.utility.UtilityMethod;
 
 public class Employee {
     private StringProperty eID = null;
     private StringProperty eName = null;
-    private StringProperty eGender = null;
     private StringProperty eNIC = null;
     private StringProperty eAddress = null;
+    private StringProperty eGender = null;
     private StringProperty eDOB = null;
     private StringProperty eTitle = null;
     private IntegerProperty ePhone = null;
     private StringProperty eBankName = null;
-    private IntegerProperty eAccNo = null;
+    private LongProperty eAccNo = null;
     private StringProperty eBSSID = null;
 
-    public Employee(String eID, String eName, String eGender, String eNIC, String eAddress, String eDOB, String eTitle, Integer ePhone, String eBankName, Integer eAccNo, String eBSSID) {
+    public Employee(String eID, String eName, String eNIC, String eAddress, String eGender, String eDOB, String eTitle, Integer ePhone, String eBankName, Long eAccNo, String eBSSID) {
         this.eID = new SimpleStringProperty(UtilityMethod.addPrefix("E", eID));
         this.eName = new SimpleStringProperty(eName);
         this.eGender = new SimpleStringProperty(eGender);
@@ -29,7 +26,7 @@ public class Employee {
         this.eTitle = new SimpleStringProperty(eTitle);
         this.ePhone = new SimpleIntegerProperty(ePhone);
         this.eBankName = new SimpleStringProperty(eBankName);
-        this.eAccNo = new SimpleIntegerProperty(eAccNo);
+        this.eAccNo = new SimpleLongProperty(eAccNo);
         this.eBSSID = new SimpleStringProperty(UtilityMethod.addPrefix("BSS", eBSSID));
     }
 
@@ -145,16 +142,16 @@ public class Employee {
         this.eBankName = new SimpleStringProperty(eBankName);
     }
 
-    public int geteAccNo() {
+    public Long geteAccNo() {
         return eAccNo.get();
     }
 
-    public IntegerProperty eAccNoProperty() {
+    public LongProperty eAccNoProperty() {
         return eAccNo;
     }
 
-    public void seteAccNo(int eAccNo) {
-        this.eAccNo = new SimpleIntegerProperty(eAccNo);
+    public void seteAccNo(Long eAccNo) {
+        this.eAccNo = new SimpleLongProperty(eAccNo);
     }
 
     public String geteBSSID() {

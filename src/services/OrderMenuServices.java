@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TextField;
-import model.BakeryProduct;
 import model.OrderMenu;
 import util.dbConnect.DBConnection;
 import util.query.OrderMenuQueries;
@@ -25,7 +24,6 @@ public class OrderMenuServices {
         try {
             Connection conn = DBConnection.Connect();
             orderMenuData = FXCollections.observableArrayList();
-            File file;
             ResultSet rsLoadOrderMenuProduct = conn.createStatement().executeQuery(OrderMenuQueries.LOAD_ORDER_MENU_DATA_QUERY);
 
             while (rsLoadOrderMenuProduct.next()) {
@@ -39,7 +37,33 @@ public class OrderMenuServices {
         }
         return orderMenuData;
     }
+    public  OrderMenu loadSpecificData(String id){
+        PreparedStatement psLoadOrderMenuProduct;
+        ResultSet rsLoadOrderMenuProduct;
+        OrderMenu orderMenuModelData = new OrderMenu();
+        try {
+            Connection conn = DBConnection.Connect();
+            psLoadOrderMenuProduct = conn.prepareStatement(OrderMenuQueries.LOAD_SPECIFIC_ORDER_MENU_DATA_QUERY);
 
+            psLoadOrderMenuProduct.setInt(1, UtilityMethod.seperateID(id));
+            rsLoadOrderMenuProduct = psLoadOrderMenuProduct.executeQuery();
+            while (rsLoadOrderMenuProduct.next()) {
+                orderMenuModelData.setoMIID(rsLoadOrderMenuProduct.getString(1));
+                InputStream inputStream = rsLoadOrderMenuProduct.getBinaryStream(2);
+                orderMenuModelData.setoMIImage(UtilityMethod.convertInputStreamToImage(inputStream));
+                orderMenuModelData.setoMIName(rsLoadOrderMenuProduct.getString(3));
+                orderMenuModelData.setoMIDescription(rsLoadOrderMenuProduct.getString(4));
+                orderMenuModelData.setoMIWeight(rsLoadOrderMenuProduct.getFloat(5));
+                orderMenuModelData.setoMIPrice(rsLoadOrderMenuProduct.getFloat(6));
+                orderMenuModelData.setoMIStatus(rsLoadOrderMenuProduct.getString(7));
+            }
+        } catch (SQLException | FileNotFoundException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return orderMenuModelData;
+    }
     public boolean insertData(OrderMenu orderMenu) throws  Exception{
         PreparedStatement psOrderMenu = null;
         boolean resultval = false;
@@ -47,18 +71,18 @@ public class OrderMenuServices {
             Connection conn = DBConnection.Connect();
             psOrderMenu = conn.prepareStatement(OrderMenuQueries.INSERT_ORDER_MENU_DATA_QUERY);
 
-            psOrderMenu.setBinaryStream(1, UtilityMethod.convertImageToInputStream(orderMenu.getoMIImage()));
+                psOrderMenu.setBinaryStream(1, UtilityMethod.convertImageToInputStream(orderMenu.getoMIImage()));
             psOrderMenu.setString(2,orderMenu.getoMIName());
             psOrderMenu.setString(3, orderMenu.getoMIDescription());
             psOrderMenu.setFloat(4, orderMenu.getoMIWeight());
             psOrderMenu.setFloat(5, orderMenu.getoMIPrice());
             psOrderMenu.setString(6, orderMenu.getoMIStatus());
             psOrderMenu.execute();
-            AlertPopUp.insertSuccesfully("Order Menu Product");
+            AlertPopUp.insertSuccesfully("Order Menu SalesItem");
             resultval = true;
 
         } catch (SQLException ex) {
-            AlertPopUp.insertionFailed(ex, "Order Menu Product");
+            AlertPopUp.insertionFailed(ex, "Order Menu SalesItem");
         }
         finally{
             psOrderMenu.close();
@@ -81,11 +105,11 @@ public class OrderMenuServices {
             psOrderMenu.setString(6, orderMenu.getoMIStatus());
             psOrderMenu.setInt(7, UtilityMethod.seperateID(orderMenu.getoMIID()));
             psOrderMenu.execute();
-            AlertPopUp.updateSuccesfully("Order Menu Product");
+            AlertPopUp.updateSuccesfully("Order Menu SalesItem");
             resultVal = true;
 
         } catch (SQLException ex) {
-            AlertPopUp.updateFailed(ex, "Order Menu Product");
+            AlertPopUp.updateFailed(ex, "Order Menu SalesItem");
 
         } finally {
             psOrderMenu.close();
@@ -100,11 +124,11 @@ public class OrderMenuServices {
             psOrderMenu = conn.prepareStatement(OrderMenuQueries.DELETE_ORDER_MENU_DATA_QUERY);
             psOrderMenu.setInt(1, itemID);
             psOrderMenu.executeUpdate();
-            AlertPopUp.deleteSuccesfull("Order Menu Product");
+            AlertPopUp.deleteSuccesfull("Order Menu SalesItem");
             resultVal = true;
 
         }catch (SQLException ex) {
-            AlertPopUp.deleteFailed(ex, "Order Menu Product");
+            AlertPopUp.deleteFailed(ex, "Order Menu SalesItem");
         }finally{
             psOrderMenu.close();
         }
@@ -113,7 +137,6 @@ public class OrderMenuServices {
 
     public SortedList<OrderMenu> searchTable(TextField searchTextField){
         //Retreiving all data from database
-        ObservableList<BakeryProduct> bakeryProductsData = null;
 
         try {
             Connection conn = DBConnection.Connect();
@@ -135,14 +158,12 @@ public class OrderMenuServices {
 
         searchTextField.textProperty().addListener((observable,oldValue,newValue) ->{
             filteredData.setPredicate(orderMenu -> {
+                //comparing search text with table columns one by one
+                String lowerCaseFilter = newValue.toLowerCase();
                 //if filter text is empty display all data
                 if(newValue == null || newValue.isEmpty()){
                     return true;
-                }
-                //comparing search text with table columns one by one
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if(orderMenu.getoMIID().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                }else if(orderMenu.getoMIID().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     //return if filter matches data
                     return true;
                 }else if(orderMenu.getoMIName().toLowerCase().indexOf(lowerCaseFilter) != -1){

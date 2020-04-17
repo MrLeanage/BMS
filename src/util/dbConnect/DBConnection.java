@@ -20,7 +20,7 @@ public class DBConnection {
             String url = "jdbc:mysql://localhost:3306/bms?useSSL=false";
             String user = "root";
             String password = "uthpala";
-            
+
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, user, password);
             return conn;

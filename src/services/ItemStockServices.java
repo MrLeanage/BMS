@@ -64,6 +64,35 @@ public class ItemStockServices {
         }
         return itemStockData;
     }
+    public ItemStock loadSpecificData(String id){
+        ItemStock itemStock = new ItemStock();
+        PreparedStatement psLoadItemStock = null;
+        ResultSet rsLoadItemStock = null;
+
+        try{
+            Connection conn = DBConnection.Connect();
+            psLoadItemStock = conn.prepareStatement(ItemStockQueries.LOAD_SPECIFIC_ITEM_STOCK_DATA_QUERY);
+            psLoadItemStock.setInt(1, UtilityMethod.seperateID(id));
+            rsLoadItemStock = psLoadItemStock.executeQuery();
+
+            while (rsLoadItemStock.next()){
+                itemStock.setiID(rsLoadItemStock.getString(1));
+                itemStock.setiName(rsLoadItemStock.getString(2));
+                itemStock.setiUnitsPerBlock(rsLoadItemStock.getInt(3));
+                itemStock.setiBlocks(rsLoadItemStock.getInt(4));
+                itemStock.setiWeightPerBlock(rsLoadItemStock.getFloat(5));
+                itemStock.setiBuyingPrice(rsLoadItemStock.getFloat(6));
+                itemStock.setiExpireDate(rsLoadItemStock.getString(7));
+                itemStock.setiAddedDate(rsLoadItemStock.getString(8));
+                itemStock.setiMinQuantityLimit(rsLoadItemStock.getInt(9));
+                itemStock.setiAvailableQuantity(rsLoadItemStock.getInt(10));
+            }
+        }catch (SQLException ex){
+            AlertPopUp.sqlQueryError(ex);
+        }
+
+        return itemStock;
+    }
 
     public boolean insertData(ItemStock itemStock) throws  Exception{
         PreparedStatement psItemStock = null, psPurchase = null;
@@ -88,7 +117,7 @@ public class ItemStockServices {
                 try{
                     ResultSet rsLastStockItem = conn.createStatement().executeQuery(ItemStockQueries.GET_LAST_ID_DATA_QUERY);
                     while (rsLastStockItem.next()){
-                        psPurchase = conn.prepareStatement(PurchaseProductQueries.INSERT_PURCHASE_DATA_QUERRY);
+                        psPurchase = conn.prepareStatement(PurchaseProductQueries.INSERT_PURCHASE_DATA_QUERY);
                         psPurchase.setInt(1, rsLastStockItem.getInt(1));
                         psPurchase.setInt(2, UtilityMethod.seperateID(itemStock.getiSID()));
                         psPurchase.setString(3, "Stock");

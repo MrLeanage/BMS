@@ -32,11 +32,34 @@ public class SalarySchemeServices {
                 salarySchemesData.add(new SalaryScheme(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getFloat(3), rsLoadBakeryProduct.getString(4)));
             }
         } catch (SQLException ex) {
-            AlertPopUp.sqlQueryError(ex);
+                AlertPopUp.sqlQueryError(ex);
         }
         return salarySchemesData;
     }
+    public  SalaryScheme loadSpecificData(String id) throws SQLException {
+        SalaryScheme salaryScheme = new SalaryScheme();
+        PreparedStatement psLoadBasicSalaryScheme = null;
+        ResultSet rsLoadBasicSalaryScheme = null;
 
+        try {
+            Connection conn = DBConnection.Connect();
+            psLoadBasicSalaryScheme = conn.prepareStatement(BasicSalarySchemeQueries.LOAD_SPECIFIC_BASIC_SALARY_SCHEME_DATA_QUERY);
+            psLoadBasicSalaryScheme.setInt(1, UtilityMethod.seperateID(id));
+            rsLoadBasicSalaryScheme = psLoadBasicSalaryScheme.executeQuery();
+            while (rsLoadBasicSalaryScheme.next()) {
+                salaryScheme.setbSSID(rsLoadBasicSalaryScheme.getString(1));
+                salaryScheme.setbSSTitle(rsLoadBasicSalaryScheme.getString(2));
+                salaryScheme.setbSSAmount(rsLoadBasicSalaryScheme.getFloat(3));
+                salaryScheme.setbSSAddedDate(rsLoadBasicSalaryScheme.getString(4));
+            }
+        } catch (SQLException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        }finally {
+            psLoadBasicSalaryScheme.close();
+            rsLoadBasicSalaryScheme.close();
+        }
+        return salaryScheme;
+    }
     public boolean insertData(SalaryScheme salaryScheme) throws  Exception{
         PreparedStatement psSalaryScheme = null;
         boolean resultval = false;

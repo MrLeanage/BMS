@@ -32,7 +32,7 @@ public class SalaryScheme {
     }
 
     public void setbSSID(String bSSID) {
-        this.bSSID = new SimpleStringProperty(bSSID);
+        this.bSSID = new SimpleStringProperty(UtilityMethod.addPrefix("BSS", bSSID));
     }
 
     public String getbSSTitle() {

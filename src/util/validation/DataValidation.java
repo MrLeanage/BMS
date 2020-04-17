@@ -1,5 +1,6 @@
 package util.validation;
 
+import com.jfoenix.controls.JFXTimePicker;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,7 +43,6 @@ public class DataValidation {
             label.setText(validationText);
         }
 
-
     }
 
     //Checking Strings for not empty with same name
@@ -68,7 +68,7 @@ public class DataValidation {
     public static boolean TextFieldNotEmpty(Integer integerField){
         //returning integer fields empty as default value
         boolean returnVal = false;
-        if(integerField.toString() != null  && !integerField.toString().isEmpty()){
+        if((!integerField.toString().isEmpty()) && (integerField != 0)){
             returnVal = true;
         }
         return returnVal;
@@ -106,10 +106,42 @@ public class DataValidation {
         }
         return returnVal;
     }
-    public static void TextFieldNotEmpty(Float floatField, Label label, String validationText){
 
-        if(!TextFieldNotEmpty(floatField)){
+    public static void TextFieldNotEmpty(PasswordField passwordField, Label label, String validationText){
+
+        if(!TextFieldNotEmpty(passwordField)){
             label.setText(validationText);
+        }
+
+    }
+    public static boolean PasswordFieldNotEmpty(PasswordField passwordField){
+        //returning integer fields empty as default value
+        boolean returnVal = false;
+        if(passwordField.getText() != null  && !passwordField.getText().isEmpty()){
+            returnVal = true;
+        }
+        return returnVal;
+    }
+    public static void PasswordFieldNotEmpty(PasswordField passwordField, Label label, String validationText){
+
+        if(!PasswordFieldNotEmpty(passwordField)){
+            label.setText(validationText);
+        }
+
+    }
+    public static boolean PasswordFieldMatch(PasswordField passwordField, PasswordField ConfirmPasswordField){
+        //returning integer fields empty as default value
+        boolean returnVal = false;
+        if(passwordField.getText().equals(ConfirmPasswordField.getText())){
+            returnVal = true;
+        }
+        return returnVal;
+    }
+    public static void PasswordFieldMatch(PasswordField passwordField, PasswordField ConfirmPasswordField, Label passwordLabel, Label confirmPasswordLabel,String validationText){
+
+        if(!PasswordFieldMatch(passwordField, ConfirmPasswordField)){
+            passwordLabel.setText(validationText);
+            confirmPasswordLabel.setText(validationText);
         }
 
     }
@@ -221,6 +253,20 @@ public class DataValidation {
             label.setText(validationText);
         }
     }
+    //checking for minimum length
+    public static boolean isValidMinimumLength(String data, int minLength){
+        boolean returnVal = true;
+        if((data.length() < minLength) && (!data.isEmpty())){
+            returnVal = false;
+        }
+        return returnVal;
+    }
+    public static void isValidMinimumLength(String data, int minLength, Label label, String validationText){
+
+        if(!isValidMinimumLength(data, minLength)){
+            label.setText(validationText);
+        }
+    }
 
     public static  final Pattern VALIDOLDNIC = Pattern.compile("^[0-9]{9}[vVxX]$");
     public static  final Pattern VALIDNEWNIC = Pattern.compile("^[1-2]{1}[0-9]{11}$");
@@ -255,6 +301,17 @@ public class DataValidation {
     }
     public static void DatePickerNotEmpty(DatePicker date, Label label, String validationText){
         if(!DatePickerNotEmpty(date)){
+            label.setText(validationText);
+        }
+    }
+    public static boolean TimePickerNotEmpty(JFXTimePicker time){
+        if(!(time.getValue() == null || time.getValue().toString().isEmpty())){
+            return true;
+        }
+        return false;
+    }
+    public static void TimePickerNotEmpty(JFXTimePicker time, Label label, String validationText){
+        if(!TimePickerNotEmpty(time)){
             label.setText(validationText);
         }
     }

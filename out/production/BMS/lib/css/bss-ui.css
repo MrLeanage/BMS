@@ -1,0 +1,12 @@
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+.list-cell:empty {
+    -fx-background-color: white;
+}

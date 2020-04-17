@@ -29,7 +29,7 @@ public class EmployeeServices {
             ResultSet rsLoadBakeryProduct = conn.createStatement().executeQuery(EmployeeQueries.LOAD_EMPLOYEE_DATA_QUERY);
 
             while (rsLoadBakeryProduct.next()) {
-                employeesData.add(new Employee(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getString(6), rsLoadBakeryProduct.getString(7), rsLoadBakeryProduct.getInt(8), rsLoadBakeryProduct.getString(9), rsLoadBakeryProduct.getInt(10), rsLoadBakeryProduct.getString(11)));
+                employeesData.add(new Employee(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getString(6), rsLoadBakeryProduct.getString(7), rsLoadBakeryProduct.getInt(8), rsLoadBakeryProduct.getString(9), rsLoadBakeryProduct.getLong(10), rsLoadBakeryProduct.getString(11)));
             }
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);
@@ -52,7 +52,7 @@ public class EmployeeServices {
             psEmployee.setString(6, employee.geteTitle());
             psEmployee.setInt(7, employee.getePhone());
             psEmployee.setString(8, employee.geteBankName());
-            psEmployee.setInt(9, employee.geteAccNo());
+            psEmployee.setLong(9, employee.geteAccNo());
             psEmployee.setInt(10, UtilityMethod.seperateID(employee.geteBSSID()));
             psEmployee.execute();
             AlertPopUp.insertSuccesfully("Employee Info");
@@ -83,7 +83,7 @@ public class EmployeeServices {
             psEmployee.setString(6, employee.geteTitle());
             psEmployee.setInt(7, employee.getePhone());
             psEmployee.setString(8, employee.geteBankName());
-            psEmployee.setInt(9, employee.geteAccNo());
+            psEmployee.setLong(9, employee.geteAccNo());
             psEmployee.setInt(10, UtilityMethod.seperateID(employee.geteBSSID()));
             psEmployee.setInt(11, UtilityMethod.seperateID(employee.geteID()));
             psEmployee.execute();
@@ -127,7 +127,7 @@ public class EmployeeServices {
             ResultSet rsLoadBakeryProduct = conn.createStatement().executeQuery(EmployeeQueries.LOAD_EMPLOYEE_DATA_QUERY);
 
             while (rsLoadBakeryProduct.next()) {
-                employeesData.add(new Employee(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getString(6), rsLoadBakeryProduct.getString(7), rsLoadBakeryProduct.getInt(8), rsLoadBakeryProduct.getString(9), rsLoadBakeryProduct.getInt(10), rsLoadBakeryProduct.getString(11)));
+                employeesData.add(new Employee(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getString(6), rsLoadBakeryProduct.getString(7), rsLoadBakeryProduct.getInt(8), rsLoadBakeryProduct.getString(9), rsLoadBakeryProduct.getLong(10), rsLoadBakeryProduct.getString(11)));
             }
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);

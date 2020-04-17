@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EmployeeManagement.EmployeeViewController">
+<AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EmployeeManagement.EmployeeController">
    <children>
       <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -103,18 +103,18 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="225.0" layoutX="56.0" layoutY="411.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="345.0" />
                   <TableView fx:id="EmployeeTable" layoutX="7.0" layoutY="50.0" onMouseClicked="#loadSelectedModelData" onMousePressed="#loadSelectedData" prefHeight="300.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                     <columns>
-                      <TableColumn fx:id="EIDColumn" prefWidth="64.00003051757812" text="ID" />
-                      <TableColumn fx:id="ENameColumn" prefWidth="130.0" text="Full Name" />
-                        <TableColumn fx:id="ENICColumn" prefWidth="72.66668701171875" text="NIC" />
-                        <TableColumn fx:id="EAddressColumn" prefWidth="120.0" text="Address" />
-                        <TableColumn fx:id="EGenderColumn" prefWidth="45.66668701171875" text="Gender" />
-                        <TableColumn fx:id="EDOBColumn" prefWidth="84.0" text="DOB" />
-                        <TableColumn fx:id="ETitleColumn" prefWidth="72.0" text="Titile" />
-                        <TableColumn fx:id="EPhoneColumn" prefWidth="70.66668701171875" text="Contact No" />
-                        <TableColumn fx:id="EBankColumn" prefWidth="105.666748046875" text="Bank" />
-                        <TableColumn fx:id="EAccNoColumn" prefWidth="81.666748046875" text="Acc No" />
-                        <TableColumn fx:id="EBSSIDColumn" prefWidth="133.3333740234375" text="BSSID" />
-                        <TableColumn fx:id="EMoreColumn" prefWidth="96.6666259765625" text="More" />
+                      <TableColumn fx:id="EIDColumn" prefWidth="45.000030517578125" text="ID" />
+                      <TableColumn fx:id="ENameColumn" prefWidth="129.0" text="Full Name" />
+                        <TableColumn fx:id="ENICColumn" prefWidth="82.33331298828125" text="NIC" />
+                        <TableColumn fx:id="EAddressColumn" prefWidth="160.66668701171875" text="Address" />
+                        <TableColumn fx:id="EGenderColumn" prefWidth="56.888916015625" text="Gender" />
+                        <TableColumn fx:id="EDOBColumn" prefWidth="67.22222900390625" text="DOB" />
+                        <TableColumn fx:id="ETitleColumn" prefWidth="78.111083984375" text="Titile" />
+                        <TableColumn fx:id="EPhoneColumn" prefWidth="72.77783203125" text="Contact No" />
+                        <TableColumn fx:id="EBankColumn" prefWidth="153.66668701171875" text="Bank" />
+                        <TableColumn fx:id="EAccNoColumn" prefWidth="75.333251953125" text="Acc No" />
+                        <TableColumn fx:id="EBSSIDColumn" prefWidth="50.0" text="BSSID" />
+                        <TableColumn fx:id="EMoreColumn" prefWidth="123.0" text="More" />
                     </columns>
                   </TableView>
                   <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="19.0" prefHeight="30.0" prefWidth="1080.0" promptText="Search in Here" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
@@ -196,7 +196,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="EBSSIDTextBox" layoutX="740.0" layoutY="467.0" prefHeight="25.0" prefWidth="95.0" AnchorPane.leftAnchor="740.0" AnchorPane.topAnchor="467.0" />
-                  <Button layoutX="840.0" layoutY="467.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Browse Scheme" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="467.0" />
+                  <Button layoutX="840.0" layoutY="467.0" mnemonicParsing="false" onAction="#selectSalaryScheme" prefHeight="25.0" prefWidth="100.0" text="Browse Scheme" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="467.0" />
                   <Label fx:id="ENameLabel" layoutX="20.0" layoutY="396.0" prefHeight="19.0" prefWidth="319.0" textFill="#f8ea03" AnchorPane.leftAnchor="20.0" />
                   <Label fx:id="EGenderLabel" layoutX="20.0" layoutY="445.0" prefHeight="19.0" prefWidth="319.0" textFill="#f8ea03" AnchorPane.leftAnchor="20.0" />
                   <Label fx:id="EBankNameLabel" layoutX="20.0" layoutY="495.0" prefHeight="19.0" prefWidth="319.0" textFill="#f8ea03" AnchorPane.leftAnchor="20.0" />

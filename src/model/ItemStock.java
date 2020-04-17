@@ -120,7 +120,7 @@ public class ItemStock {
         return iWeightPerBlock;
     }
 
-    public void setiWeightPerBlock(float iWeightPerBlock) {
+    public void setiWeightPerBlock(Float iWeightPerBlock) {
         this.iWeightPerBlock = new SimpleFloatProperty(iWeightPerBlock);
     }
 
@@ -132,7 +132,7 @@ public class ItemStock {
         return iBuyingPrice;
     }
 
-    public void setiBuyingPrice(float iBuyingPrice) {
+    public void setiBuyingPrice(Float iBuyingPrice) {
         this.iBuyingPrice = new SimpleFloatProperty(iBuyingPrice);
     }
 

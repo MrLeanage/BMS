@@ -20,27 +20,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SupplierServices implements Initializable {
-    private DBConnection dbcon;
-    private static PreparedStatement ps;
-
-
-    Audio play = new Audio();
-
-
+public class SupplierServices{
     private ObservableList<Supplier> supplierData;
 
-    /**
-     * Initializes the services class.
-     * @param location
-     * @param resources
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        dbcon = new DBConnection();
-        loadData();
-
-    }
     public  ObservableList<Supplier> loadData(){
         try {
             Connection conn = DBConnection.Connect();
@@ -55,12 +37,48 @@ public class SupplierServices implements Initializable {
         }
         return supplierData;
     }
+    public Supplier loadSpecificData(String id){
+        Supplier supplierData = new Supplier();
+        PreparedStatement psLoadSupplier = null;
+        ResultSet rsLoadSupplier = null;
+        Connection conn = DBConnection.Connect();
+        try{
 
+            psLoadSupplier = conn.prepareStatement(SupplierQueries.LOAD_SPECIFIC_SUPPLIER_DATA_QUERY);
+            psLoadSupplier.setInt(1, UtilityMethod.seperateID(id));
+            rsLoadSupplier = psLoadSupplier.executeQuery();
+
+            while (rsLoadSupplier.next()){
+                supplierData.setsIID(rsLoadSupplier.getString(1));
+                supplierData.setsIName(rsLoadSupplier.getString(2));
+                supplierData.setsIAddress(rsLoadSupplier.getString(3));
+                supplierData.setsIPhone1(rsLoadSupplier.getInt(4));
+                supplierData.setsIPhone2(rsLoadSupplier.getInt(5));
+                supplierData.setsIEmail(rsLoadSupplier.getString(6));
+                supplierData.setsIType(rsLoadSupplier.getString(7));
+                supplierData.setsIBank(rsLoadSupplier.getString(8));
+                supplierData.setsIAccNo(rsLoadSupplier.getLong(9));
+            }
+        }catch (SQLException ex){
+            AlertPopUp.sqlQueryError(ex);
+        }finally{
+            try{
+                rsLoadSupplier.close();
+                psLoadSupplier.close();
+                conn.close();
+            }catch(SQLException ex){
+
+            }
+        }
+
+        return supplierData;
+    }
     public boolean insertData(Supplier supplier) throws  Exception{
-        ps = null;
+        PreparedStatement ps = null;
         boolean resultval = false;
+        Connection conn = DBConnection.Connect();
         try {
-            Connection conn = DBConnection.Connect();
+
             ps = conn.prepareStatement(SupplierQueries.INSERT_DATA_QUERY);
             ps.setString(1,supplier.getsIName());
             ps.setString(2,supplier.getsIAddress());
@@ -82,14 +100,17 @@ public class SupplierServices implements Initializable {
         }
         finally{
             ps.close();
+            conn.close();
         }
         return resultval;
     }
 
     public boolean updateData(Supplier supplier) throws Exception {
+        PreparedStatement ps = null;
         boolean resultVal = false;
+        Connection conn = DBConnection.Connect();
         try {
-            Connection conn = DBConnection.Connect();
+
             ps = conn.prepareStatement(SupplierQueries.UPDATE_DATA_QUERY);
             ps.setString(1,supplier.getsIName());
             ps.setString(2,supplier.getsIAddress());
@@ -110,12 +131,14 @@ public class SupplierServices implements Initializable {
 
         } finally {
             ps.close();
+            conn.close();
         }
         return resultVal;
     }
     public Boolean deleteData(int ID) throws SQLException {
         Boolean resultVal = false;
         Connection conn = DBConnection.Connect();
+        PreparedStatement ps = null;
         try{
             ps = conn.prepareStatement(SupplierQueries.DELETE_DATA_QUERY);
             ps.setInt(1, ID);
@@ -135,10 +158,12 @@ public class SupplierServices implements Initializable {
     public SortedList<Supplier> searchTable(TextField searchTextField){
         //Retreiving all data from database
         ObservableList<Supplier> supplierData = null;
+        Connection conn = DBConnection.Connect();
+        ResultSet rs = null;
         try {
-            Connection conn = DBConnection.Connect();
+
             supplierData = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery(SupplierQueries.SEARCH_DATA_QUERY);
+            rs = conn.createStatement().executeQuery(SupplierQueries.SEARCH_DATA_QUERY);
 
             while (rs.next()) {
                 supplierData.add(new Supplier(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getString(6), rs.getString(7),rs.getString(8),rs.getLong(9)));
@@ -146,6 +171,13 @@ public class SupplierServices implements Initializable {
             }
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);
+        }finally {
+            try{
+                conn.close();
+                rs.close();
+            }catch (SQLException ex){
+
+            }
         }
         //Wrap the ObservableList in a filtered List (initially display all data)
         FilteredList<Supplier> filteredData = new FilteredList<>(supplierData, b -> true);

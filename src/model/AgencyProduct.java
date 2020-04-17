@@ -4,19 +4,19 @@ import javafx.beans.property.*;
 import util.utility.UtilityMethod;
 
 public class AgencyProduct {
-    StringProperty aPID = null;
-    StringProperty aPName = null;
-    StringProperty aPSupplierID = null;
-    StringProperty aPSupplierName = null;
-    IntegerProperty aPTotalUnits = null;
-    FloatProperty aPWeightOfUnit = null;
-    FloatProperty aPBuyingPricePerUnit = null;
-    FloatProperty aPMarketPricePerUnit = null;
-    FloatProperty aPSellingPricePerUnit = null;
-    StringProperty aPMDate = null;
-    StringProperty aPEDate = null;
-    StringProperty aPADate = null;
-    StringProperty aPDADate = null;
+    private StringProperty aPID = null;
+    private StringProperty aPName = null;
+    private StringProperty aPSupplierID = null;
+    private StringProperty aPSupplierName = null;
+    private IntegerProperty aPTotalUnits = null;
+    private FloatProperty aPWeightOfUnit = null;
+    private FloatProperty aPBuyingPricePerUnit = null;
+    private FloatProperty aPMarketPricePerUnit = null;
+    private FloatProperty aPSellingPricePerUnit = null;
+    private StringProperty aPMDate = null;
+    private StringProperty aPEDate = null;
+    private StringProperty aPADate = null;
+    private StringProperty aPDADate = null;
 
     public AgencyProduct(String aPID, String aPName, String aPSupplierID, String aPSupplierName, Integer aPTotalUnits, Float aPWeightOfUnit, Float aPBuyingPricePerUnit, Float aPMarketPricePerUnit, Float aPSellingPricePerUnit, String aPMDate, String aPEDate, String aPADate, String aPDADate) {
         this.aPID = new SimpleStringProperty(UtilityMethod.addPrefix("AP", aPID));
@@ -47,7 +47,7 @@ public class AgencyProduct {
     }
 
     public void setaPID(String aPID) {
-        this.aPID = new SimpleStringProperty(aPID);
+        this.aPID = new SimpleStringProperty(UtilityMethod.addPrefix("AP", aPID));
     }
 
     public String getaPName() {
@@ -71,7 +71,7 @@ public class AgencyProduct {
     }
 
     public void setaPSupplierID(String aPSupplierID) {
-        this.aPSupplierID = new SimpleStringProperty(aPSupplierID);
+        this.aPSupplierID = new SimpleStringProperty(UtilityMethod.addPrefix("aPSupplierID", aPSupplierID));
     }
 
     public String getaPSupplierName() {

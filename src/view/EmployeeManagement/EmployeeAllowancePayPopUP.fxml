@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EmployeeManagement.EmployeeAllowancePayPopUPController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="400.0" layoutX="10.0" layoutY="10.0" stroke="#03244a" strokeType="INSIDE" style="-fx-fill: #d3d4d4;" width="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="27.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="325.0" prefWidth="700.0" AnchorPane.topAnchor="27.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="314.0" stroke="#03254c" strokeType="INSIDE" strokeWidth="2.0" width="690.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="55.0" layoutX="5.0" layoutY="264.0" stroke="TRANSPARENT" strokeType="INSIDE" width="690.0" />
+            <TableView fx:id="AllowanceTable" layoutY="65.0" prefHeight="188.0" prefWidth="680.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="65.0">
+               <columns>
+                  <TableColumn fx:id="AIDColumn" prefWidth="64.00003051757812" text="ID" />
+                  <TableColumn fx:id="ATitleColumn" prefWidth="170.77780151367188" text="Allowance Title" />
+                  <TableColumn fx:id="ADescriptionColumn" prefWidth="232.33331298828125" text="Allowance Description" />
+                  <TableColumn fx:id="ATypeColumn" prefWidth="109.66668701171875" text="Allowance Type" />
+                  <TableColumn fx:id="AValueColumn" prefWidth="101.3333740234375" text="Allowance Value" />
+               </columns>
+            </TableView>
+            <Label layoutX="15.0" layoutY="284.0" text="Browse a Allowance :" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="275.0" />
+            <Label layoutX="17.0" layoutY="7.0" prefHeight="27.0" prefWidth="97.0" text="Employee ID :" AnchorPane.topAnchor="7.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="34.0" prefHeight="30.0" prefWidth="682.0" promptText="Search Allowance Information Here">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIconView fill="#182c49" glyphName="SEARCH" layoutX="667.0" layoutY="56.0" size="20" />
+            <TextField fx:id="AIDTextBox" editable="false" layoutX="135.0" layoutY="279.0" prefHeight="24.0" prefWidth="59.0" promptText="AID" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="275.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="ATitleTextBox" editable="false" layoutX="199.0" layoutY="275.0" prefHeight="24.0" prefWidth="192.0" promptText="Allowance Title" AnchorPane.topAnchor="275.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <Button layoutX="396.0" layoutY="274.0" mnemonicParsing="false" onAction="#selectAllowance" text="Browse" AnchorPane.topAnchor="274.0" />
+            <Label fx:id="AIDLabel" layoutX="15.0" layoutY="300.0" prefHeight="17.0" prefWidth="365.0" textFill="#f8ea03" />
+            <Button fx:id="AllowanceCloseButton" layoutX="620.0" layoutY="277.0" mnemonicParsing="false" onAction="#deleteData" prefHeight="34.0" prefWidth="70.0" style="-fx-background-color: #f61b1b;" text="Remove" textFill="WHITE" AnchorPane.topAnchor="275.0" />
+            <Button layoutX="542.0" layoutY="274.0" mnemonicParsing="false" onAction="#addData" prefHeight="34.0" prefWidth="70.0" style="-fx-background-color: f8ea03;" text="Add " AnchorPane.topAnchor="275.0" />
+            <Label fx:id="EIDLabel" layoutX="114.0" layoutY="14.0" prefHeight="17.0" prefWidth="77.0" />
+            <Label layoutX="201.0" layoutY="14.0" prefHeight="27.0" prefWidth="115.0" text="Employee Name :" AnchorPane.topAnchor="7.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="ENameLabel" layoutX="319.0" layoutY="14.0" prefHeight="17.0" prefWidth="365.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="351.0" prefHeight="48.0" prefWidth="700.0" style="-fx-background-color: #182c49;">
+         <children>
+            <Button fx:id="AllowanceCloseButton" layoutX="566.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="34.0" prefWidth="90.0" style="-fx-background-color: #029206;" text="Save Changes" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

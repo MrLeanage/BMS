@@ -63,6 +63,60 @@ public class AgencyProductServices {
         }
         return agencyProductsData;
     }
+    public  AgencyProduct loadSpecificData(String id){
+        AgencyProduct agencyProduct = new AgencyProduct();
+        try {
+            Connection conn = DBConnection.Connect();
+            agencyProductsData = FXCollections.observableArrayList();
+            PreparedStatement psLoadAgencyProduct = conn.prepareStatement(AgencyProductQueries.LOAD_SPECIFIC_AGENCY_PRODUCT_DATA_QUERY);
+            psLoadAgencyProduct.setInt(1, UtilityMethod.seperateID(id));
+            ResultSet rsLoadAgencyProduct = psLoadAgencyProduct.executeQuery();
+
+
+            while (rsLoadAgencyProduct.next()) {
+                try{
+                    ResultSet rsFindPurchaseData = conn.createStatement().executeQuery(PurchaseProductQueries.FIND_PURCHASE_AGENCY_DATA_QUERRY + rsLoadAgencyProduct.getString(1));
+                    while(rsFindPurchaseData.next()){
+                        if(!(rsFindPurchaseData.getString(1).isEmpty() || rsFindPurchaseData.getString(1).equals(null))){
+                            try{
+                                ResultSet rsFindSupplierData = conn.createStatement().executeQuery(SupplierQueries.FIND_SUPPLIER_DATA_QUERY + rsFindPurchaseData.getString(3));
+                                while (rsFindSupplierData.next()){
+                                    if(!(rsFindSupplierData.getString(1).isEmpty() || rsFindSupplierData.getString(1).equals(null))){
+
+                                        agencyProduct.setaPID(rsLoadAgencyProduct.getString(1));
+                                        agencyProduct.setaPName(rsLoadAgencyProduct.getString(2));
+                                        agencyProduct.setaPSupplierID(rsFindSupplierData.getString(1));
+                                        agencyProduct.setaPSupplierName(rsFindSupplierData.getString(2));
+                                        agencyProduct.setaPTotalUnits(rsLoadAgencyProduct.getInt(3));
+                                        agencyProduct.setaPWeightOfUnit(rsLoadAgencyProduct.getFloat(4));
+                                        agencyProduct.setaPBuyingPricePerUnit(rsLoadAgencyProduct.getFloat(5));
+                                        agencyProduct.setaPMarketPricePerUnit(rsLoadAgencyProduct.getFloat(6));
+                                        agencyProduct.setaPSellingPricePerUnit(rsLoadAgencyProduct.getFloat(7));
+                                        agencyProduct.setaPMDate(rsLoadAgencyProduct.getString(8));
+                                        agencyProduct.setaPEDate(rsLoadAgencyProduct.getString(9));
+                                        agencyProduct.setaPADate(rsLoadAgencyProduct.getString(10));
+                                        agencyProduct.setaPDADate(rsLoadAgencyProduct.getString(11));
+                                    }else{
+                                        AlertPopUp.sqlRecordNotFound("Supplier");
+                                    }
+                                }
+                            }catch(SQLException ex){
+                                AlertPopUp.sqlQueryError(ex);
+                            }
+                        }else{
+                            AlertPopUp.sqlRecordNotFound("Purchase");
+                        }
+                    }
+                }catch (SQLException ex){
+                    AlertPopUp.sqlQueryError(ex);
+                }
+
+            }
+        } catch (SQLException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        }
+        return agencyProduct;
+    }
 
     public boolean insertData(AgencyProduct agencyProduct) throws  Exception{
         PreparedStatement psAgencyProduct = null, psPurchase = null;
@@ -88,14 +142,14 @@ public class AgencyProductServices {
                 try{
                     ResultSet rsLastAgencyProduct = conn.createStatement().executeQuery(AgencyProductQueries.GET_LAST_ID_DATA_QUERY);
                     while (rsLastAgencyProduct.next()){
-                        psPurchase = conn.prepareStatement(PurchaseProductQueries.INSERT_PURCHASE_DATA_QUERRY);
+                        psPurchase = conn.prepareStatement(PurchaseProductQueries.INSERT_PURCHASE_DATA_QUERY);
                         psPurchase.setInt(1, rsLastAgencyProduct.getInt(1));
                         psPurchase.setInt(2, UtilityMethod.seperateID(agencyProduct.getaPSupplierID()));
                         psPurchase.setString(3, "Agency");
                         psPurchase.setString(4, String.valueOf(LocalDate.now()));
                         psPurchase.setString(5,"Pending");
                         psPurchase.execute();
-                        AlertPopUp.insertSuccesfully("Agency Product");
+                        AlertPopUp.insertSuccesfully("Agency SalesItem");
                         resultval = true;
                     }
                 }catch(SQLException ex){
@@ -103,7 +157,7 @@ public class AgencyProductServices {
                 }
             }
         } catch (SQLException ex) {
-            AlertPopUp.insertionFailed(ex, "Agency Product");
+            AlertPopUp.insertionFailed(ex, "Agency SalesItem");
         }
         finally{
             psAgencyProduct.close();
@@ -139,7 +193,7 @@ public class AgencyProductServices {
                         psPurchase.setString(2,String.valueOf(LocalDate.now()));
                         psPurchase.setInt(3, UtilityMethod.seperateID(agencyProduct.getaPID()));
                         psPurchase.execute();
-                        AlertPopUp.updateSuccesfully("Agency Product");
+                        AlertPopUp.updateSuccesfully("Agency SalesItem");
                         resultVal = true;
 
                 }catch(SQLException ex){
@@ -148,7 +202,7 @@ public class AgencyProductServices {
             }
 
         } catch (SQLException ex) {
-            AlertPopUp.updateFailed(ex, "Agency Product");
+            AlertPopUp.updateFailed(ex, "Agency SalesItem");
 
         } finally {
             psAgencyProduct.close();
@@ -167,14 +221,14 @@ public class AgencyProductServices {
                 psPurchase = conn.prepareStatement(PurchaseProductQueries.DELETE_PURCHASE_AGENCY_DATA_QUERRY);
                 psPurchase.setInt(1, itemID);
                 psPurchase.executeUpdate();
-                AlertPopUp.deleteSuccesfull("Agency Product");
+                AlertPopUp.deleteSuccesfull("Agency SalesItem");
                 resultVal = true;
             }catch(SQLException ex){
-                AlertPopUp.deleteFailed(ex, "Agency Product");
+                AlertPopUp.deleteFailed(ex, "Agency SalesItem");
             }
 
         }catch (SQLException ex) {
-            AlertPopUp.deleteFailed(ex, "Agency Product");
+            AlertPopUp.deleteFailed(ex, "Agency SalesItem");
         }finally{
             psAgencyProduct.close();
             psPurchase.close();
