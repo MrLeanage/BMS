@@ -10,6 +10,7 @@ import model.User;
 import util.dbConnect.DBConnection;
 import util.query.UserQueries;
 import util.userAlerts.AlertPopUp;
+import util.utility.DataEncryption;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,11 +35,56 @@ public class UserServices {
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);
         }
+        //Generating Admin Account if No Admin Account Exist
+        if(usersData.size() == 0){
+            User user = new User();
+            user.setuID("administrator");
+            user.setuName("administrator");
+            user.setuType("Admin");
+            user.setuPassword("admin");
+            user.setuStatus("Active");
+            Boolean resultVal = insertData(user);
+            if(resultVal){
+                loadData();
+            }
+        }
         return usersData;
     }
-    public boolean DataNotExist(String uID) throws SQLException {
-        boolean resultval = false;
-        User userModelData = null;
+    public User userValidation(String uID,  String password) {
+        User user = new User();
+        user.setuID("Empty");
+        PreparedStatement psUser = null;
+        ResultSet rsLoadUser = null;
+        try {
+            Connection conn = DBConnection.Connect();
+            psUser = conn.prepareStatement(UserQueries.VALIDATE_USER_QUERY);
+            psUser.setString(1, uID);
+            psUser.setString(2, DataEncryption.passwordEncryption(password));
+            rsLoadUser = psUser.executeQuery();
+            while (rsLoadUser.next()) {
+                if(rsLoadUser.getString(1) != null){
+                    user.setuID(rsLoadUser.getString((1)));
+                    user.setuName(rsLoadUser.getString((2)));
+                    user.setuType(rsLoadUser.getString((4)));
+                    user.setuStatus(rsLoadUser.getString(5));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                rsLoadUser.close();
+                psUser.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        return user;
+    }
+    public User DataNotExist(String uID){
+        User user = new User();
+        user.setuID("Empty");
         PreparedStatement psLoadUser = null;
         ResultSet rsLoadUser = null;
         try {
@@ -47,23 +93,27 @@ public class UserServices {
             psLoadUser.setString(1, uID);
             rsLoadUser = psLoadUser.executeQuery();
             while (rsLoadUser.next()) {
-                if(rsLoadUser.getString(1).isEmpty()){
-                    resultval = true;
+                if(rsLoadUser.getString(1) != null){
+                    user.setuID(rsLoadUser.getString(1));
                 }
                 //userModelData.setuID(rsLoadUser.getString(1));
             }
         } catch (SQLException | NullPointerException ex) {
             AlertPopUp.sqlQueryError(ex);
         }finally {
-            rsLoadUser.close();
-            psLoadUser.close();
+            try{
+                rsLoadUser.close();
+                psLoadUser.close();
+            }catch (SQLException ex){
+                AlertPopUp.generalError(ex);
+            }
         }
-
-        return resultval;
+        System.out.println(user.getuID());
+        return user;
     }
-    public boolean insertData(User user) throws  Exception{
+    public Boolean insertData(User user) {
         PreparedStatement psUser = null;
-        boolean resultval = false;
+        Boolean resultval = false;
         try {
             Connection conn = DBConnection.Connect();
             psUser = conn.prepareStatement(UserQueries.INSERT_USER_DATA_QUERY);
@@ -81,16 +131,20 @@ public class UserServices {
             AlertPopUp.insertionFailed(ex, "User Record");
         }
         finally{
-            psUser.close();
+            try{
+                psUser.close();
+            }catch(Exception ex){
+                AlertPopUp.generalError(ex);
+            }
 
         }
         return resultval;
     }
 
-    public boolean updateData(User user) throws Exception {
+    public Boolean updateData(User user) throws Exception {
         PreparedStatement psUser = null;
 
-        boolean resultVal = false;
+        Boolean resultVal = false;
         try {
             Connection conn = DBConnection.Connect();
             psUser = conn.prepareStatement(UserQueries.UPDATE_USER_DATA_QUERY);

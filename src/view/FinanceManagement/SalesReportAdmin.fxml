@@ -17,44 +17,7 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FinanceManagement.SalesReportAdminController">
    <children>
-      <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutX="14.0" layoutY="12.0" stroke="TRANSPARENT" strokeType="INSIDE" width="160.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
-            <AnchorPane layoutX="176.0" layoutY="9.0" prefHeight="70.0" prefWidth="1062.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutY="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1085.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
-                  <JFXButton buttonType="RAISED" layoutX="535.0" layoutY="15.0" onAction="#OrderStatus" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Order Management" textFill="WHITE" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="13.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="797.0" layoutY="14.0" onAction="#Employees" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Employee Management" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="13.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="15.0" onAction="#SalesCounter" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #029206;" text="Finance Management" textFill="WHITE" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="13.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" defaultButton="true" layoutX="12.0" layoutY="16.0" onAction="#ItemStock" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 2; -fx-background-color: #2b384b;" text="Inventory Management" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="13.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </AnchorPane>
-            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="23.0" layoutY="33.0" size="18" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="10.0" />
-            <Label layoutX="35.0" layoutY="9.0" prefHeight="25.0" prefWidth="82.0" text="User " textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <JFXButton layoutX="91.0" layoutY="55.0" onAction="#LogoutSession" style="-fx-background-color: #0a0270;" text="Logout" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+      <AnchorPane fx:id="rootpane" layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="575.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="1250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
             <AnchorPane prefHeight="580.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -122,10 +85,11 @@
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="1090.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="565.0" layoutX="641.0" layoutY="7.0" stroke="TRANSPARENT" strokeType="INSIDE" width="439.0" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="10.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="565.0" layoutX="655.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="439.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="140.0" stroke="#00000001" strokeType="INSIDE" width="637.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="37.0" stroke="TRANSPARENT" strokeType="INSIDE" width="636.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="408.0" layoutX="761.0" layoutY="124.0" stroke="WHITE" strokeType="INSIDE" width="417.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="449.0" layoutX="761.0" layoutY="124.0" stroke="WHITE" strokeType="INSIDE" width="417.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="123.0" layoutX="306.0" layoutY="438.0" stroke="TRANSPARENT" strokeType="INSIDE" width="323.0" />
                   <TableView fx:id="SalesTable" layoutY="46.0" prefHeight="379.0" prefWidth="635.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="46.0">
                      <columns>
                         <TableColumn fx:id="SIDColumn" prefWidth="104.66668701171875" text="ID" />
@@ -135,12 +99,12 @@
                         <TableColumn fx:id="STotalColumn" prefWidth="111.888916015625" text="Total" />
                      </columns>
                   </TableView>
-                  <Button id="rbred" layoutX="657.0" layoutY="514.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="415.0" text="Generate Sales Report PDF" AnchorPane.leftAnchor="657.0" AnchorPane.topAnchor="514.0">
+                  <Button id="rbred" fx:id="MonthlySalesReportButton" layoutX="323.0" layoutY="512.0" mnemonicParsing="false" onAction="#generateMonthlySalesReport" prefHeight="37.0" prefWidth="294.0" text="Generate Monthly Sales Report PDF" AnchorPane.leftAnchor="323.0" AnchorPane.topAnchor="512.0">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <BarChart fx:id="SalesReportChart" alternativeColumnFillVisible="true" barGap="1.0" layoutX="623.0" layoutY="7.0" prefHeight="404.0" prefWidth="419.0" title="Monthly Sales Statistics" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <BarChart fx:id="SalesReportChart" alternativeColumnFillVisible="true" barGap="1.0" layoutX="623.0" layoutY="7.0" prefHeight="449.0" prefWidth="419.0" title="Monthly Sales Statistics" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                     <xAxis>
                       <CategoryAxis fx:id="XAXISChart" animated="false" label="Sales Period" side="BOTTOM" />
                     </xAxis>
@@ -166,23 +130,22 @@
                      </font>
                   </Text>
                   <ComboBox fx:id="MonthChoiceBox" layoutX="141.0" layoutY="487.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Select Month" AnchorPane.leftAnchor="141.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="123.0" layoutX="306.0" layoutY="438.0" stroke="TRANSPARENT" strokeType="INSIDE" width="323.0" />
-                  <Label layoutX="320.0" layoutY="470.0" text="Sold Items    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
+                  <Label layoutX="320.0" layoutY="447.0" text="Sold Items    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="320.0" layoutY="509.0" text="Total Sales    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
+                  <Label layoutX="320.0" layoutY="476.0" text="Total Sales    :" textFill="WHITE" AnchorPane.leftAnchor="320.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="SoldItemsLabel" layoutX="430.0" layoutY="472.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
+                  <Label fx:id="SoldItemsLabel" layoutX="430.0" layoutY="449.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="TotalSalesLabel" layoutX="430.0" layoutY="510.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
+                  <Label fx:id="TotalSalesLabel" layoutX="430.0" layoutY="477.0" prefHeight="17.0" prefWidth="180.0" textFill="#fffb00" AnchorPane.leftAnchor="430.0">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -197,18 +160,18 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="655.0" layoutY="438.0" text="Select Period :" textFill="WHITE" AnchorPane.leftAnchor="655.0" AnchorPane.topAnchor="438.0">
+                  <Label layoutX="655.0" layoutY="438.0" text="Select Period :" textFill="WHITE" AnchorPane.leftAnchor="655.0" AnchorPane.topAnchor="480.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="660.0" layoutY="479.0" text="Category        :" textFill="WHITE" AnchorPane.leftAnchor="655.0">
+                  <Label layoutX="660.0" layoutY="479.0" text="Category        :" textFill="WHITE" AnchorPane.leftAnchor="655.0" AnchorPane.topAnchor="520.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="StatCategoryComboBox" layoutX="770.0" layoutY="465.0" onAction="#loadStatFilterData" prefWidth="301.0" AnchorPane.topAnchor="477.0" />
-                  <ComboBox fx:id="StatPeriodComboBox" layoutX="770.0" layoutY="426.0" onAction="#loadStatFilterData" prefWidth="301.0" AnchorPane.topAnchor="438.0" />
+                  <ComboBox fx:id="StatCategoryComboBox" layoutX="770.0" layoutY="465.0" onAction="#loadStatFilterData" prefWidth="301.0" AnchorPane.topAnchor="520.0" />
+                  <ComboBox fx:id="StatPeriodComboBox" layoutX="770.0" layoutY="426.0" onAction="#loadStatFilterData" prefWidth="301.0" AnchorPane.topAnchor="480.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="580.0" prefWidth="1090.0" visible="false" AnchorPane.leftAnchor="170.0" />

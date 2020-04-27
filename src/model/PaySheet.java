@@ -1,6 +1,7 @@
 package model;
 
 import javafx.beans.property.*;
+import util.utility.UtilityMethod;
 
 public class PaySheet {
     private StringProperty pSID = null;
@@ -19,8 +20,8 @@ public class PaySheet {
     }
 
     public PaySheet(String pSID, String pSEID, String pSEName, String pSNIC, String pSBSSTitle, Double pSBSSAmount, Double pSATotalAmount, String pSBankName, Long pSAccountNo, String pSDate) {
-        this.pSID = new SimpleStringProperty(pSID);
-        this.pSEID = new SimpleStringProperty(pSEID);
+        this.pSID = new SimpleStringProperty(UtilityMethod.addPrefix("P", pSID));
+        this.pSEID = new SimpleStringProperty(UtilityMethod.addPrefix("E", pSEID));
         this.pSEName = new SimpleStringProperty(pSEName);
         this.pSNIC = new SimpleStringProperty(pSNIC);
         this.pSBSSTitle = new SimpleStringProperty(pSBSSTitle);

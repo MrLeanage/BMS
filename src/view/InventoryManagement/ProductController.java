@@ -14,13 +14,19 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.User;
 import services.ProductServices;
+import util.authenticate.CashierSessionHandler;
+import util.authenticate.UserAuthentication;
+import view.FinanceManagement.BillingController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class ProductController implements Initializable {
+
     @FXML
     private TableView<SalesItem> ProductsTable;
 
@@ -46,140 +52,45 @@ public class ProductController implements Initializable {
     private TextField SearchTextBox;
 
 
+    @FXML
+    AnchorPane rootpane;
 
+    private CashierSessionHandler cashierSessionHandler = new CashierSessionHandler();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         loadData();
-
         //to auto refresh search results
         searchTable();
-
     }
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
+    private void LogoutSession(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.endAuthenticatedSession(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-
-    @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    //internal methods
-    @FXML
-    private void FoodProducts(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/BakeryProducts.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Billing(ActionEvent event){
+        cashierSessionHandler.loadBilling(event);
     }
     @FXML
-    private void AgencyProduct(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/AgencyProduct.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Products(ActionEvent event){
+        cashierSessionHandler.loadProducts(rootpane);
     }
     @FXML
-    private void Supplier(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Supplier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderMenu(ActionEvent event){
+        cashierSessionHandler.loadOrderMenu(rootpane);
     }
     @FXML
-    private void Billing(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/Billing.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Order(ActionEvent event) {
+        cashierSessionHandler.loadOrder(rootpane);
     }
     @FXML
-    private void Products(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Products.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderStatus(ActionEvent event){
+        cashierSessionHandler.loadOrderStatus(rootpane);
     }
     @FXML
-    private void OrderMenu(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersMenuCashier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void Order(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/Orders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusCashier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void SalesInfo(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/Billing.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesInfo(ActionEvent event) {
+        cashierSessionHandler.loadSalesInfo(rootpane);
     }
     @FXML
     private void playBeep(){
@@ -187,12 +98,13 @@ public class ProductController implements Initializable {
     }
 
 
-    //load data from Main LoginController to View table
+    //load data to View table
     private void loadData() {
         //getting data
         ProductServices productServices = new ProductServices();
 
-        ObservableList<SalesItem> productsData = FXCollections.observableArrayList(productServices.loadData());
+        //ObservableList<SalesItem> productsData = FXCollections.observableArrayList(productServices.loadData());
+        ObservableList<SalesItem> productsData = productServices.loadData();
         //Setting cell value factory to table view
         PIDColumn.setCellValueFactory(new PropertyValueFactory<>("sIPID"));
         PNameColumn.setCellValueFactory(new PropertyValueFactory<>("sIPName"));
@@ -206,7 +118,6 @@ public class ProductController implements Initializable {
 
     }
 
-    //refresh Data in the Table
     @FXML
     public void refreshTable()throws Exception{
         loadData();
@@ -214,7 +125,7 @@ public class ProductController implements Initializable {
 
     public void searchTable(){
         ProductServices productServices = new ProductServices();
-        //Retrieving sorted data from Main LoginController
+        //Retrieving sorted data
         SortedList<SalesItem> sortedData = productServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView

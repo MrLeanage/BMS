@@ -84,24 +84,30 @@ public class PaySheetServices {
         }
         return paySheetsData;
     }
-    public Boolean insertData(ObservableList<PaySheet> paySheetObservableList){
+    public Integer insertData(ObservableList<PaySheet> paySheetObservableList){
         Boolean resultVal = false;
+        int resultID = 0;
         Connection connection = DBConnection.Connect();
         PreparedStatement psPaySheet = null;
-        PreparedStatement psExistingPaySheet = null;
-        ResultSet rsExistingPaySheet = null;
+        PreparedStatement psEmployeeInfo = null;
+        PreparedStatement psInsertedPaysheet = null;
+        PreparedStatement psExistingPaysheet = null;
 
+        ResultSet rsEmployeeInfo = null;
+        ResultSet rsInsertedPaysheet = null;
+        ResultSet rsExistingPaysheet = null;
 
         try{
             psPaySheet = connection.prepareStatement(PaySheetQueries.INSERT_PAYSHEET_DATA_QUERY);
-            psExistingPaySheet = connection.prepareStatement(PaySheetQueries.LOAD_SPECIFIC_EID_PAYSHEET_DATA_QUERY);
-
+            psEmployeeInfo = connection.prepareStatement(PaySheetQueries.LOAD_SPECIFIC_EID_PAYSHEET_DATA_QUERY);
+            psInsertedPaysheet = connection.prepareStatement(PaySheetQueries.GET_LAST_INSERTED_RECORD_ID);
+            psExistingPaysheet = connection.prepareStatement(PaySheetQueries.GET_SPECIFIC_DATE_PAYSHEET);
             for(PaySheet paySheet : paySheetObservableList){
-                System.out.println("ID is :"+paySheet.getpSEID());
-                psExistingPaySheet.setInt(1, UtilityMethod.seperateID(paySheet.getpSEID()));
-                rsExistingPaySheet = psExistingPaySheet.executeQuery();
-                while(rsExistingPaySheet.next()){
-                    String date = rsExistingPaySheet.getString(10);
+
+                psEmployeeInfo.setInt(1, UtilityMethod.seperateID(paySheet.getpSEID()));
+                rsEmployeeInfo = psEmployeeInfo.executeQuery();
+                while(rsEmployeeInfo.next()){
+                    String date = rsEmployeeInfo.getString(10);
 
                     psPaySheet.setInt(1, UtilityMethod.seperateID(paySheet.getpSEID()));
                     psPaySheet.setString(2, paySheet.getpSEName());
@@ -112,17 +118,36 @@ public class PaySheetServices {
                     psPaySheet.setString(7, paySheet.getpSBankName());
                     psPaySheet.setLong(8, paySheet.getpSAccountNo());
                     psPaySheet.setString(9, paySheet.getpSDate());
-                    if(!(rsExistingPaySheet.getString(1).isEmpty()) ){
-                        System.out.println("DAte is :"+ paySheet.getpSDate() + " " + date);
-                        if((UtilityMethod.getYear(date) != UtilityMethod.getYear(paySheet.getpSDate()))
+                    if(!(rsEmployeeInfo.getString(1).isEmpty()) ){
+
+                        if((!UtilityMethod.getYear(date).equals(UtilityMethod.getYear(paySheet.getpSDate())))
                                 && !(UtilityMethod.getMonth(date).equals(UtilityMethod.getMonth(paySheet.getpSDate())))){
                             psPaySheet.execute();
+                            rsInsertedPaysheet  = psInsertedPaysheet.executeQuery();
+                            while(rsInsertedPaysheet.next()){
+                                resultID = rsInsertedPaysheet.getInt(1);
+                            }
                             AlertPopUp.insertSuccesfully("Paysheet");
                         }else{
-                            AlertPopUp.emptyInsertionFailed("Already Exist");
+                            psExistingPaysheet.setInt(1, UtilityMethod.seperateID(paySheet.getpSEID()));
+                            rsExistingPaysheet  = psExistingPaysheet.executeQuery();
+                            String existingDate = null;
+                            while(rsExistingPaysheet.next()){
+                                existingDate = rsExistingPaysheet.getString(2);
+                                if((UtilityMethod.getYear(existingDate).equals(UtilityMethod.getYear(paySheet.getpSDate())))
+                                        && (UtilityMethod.getMonth(existingDate).equals(UtilityMethod.getMonth(paySheet.getpSDate())))){
+                                    resultID = rsExistingPaysheet.getInt(1);
+
+                                }
+                            }
+                            //AlertPopUp.emptyInsertionFailed("Already Exist");
                         }
                     }else{
                         psPaySheet.execute();
+                        rsInsertedPaysheet  = psInsertedPaysheet.executeQuery();
+                        while(rsInsertedPaysheet.next()){
+                            resultID = rsInsertedPaysheet.getInt(1);
+                        }
                         AlertPopUp.insertSuccesfully("Paysheet");
                     }
 
@@ -141,7 +166,7 @@ public class PaySheetServices {
                 AlertPopUp.sqlQueryError(ex);
             }
         }
-        return resultVal;
+        return resultID;
     }
     public SortedList<PaySheet> searchTable(TextField searchTextField, Integer year, String month){
         //Retreiving all data from database

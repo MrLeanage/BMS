@@ -18,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.OrderMenu;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.OrderSessionHandler;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
@@ -97,6 +99,10 @@ public class OrderMenuAdminController implements Initializable {
 
     private ObservableList<String> choiceboxList = FXCollections.observableArrayList("Available","Not Available");
 
+    @FXML
+    private AnchorPane rootpane;
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private OrderSessionHandler orderSessionHandler = new OrderSessionHandler();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,62 +111,25 @@ public class OrderMenuAdminController implements Initializable {
         loadData();
         searchTable();
     }
+    //internal methods
+
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderStatus(ActionEvent event) {
+        adminManagementHandler.loadOrderStatus(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderMenu(ActionEvent event) {
+        orderSessionHandler.loadOrderMenu(rootpane);
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-
-    @FXML
-    private void OrderMenu(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/Orders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void CompletedOrders(ActionEvent event) {
+        orderSessionHandler.loadCompletedOrder(rootpane);
     }
 
 
 
     @FXML
-    private void imageChooser(ActionEvent event) throws IOException{
+    private void imageChooser(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.jpg"));
         File file = fileChooser.showOpenDialog(null);

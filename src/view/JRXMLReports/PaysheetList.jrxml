@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Paysheet" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="946ee1a4-c8a1-4983-a016-a215bba6bcea">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<parameter name="pPeriod" class="java.lang.String"/>
+	<parameter name="pYear" class="java.lang.Integer"/>
+	<parameter name="pMonth" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM bms.paysheet WHERE DATE_FORMAT(PSGeneratedDate, "%Y-%m") =$P{pPeriod}]]>
+	</queryString>
+	<field name="PSID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="PSID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSEID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="PSEID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSEName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PSEName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSENIC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PSENIC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSBSSTitle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PSBSSTitle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSBSSAmount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PSBSSAmount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSTotalAllowances" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="PSTotalAllowances"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSBank" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PSBank"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSAccount" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="PSAccount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<field name="PSGeneratedDate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PSGeneratedDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
+	</field>
+	<variable name="Variable_1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="0" width="290" height="56" uuid="66c15d0d-c914-4b5a-9620-5e86e4e34ee3"/>
+				<textElement>
+					<font size="33" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BMS - Payroll Slip]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="80">
+			<rectangle>
+				<reportElement x="10" y="5" width="536" height="22" uuid="080b51eb-30e8-41cc-83a4-b54dc5fedd20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="19" width="552" height="30" uuid="993b72cf-612b-4f4d-ae1e-460bb7b6b7e4"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="10" width="53" height="17" uuid="456af571-f5d4-4345-a89a-ce93b4aab9e5"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month   :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="10" width="60" height="17" uuid="565cdb80-f8b1-411b-bd47-f6d79a1b0217"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Year        :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="42" width="164" height="14" uuid="6df72da2-2946-40f1-b93d-a8536c403e2c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monthly Salary Description :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="61" width="33" height="15" uuid="12c5a986-acb2-4db5-9ed2-78d1f4314450"/>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[EID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="61" width="90" height="15" uuid="537dc496-2b70-4fce-a88b-42960666a18e"/>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[E Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="61" width="49" height="15" uuid="15de07ab-f776-4047-b36a-e42cc2c651ff"/>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Scheme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="61" width="51" height="15" uuid="5f0e1998-3a97-4085-a8a1-43ed88e61ebd"/>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Basic Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="61" width="62" height="15" uuid="eb0432b4-201c-4b8c-8ed5-12fa43f17671">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total Allowances]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="61" width="63" height="15" uuid="abe60d63-9199-48c0-afe7-d025948a874e"/>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Net Salary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="61" width="95" height="15" uuid="f5edaf01-ca98-4e5e-967d-e57a3ff0d4ba">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Bank Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="61" width="71" height="15" uuid="c1e09284-1cf6-4639-814f-e5bcb0a09105"/>
+				<box topPadding="2">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Account Number]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="10" width="95" height="17" uuid="5ba11e1f-d851-49dd-96d5-8b8f1092525f"/>
+				<textFieldExpression><![CDATA[$P{pYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="10" width="100" height="17" uuid="7a46507a-26db-4e18-a253-f3582536ae26"/>
+				<textFieldExpression><![CDATA[$P{pMonth}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24">
+			<textField>
+				<reportElement x="5" y="5" width="33" height="15" uuid="31493ae1-dfe9-412a-9707-dad82e49bde0"/>
+				<box topPadding="2" leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{PSEID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="5" width="90" height="15" uuid="041ad4dc-4671-4d13-94fe-e8f2524ebfe5"/>
+				<box topPadding="2" leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{PSEName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="5" width="49" height="15" uuid="611a8ff0-8e37-4e34-a121-9c969aea1ebb"/>
+				<box topPadding="2" leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{PSBSSTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="190" y="5" width="51" height="15" uuid="3f6ef6da-7c19-4995-85a4-4942d2f953f4"/>
+				<box topPadding="2" rightPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{PSBSSAmount}]]></textFieldExpression>
+				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="246" y="5" width="62" height="15" uuid="a3284b96-e0c6-4f51-840b-4c89c221ee2f"/>
+				<box topPadding="2" rightPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{PSBSSAmount}]]></textFieldExpression>
+				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="313" y="5" width="63" height="15" uuid="24201184-6cbb-45b9-9085-0f884df0f4e6"/>
+				<box topPadding="2" rightPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{PSBSSAmount} + $F{PSTotalAllowances}]]></textFieldExpression>
+				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="5" width="95" height="15" uuid="ebfdc1ea-a585-4789-9037-d87f894146d6"/>
+				<box topPadding="2" leftPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{PSBank}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="5" width="71" height="15" uuid="dd91312a-492f-433e-a1d7-90ac343d7911"/>
+				<box topPadding="2" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{PSAccount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="120">
+			<rectangle>
+				<reportElement x="12" y="51" width="536" height="43" uuid="d6f61129-4dc7-49e7-8694-958d6c495a10"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="27" width="552" height="30" uuid="e564bd5e-be6d-4cc8-9efd-a4f8b6ea8210"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="2" width="323" height="34" uuid="2320cc98-df9d-4ec6-ab2c-b458d919fd27"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="59" width="100" height="30" uuid="79558c7e-65bc-4d0f-80cd-a6af11666f30"/>
+				<text><![CDATA[Note :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="60" width="367" height="19" uuid="586ca5ee-de03-4127-8b36-ea2357dd3567"/>
+				<text><![CDATA[1. This is a Computer generated statement and does not need any signature]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="76" y="76" width="100" height="20" uuid="5bcaacbb-e7c0-4b59-846e-b494855558d6"/>
+				<textFieldExpression><![CDATA[new java.util.Date().toString() +  new java.util.Date().toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="76" width="60" height="22" uuid="94da9221-a18e-47d7-a187-49c670655754"/>
+				<text><![CDATA[Generated :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="34" width="147" height="13" uuid="6ae896d3-bbfd-428e-950f-aded64880aec"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Total Net Salary                   :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="220" y="22" width="319" height="25" uuid="f4092397-0e2c-4fbd-8bec-cbc9d095546d"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PSBSSAmount} + $F{PSTotalAllowances}]]></textFieldExpression>
+				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="20" width="217" height="18" uuid="9f1643b3-f1c6-4564-9009-6e83569fb4f9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payroll Expense For the month :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

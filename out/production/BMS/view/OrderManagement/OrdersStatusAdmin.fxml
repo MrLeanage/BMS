@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,17 +19,12 @@
             <AnchorPane layoutX="176.0" layoutY="9.0" prefHeight="70.0" prefWidth="1062.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutY="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1085.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
-                  <JFXButton buttonType="RAISED" layoutX="535.0" layoutY="15.0" onAction="#OrderStatus" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #029206;" text="Order Management" textFill="WHITE" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="13.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="797.0" layoutY="14.0" onAction="#Employees" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Employee Management" textFill="WHITE" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="13.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="15.0" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Finance Management" textFill="WHITE" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="13.0">
+                  <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="15.0" onAction="#SalesCounter" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #2b384b;" text="Finance Management" textFill="WHITE" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="13.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -38,18 +34,23 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="550.0" layoutY="13.0" onAction="#OrderStatus" prefHeight="40.0" prefWidth="250.0" style="-fx-border-width: 1; -fx-border-radius: 0; -fx-background-color: #029206;" text="Order Management" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
-            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="23.0" layoutY="33.0" size="18" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="10.0" />
-            <Label layoutX="35.0" layoutY="9.0" prefHeight="25.0" prefWidth="82.0" text="User " textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="12.0" layoutY="51.57143020629883" size="45" />
+            <Label fx:id="UserNameLabel" alignment="CENTER_RIGHT" layoutX="43.0" layoutY="14.0" prefHeight="17.0" prefWidth="115.0" text="User " textFill="WHITE" />
+            <Button graphicTextGap="3.0" layoutX="55.0" layoutY="33.0" mnemonicParsing="false" onAction="#LogoutSession" prefHeight="20.0" prefWidth="103.0" style="-fx-background-color: #ff5e00;" text="Logout" textFill="WHITE">
                <font>
-                  <Font size="17.0" />
+                  <Font name="System Bold" size="10.0" />
                </font>
-            </Label>
-            <JFXButton layoutX="91.0" layoutY="55.0" onAction="#LogoutSession" style="-fx-background-color: #0a0270;" text="Logout" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0" />
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+      <AnchorPane fx:id="rootpane" layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="575.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="1250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
             <AnchorPane prefHeight="580.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -74,7 +75,7 @@
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="BOOK" />
                      </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Completed Orders" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" onAction="#CompletedOrders" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Completed Orders" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -90,15 +91,15 @@
                      <columns>
                         <TableColumn fx:id="OIDColumn" prefWidth="50.0" text="ID" />
                         <TableColumn fx:id="OTypeColumn" prefWidth="121.0" text="Order Type" />
-                        <TableColumn fx:id="ODetailsColumn" minWidth="0.0" prefWidth="174.333251953125" text="Order Details" />
-                        <TableColumn fx:id="ODeliveryDateColumn" prefWidth="56.666748046875" text="OD-Date" />
-                        <TableColumn fx:id="ODeliveryTimeColumn" prefWidth="57.0" text="OD-Time" />
-                        <TableColumn fx:id="OtakenDateColumn" prefWidth="63.0" text="OT-Date" />
-                        <TableColumn fx:id="OTakenTimeColumn" prefWidth="63.0" text="OT-Time" />
-                        <TableColumn fx:id="OTakenByColumn" prefWidth="123.3333740234375" text="Taken By" />
-                        <TableColumn fx:id="OStatusColumn" prefWidth="124.6666259765625" text="Order Status" />
-                        <TableColumn fx:id="ORemarksColumn" prefWidth="101.6666259765625" text="Remarks" />
-                        <TableColumn fx:id="OActionColumn" prefWidth="120.0" text="Action" />
+                        <TableColumn fx:id="ODetailsColumn" minWidth="0.0" prefWidth="164.0" text="Order Name" />
+                        <TableColumn fx:id="OQuantityColumn" prefWidth="57.0" text="Quantity" />
+                        <TableColumn fx:id="ODeliveryDateColumn" prefWidth="81.0" text="OD-Date" />
+                        <TableColumn fx:id="ODeliveryTimeColumn" prefWidth="62.0" text="OD-Time" />
+                        <TableColumn fx:id="OTakenDateColumn" prefWidth="82.0" text="OT-Date" />
+                        <TableColumn fx:id="OTakenTimeColumn" prefWidth="67.0" text="OT-Time" />
+                        <TableColumn fx:id="OTakenByColumn" prefWidth="125.0" text="Taken By" />
+                        <TableColumn fx:id="OProcessingStatusColumn" prefWidth="141.0" text="Order Processing Status" />
+                        <TableColumn fx:id="OPaymentStatusColumn" prefWidth="128.0" text="Order Payment Status" />
                      </columns>
                   </TableView>
                   <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="19.0" prefHeight="30.0" prefWidth="1080.0" promptText="Search in Here" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">

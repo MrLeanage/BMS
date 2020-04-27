@@ -21,6 +21,7 @@ public class ItemStock {
     private StringProperty iStatus = null;
 
     public ItemStock(String iID, String iName, String iSID, String iSISupplierName, Integer iUnitsPerBlock, Integer iBlocks, Float iWeightPerBlock, Float iBuyingPrice, String iExpireDate, String iAddedDate, Integer iMinQuantityLimit, Integer iAvailableQuantity) {
+
         this.iID = new SimpleStringProperty(UtilityMethod.addPrefix("I", iID));
         this.iName = new SimpleStringProperty(iName);
         this.iSIID = new SimpleStringProperty(UtilityMethod.addPrefix("SI", iSID));
@@ -64,16 +65,16 @@ public class ItemStock {
         this.iName = new SimpleStringProperty(iName);
     }
 
-    public String getiSID() {
+    public String getiSIID() {
         return iSIID.get();
     }
 
-    public StringProperty iSIDProperty() {
+    public StringProperty iSIIDProperty() {
         return iSIID;
     }
 
-    public void setiSID(String iSID) {
-        this.iSIID = new SimpleStringProperty(iSID);
+    public void setiSIID(String iSIID) {
+        this.iSIID = new SimpleStringProperty(iSIID);
     }
 
     public String getiSISupplierName() {
@@ -120,7 +121,7 @@ public class ItemStock {
         return iWeightPerBlock;
     }
 
-    public void setiWeightPerBlock(Float iWeightPerBlock) {
+    public void setiWeightPerBlock(float iWeightPerBlock) {
         this.iWeightPerBlock = new SimpleFloatProperty(iWeightPerBlock);
     }
 

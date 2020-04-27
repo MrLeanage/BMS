@@ -198,13 +198,8 @@ public class UtilityMethod {
         }
         return result;
     }
-    public static Integer convertMonthNameToNumber(String month) throws ParseException {
-        DateTimeFormatter parser = DateTimeFormatter.ofPattern("MMM").withLocale(Locale.ENGLISH);
-        //TemporalAccessor accessor = parser.parse("february");
-        Date date = new SimpleDateFormat("MMMM").parse(month);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return cal.get(Calendar.MONTH) + 1;
+    public static int getMonthNumber(String monthName) {
+        return Month.valueOf(monthName.toUpperCase()).getValue();
     }
     public static Integer seperateIntegerFromString(String stringIntegerMixedText){
 

@@ -15,6 +15,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.BakeryProduct;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.InventorySessionHandler;
+import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
@@ -94,6 +97,11 @@ public class BakeryProductController implements Initializable {
 
     private ObservableList<String> statusChoiceboxList = FXCollections.observableArrayList("Available","Not Available");
 
+    @FXML
+    private AnchorPane rootpane;
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private InventorySessionHandler inventorySessionHandler = new InventorySessionHandler();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -107,78 +115,22 @@ public class BakeryProductController implements Initializable {
         searchTable();
 
     }
-    @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
-    }
-    @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
     //internal methods
     @FXML
-    private void FoodProducts(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/BakeryProducts.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void ItemStock(ActionEvent event){
+        adminManagementHandler.loadItemStock(event);
     }
     @FXML
-    private void AgencyProduct(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/AgencyProduct.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void FoodProducts(ActionEvent event) {
+        inventorySessionHandler.loadBakeryProducts(rootpane);
     }
     @FXML
-    private void Supplier(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Supplier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void AgencyProduct(ActionEvent event)  {
+        inventorySessionHandler.loadAgencyProduct(rootpane);
+    }
+    @FXML
+    private void Supplier(ActionEvent event) {
+        inventorySessionHandler.loadSupplier(rootpane);
     }
     @FXML
     private void playBeep(){

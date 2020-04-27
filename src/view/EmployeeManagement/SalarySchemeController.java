@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.SalaryScheme;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.EmployeeSessionHandler;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
@@ -57,8 +59,11 @@ public class SalarySchemeController implements Initializable {
 
     private static SalaryScheme existingSalarySchemeModel;
 
+    @FXML
+    private AnchorPane rootpane;
 
-
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private EmployeeSessionHandler employeeSessionHandler = new EmployeeSessionHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -70,75 +75,21 @@ public class SalarySchemeController implements Initializable {
 
     }
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Employees(ActionEvent event){
+        adminManagementHandler.loadEmployees(event);
     }
     //internal methods
     @FXML
-    private void SalarySchemes(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/SalarySchemes.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalarySchemes(ActionEvent event){
+        employeeSessionHandler.loadSalarySchemes(rootpane);
     }
     @FXML
-    private void Allowances(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Allowances.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Allowances(ActionEvent event){
+        employeeSessionHandler.loadAllowances(rootpane);
     }
     @FXML
-    private void SystemUsers(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/SystemUsers.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SystemUsers(ActionEvent event){
+        employeeSessionHandler.loadSystemUsers(rootpane);
     }
     @FXML
     private void playBeep(){

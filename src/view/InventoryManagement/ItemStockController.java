@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.ItemStock;
 import model.Supplier;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.InventorySessionHandler;
+import util.authenticate.UserAuthentication;
 import util.playAudio.Audio;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
@@ -140,7 +143,13 @@ public class ItemStockController implements Initializable {
      * @param url
      * @param rb
      */
+    @FXML
+    public Label UserNameLabel;
 
+    @FXML
+    private AnchorPane rootpane;
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private InventorySessionHandler inventorySessionHandler = new InventorySessionHandler();
     //overriding methods and connections to load data on page visit
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -149,90 +158,42 @@ public class ItemStockController implements Initializable {
         //to auto refresh search results
         searchTable();
         dateValidation();
+        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
 
     }
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
+    private void LogoutSession(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.endAuthenticatedSession(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void ItemStock(ActionEvent event){
+        adminManagementHandler.loadItemStock(event);
     }
     @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesCounter(ActionEvent event){
+        adminManagementHandler.loadSalesCounter(event);
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderStatus(ActionEvent event) {
+        adminManagementHandler.loadOrderStatus(event);
+    }
+    @FXML
+    private void Employees(ActionEvent event){
+        adminManagementHandler.loadEmployees(event);
     }
     //internal methods
     @FXML
-    private void FoodProducts(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/BakeryProducts.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void FoodProducts(ActionEvent event){
+        inventorySessionHandler.loadBakeryProducts(rootpane);
     }
     @FXML
-    private void AgencyProduct(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/AgencyProduct.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void AgencyProduct(ActionEvent event){
+        inventorySessionHandler.loadAgencyProduct(rootpane);
     }
     @FXML
-    private void Supplier(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Supplier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void SalesCounter(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/SalesCounterAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Supplier(ActionEvent event) {
+        inventorySessionHandler.loadSupplier(rootpane);
     }
     @FXML
     private void playBeep(){
@@ -464,7 +425,7 @@ public class ItemStockController implements Initializable {
             itemStockModel.setiBuyingPrice(Float.parseFloat(IBuyingPriceTextField.getText()));
             itemStockModel.setiMinQuantityLimit(Integer.parseInt(IMinQuantityLimitTextField.getText()));
             itemStockModel.setiExpireDate(String.valueOf(IExpireDateDatePicker.getValue()));
-            itemStockModel.setiSID(ISupplierIDTextField.getText());
+            itemStockModel.setiSIID(ISupplierIDTextField.getText());
             itemStockModel.setiAddedDate(String.valueOf(LocalDate.now()));
 
             Boolean resultVal = itemStockServices.insertData(itemStockModel);
@@ -490,7 +451,7 @@ public class ItemStockController implements Initializable {
             IBuyingPriceTextField.setText(String.valueOf(itemStockModel.getiBuyingPrice()));
             IMinQuantityLimitTextField.setText(String.valueOf(itemStockModel.getiMinQuantityLimit()));
             IExpireDateDatePicker.setValue(LocalDate.parse(itemStockModel.getiExpireDate()));
-            ISupplierIDTextField.setText(itemStockModel.getiSID());
+            ISupplierIDTextField.setText(itemStockModel.getiSIID());
             ISupplierNameTextField.setText(itemStockModel.getiSISupplierName());
 
             clearLabels();
@@ -527,7 +488,7 @@ public class ItemStockController implements Initializable {
                     //Overriding existing values retreiving from table
                     itemStockModel.setiID(existingItemStockModel.getiID());
                     itemStockModel.setiName(INameTextField.getText());
-                    itemStockModel.setiSID(ISupplierIDTextField.getText());
+                    itemStockModel.setiSIID(ISupplierIDTextField.getText());
                     itemStockModel.setiSISupplierName(ISupplierNameTextField.getText());
                     itemStockModel.setiUnitsPerBlock(Integer.parseInt(IUnitsPerBlockTextField.getText()));
                     itemStockModel.setiBlocks(Integer.parseInt(IBlocksTextField.getText()));

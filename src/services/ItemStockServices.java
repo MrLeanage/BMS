@@ -119,7 +119,7 @@ public class ItemStockServices {
                     while (rsLastStockItem.next()){
                         psPurchase = conn.prepareStatement(PurchaseProductQueries.INSERT_PURCHASE_DATA_QUERY);
                         psPurchase.setInt(1, rsLastStockItem.getInt(1));
-                        psPurchase.setInt(2, UtilityMethod.seperateID(itemStock.getiSID()));
+                        psPurchase.setInt(2, UtilityMethod.seperateID(itemStock.getiSIID()));
                         psPurchase.setString(3, "Stock");
                         psPurchase.setString(4, String.valueOf(LocalDate.now()));
                         psPurchase.setString(5,"Pending");
@@ -165,7 +165,7 @@ public class ItemStockServices {
             if(status){
                 try{
                         psPurchase = conn.prepareStatement(PurchaseProductQueries.UPDATE_PURCHASE_STOCK_DATA_QUERRY);
-                        psPurchase.setInt(1, UtilityMethod.seperateID(newItemStock.getiSID()));
+                        psPurchase.setInt(1, UtilityMethod.seperateID(newItemStock.getiSIID()));
                         psPurchase.setString(2,String.valueOf(LocalDate.now()));
                         psPurchase.setInt(3, UtilityMethod.seperateID(newItemStock.getiID()));
                         psPurchase.execute();
@@ -271,7 +271,7 @@ public class ItemStockServices {
                 }else if(itemStock.getiName().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     //return if filter matches data
                     return true;
-                }else if(itemStock.getiSID().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                }else if(itemStock.getiSIID().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     //return if filter matches data
                     return true;
                 }else if(itemStock.getiSISupplierName().toLowerCase().indexOf(lowerCaseFilter) != -1){

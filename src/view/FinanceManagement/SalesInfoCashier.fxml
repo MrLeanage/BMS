@@ -5,30 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="650.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FinanceManagement.SalesInfoCashierController">
    <children>
-      <AnchorPane layoutX="11.0" layoutY="10.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutX="14.0" layoutY="12.0" stroke="TRANSPARENT" strokeType="INSIDE" width="160.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
-            <AnchorPane layoutX="176.0" layoutY="9.0" prefHeight="70.0" prefWidth="1062.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutY="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1085.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="23.0" layoutY="33.0" size="18" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="10.0" />
-            <Label layoutX="35.0" layoutY="9.0" prefHeight="25.0" prefWidth="82.0" text="User " textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <JFXButton layoutX="91.0" layoutY="55.0" onAction="#LogoutSession" style="-fx-background-color: #0a0270;" text="Logout" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+      <AnchorPane fx:id="rootpane" layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="575.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="1250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
             <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="170.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -90,7 +74,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="59.0" layoutY="499.0" stroke="BLACK" strokeType="INSIDE" width="745.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="37.0" stroke="TRANSPARENT" strokeType="INSIDE" width="745.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="565.0" layoutX="746.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="330.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="107.0" layoutX="775.0" layoutY="103.0" stroke="TRANSPARENT" strokeType="INSIDE" width="290.0" AnchorPane.leftAnchor="770.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="166.0" layoutX="752.0" layoutY="277.0" stroke="TRANSPARENT" strokeType="INSIDE" width="320.0" AnchorPane.leftAnchor="752.0" />
                   <Label layoutX="13.0" layoutY="11.0" text="Sales Counter" textFill="WHITE" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="11.0">
                      <font>
                         <Font name="System Bold" size="16.0" />
@@ -106,52 +90,46 @@
                         <TableColumn fx:id="BTotalColumn" prefWidth="118.888916015625" text="Total" />
                      </columns>
                   </TableView>
-                  <Label layoutX="778.0" layoutY="236.0" prefHeight="27.0" prefWidth="109.0" text="User ID       :" textFill="#f8ea03" AnchorPane.leftAnchor="778.0" AnchorPane.topAnchor="236.0">
+                  <Label layoutX="773.0" layoutY="304.0" prefHeight="27.0" prefWidth="109.0" text="User ID       :" textFill="#f8ea03" AnchorPane.leftAnchor="773.0" AnchorPane.topAnchor="304.0">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="778.0" layoutY="278.0" prefHeight="27.0" prefWidth="103.0" text="User Name :" textFill="#f8ea03" AnchorPane.leftAnchor="778.0" AnchorPane.topAnchor="278.0">
+                  <Label layoutX="773.0" layoutY="346.0" prefHeight="27.0" prefWidth="103.0" text="User Name :" textFill="#f8ea03" AnchorPane.leftAnchor="773.0" AnchorPane.topAnchor="346.0">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="DateLabel" alignment="CENTER" layoutX="779.0" layoutY="119.0" prefHeight="81.0" prefWidth="276.0" textFill="#f8ea03">
+                  <Label fx:id="DateLabel" alignment="CENTER" layoutX="759.0" layoutY="225.0" prefHeight="47.0" prefWidth="313.0" textFill="#f8ea03">
                      <font>
-                        <Font size="35.0" />
+                        <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="803.0" layoutY="367.0" prefHeight="31.0" prefWidth="247.0" text="Total Sales Amount" textFill="#f8ea03">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="107.0" layoutX="778.0" layoutY="415.0" stroke="TRANSPARENT" strokeType="INSIDE" width="290.0" AnchorPane.leftAnchor="770.0" />
-                  <Label fx:id="TotalAmountLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="789.0" layoutY="454.0" prefHeight="35.0" prefWidth="247.0" text="Rs : 0.00" textAlignment="CENTER" textFill="WHITE">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="68.0" layoutX="755.0" layoutY="496.0" stroke="TRANSPARENT" strokeType="INSIDE" width="320.0" AnchorPane.leftAnchor="755.0" />
+                  <Label fx:id="TotalAmountLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="769.0" layoutY="512.0" prefHeight="35.0" prefWidth="285.0" text="Rs : 0.00" textAlignment="CENTER" textFill="#f8ea03">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="UIDLabel" layoutX="888.0" layoutY="238.0" prefHeight="17.0" prefWidth="160.0" textFill="WHITE" AnchorPane.leftAnchor="888.0">
+                  <Label layoutX="773.0" layoutY="387.0" prefHeight="27.0" prefWidth="109.0" text="Items Sold  :" textFill="#f8ea03" AnchorPane.leftAnchor="773.0">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="UNameLabel" layoutX="888.0" layoutY="281.0" prefHeight="17.0" prefWidth="160.0" textFill="WHITE" AnchorPane.leftAnchor="888.0">
+                  <Label layoutX="792.0" layoutY="25.0" prefHeight="47.0" prefWidth="267.0" text="Sales Information" textFill="#f8ea03">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="27.0" />
                      </font>
                   </Label>
-                  <Label layoutX="778.0" layoutY="319.0" prefHeight="27.0" prefWidth="109.0" text="Items Sold  :" textFill="#f8ea03" AnchorPane.leftAnchor="778.0">
+                  <TextField fx:id="UIDTextBox" editable="false" layoutX="865.0" layoutY="306.0" prefWidth="180.0" AnchorPane.leftAnchor="865.0" />
+                  <TextField fx:id="UNameTextBox" editable="false" layoutX="865.0" layoutY="349.0" prefWidth="180.0" />
+                  <TextField fx:id="TotalItemsSoldTextBox" editable="false" layoutX="865.0" layoutY="388.0" prefWidth="180.0" />
+                  <Label layoutX="768.0" layoutY="453.0" prefHeight="47.0" prefWidth="241.0" text="Amount to be Claimed :" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="TotalItemsLabel" layoutX="888.0" layoutY="320.0" prefHeight="17.0" prefWidth="160.0" textFill="WHITE" AnchorPane.leftAnchor="888.0">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="856.0" layoutY="201.0" size="150" />
                </children>
             </AnchorPane>
          </children>

@@ -18,9 +18,13 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.SalesItem;
+import model.User;
 import services.BillingServices;
 import services.ProductServices;
+import util.authenticate.CashierSessionHandler;
+import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
+import util.utility.PrintReport;
 import util.validation.DataValidation;
 
 import java.io.IOException;
@@ -113,135 +117,46 @@ public class BillingController implements Initializable {
 
     private LinkedList<SalesItem> salesItemLinkedList = new LinkedList<>();
 
+
+    @FXML
+    public Label UserNameLabel;
+
+    @FXML
+    private AnchorPane rootpane;
+
+    private CashierSessionHandler cashierSessionHandler = new CashierSessionHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
         searchTable();
+        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
     }
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
+    private void LogoutSession(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.endAuthenticatedSession(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-
+    private void Billing(ActionEvent event){ cashierSessionHandler.loadBilling(event); }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    //internal methods
+    private void Products(ActionEvent event){ cashierSessionHandler.loadProducts(rootpane); }
     @FXML
-    private void FoodProducts(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/BakeryProducts.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderMenu(ActionEvent event){
+        cashierSessionHandler.loadOrderMenu(rootpane);
     }
     @FXML
-    private void AgencyProduct(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/AgencyProduct.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Order(ActionEvent event) {
+        cashierSessionHandler.loadOrder(rootpane);
     }
     @FXML
-    private void Supplier(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Supplier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderStatus(ActionEvent event){
+        cashierSessionHandler.loadOrderStatus(rootpane);
     }
     @FXML
-    private void Billing(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/Billing.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesInfo(ActionEvent event) {
+        cashierSessionHandler.loadSalesInfo(rootpane);
     }
-    @FXML
-    private void Products(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Products.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderMenu(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersMenuCashier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void Order(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/Orders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusCashier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void SalesInfo(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/SalesInfoCashier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
     @FXML
     private void clearFields(){
 
@@ -317,7 +232,7 @@ public class BillingController implements Initializable {
         //getting data from main LoginController
         ProductServices productServices = new ProductServices();
 
-        ObservableList<SalesItem> productsData = FXCollections.observableArrayList(productServices.loadData());
+        ObservableList<SalesItem> productsData = productServices.loadData();
         //Setting cell value factory to table view
         PIDColumn.setCellValueFactory(new PropertyValueFactory<>("sIPID"));
         PNameColumn.setCellValueFactory(new PropertyValueFactory<>("sIPName"));
@@ -342,7 +257,7 @@ public class BillingController implements Initializable {
                     salesItem.setsIPWeight(PWeightTextbox.getText());
                     salesItem.setsIUnitPrice(Float.parseFloat(PPriceTextbox.getText()));
                     salesItem.setsIPQuantity(Integer.parseInt(String.valueOf(PQuantitySpinner.getValue())));
-                    salesItem.setsIUser("noobmaster95");
+                    salesItem.setsIUser(UserAuthentication.getAuthenticatedSession().getuID());
                     if(PTotalPriceTextbox.getText().isEmpty()){
                         salesItem.setsITotalAmount(Float.parseFloat(PPriceTextbox.getText()) * Integer.parseInt(String.valueOf(PQuantitySpinner.getValue())));
                     }else{
@@ -364,7 +279,6 @@ public class BillingController implements Initializable {
                 }
             }
         }catch(NullPointerException ex){
-            System.out.println("Ex :" + ex);
             AlertPopUp.emptyInsertionFailed("No Sales Item Record to add to Bill");
         }
     }
@@ -372,8 +286,10 @@ public class BillingController implements Initializable {
     private void generateBill(ActionEvent event) throws Exception {
         BillingServices billingServices = new BillingServices();
         if(!salesItemLinkedList.isEmpty()){
-            boolean resultVal = billingServices.insertData(salesItemLinkedList);
-            if(resultVal){
+            Integer resultVal = billingServices.insertData(salesItemLinkedList);
+            if(resultVal != 0){
+                PrintReport printReport = new PrintReport();
+                printReport.printBill(resultVal);
                 salesItemLinkedList.clear();
                 refreshCartTable();
             }

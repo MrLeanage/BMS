@@ -172,11 +172,10 @@ public class BillingServices {
         return salesItemData;
     }
 
-    public boolean insertData(LinkedList<SalesItem> productsList){
+    public Integer insertData(LinkedList<SalesItem> productsList){
         PreparedStatement psSalesItem = null;
         PreparedStatement psBilling = null;
         ResultSet rsBilling = null;
-        boolean resultval = false;
         int billingID = 0;
         String user = null;
         OrderServices orderServices = new OrderServices();
@@ -228,7 +227,6 @@ public class BillingServices {
             }
 
             AlertPopUp.insertSuccesfully("Billed");
-            resultval = true;
 
         } catch (SQLException ex) {
             AlertPopUp.insertionFailed(ex, "Billing");
@@ -242,7 +240,7 @@ public class BillingServices {
                 AlertPopUp.sqlQueryError(ex);
             }
         }
-        return resultval;
+        return billingID;
     }
     public boolean updateClearance(LinkedList<SalesItem> salesItemLinkedList){
         boolean resultVal = false;

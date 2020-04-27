@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.ItemWithdraw;
 import services.ItemWithdrawServices;
+import util.authenticate.SupervisorSessionHandler;
+import util.authenticate.UserAuthentication;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,6 +51,10 @@ public class WithdrawedItemsController implements Initializable {
     @FXML
     private TableColumn<ItemWithdraw, String> WTimeColumn;
 
+    @FXML
+    AnchorPane rootpane;
+    SupervisorSessionHandler supervisorSessionHandler = new SupervisorSessionHandler();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -57,86 +63,34 @@ public class WithdrawedItemsController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    //internal methods
-    @FXML
-    private void ItemWithdraw(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemWithdraw.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void ItemWithdraw(ActionEvent event) {
+        supervisorSessionHandler.loadItemWithdraw(event);
     }
     @FXML
-    private void WithdrawedItems(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/WithdrawedItems.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void WithdrawedItems(ActionEvent event) {
+        supervisorSessionHandler.loadWithdrawedItems(rootpane);
     }
     @FXML
-    private void PendingOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/NewOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PendingOrders(ActionEvent event){
+        supervisorSessionHandler.loadPendingOrders(rootpane);
     }
     @FXML
-    private void OnGoingOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OnGoingOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OnGoingOrders(ActionEvent event) {
+        supervisorSessionHandler.loadOnGoingOrders(rootpane);
     }
     @FXML
-    private void CompletedOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/CompletedOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void CompletedOrders(ActionEvent event) {
+        supervisorSessionHandler.loadCompletedOrders(rootpane);
     }
     @FXML
-    private void CancelledOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/CancelledOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void CancelledOrders(ActionEvent event) {
+        supervisorSessionHandler.loadCancelledOrders(rootpane);
     }
     @FXML
-    private void OrderMenu(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersMenuSupervisor.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderMenu(ActionEvent event) {
+        supervisorSessionHandler.loadOrderMenu(rootpane);
     }
     //load data to View table
     private void loadData() throws SQLException {

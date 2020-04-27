@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 import model.Order;
 import model.OrderMenu;
 import services.OrderServices;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.OrderSessionHandler;
+import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
@@ -40,6 +43,9 @@ public class OrderStatusAdminController implements Initializable {
     private TableColumn<Order, String> ODetailsColumn;
 
     @FXML
+    private TableColumn<Order, Integer> OQuantityColumn;
+
+    @FXML
     private TableColumn<Order, String> ODeliveryDateColumn;
 
     @FXML
@@ -55,10 +61,10 @@ public class OrderStatusAdminController implements Initializable {
     private TableColumn<Order, Integer> OTakenByColumn;
 
     @FXML
-    private TableColumn<Order, String> OStatusColumn;
+    private TableColumn<Order, String> OPaymentStatusColumn;
 
     @FXML
-    private TableColumn<Order, String> ORemarksColumn;
+    private TableColumn<Order, String> OProcessingStatusColumn;
 
     @FXML
     private TextField SearchTextBox;
@@ -68,118 +74,52 @@ public class OrderStatusAdminController implements Initializable {
     private static OrderMenu orderMenu;
     private ObservableList<String> orderTypeChoiceboxList = FXCollections.observableArrayList("Menu Item","Customized");
 
+    @FXML
+    public Label UserNameLabel;
+
+    @FXML
+    private AnchorPane rootpane;
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private OrderSessionHandler orderSessionHandler = new OrderSessionHandler();
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-      // OTypeChoiceBox.setValue("Menu Item");
-      // OTypeChoiceBox.setItems(orderTypeChoiceboxList);
+    public void initialize(URL location, ResourceBundle resources) {;
         loadData();
         searchTable();
+        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
     }
 
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
+    private void LogoutSession(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.endAuthenticatedSession(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void ItemStock(ActionEvent event){
+        adminManagementHandler.loadItemStock(event);
     }
-
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesCounter(ActionEvent event){
+        adminManagementHandler.loadSalesCounter(event);
+    }
+    @FXML
+    private void Employees(ActionEvent event){
+        adminManagementHandler.loadEmployees(event);
     }
     //internal methods
+
     @FXML
-    private void FoodProducts(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/BakeryProducts.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderStatus(ActionEvent event) {
+        adminManagementHandler.loadOrderStatus(event);
     }
     @FXML
-    private void AgencyProduct(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/AgencyProduct.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderMenu(ActionEvent event){
+        orderSessionHandler.loadOrderMenu(rootpane);
     }
     @FXML
-    private void Supplier(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Supplier.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void CompletedOrders(ActionEvent event) {
+        orderSessionHandler.loadCompletedOrder(rootpane);
     }
-    @FXML
-    private void Billing(ActionEvent event) throws IOException {
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/Billing.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void Products(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/Products.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderMenu(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersMenuAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrderStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
     //load data from Main LoginController to View table
     private void loadData() {
         //getting data from main LoginController
@@ -190,14 +130,16 @@ public class OrderStatusAdminController implements Initializable {
 
         //Setting cell value factory to table view
         OIDColumn.setCellValueFactory(new PropertyValueFactory<>("oID"));
-        //OCustomerNameColumn.setCellValueFactory(new PropertyValueFactory<>("oCustomerName"));
-       // OCustomerNICColumn.setCellValueFactory(new PropertyValueFactory<>("oCustomerNIC"));
         OTypeColumn.setCellValueFactory(new PropertyValueFactory<>("oType"));
-        ODetailsColumn.setCellValueFactory(new PropertyValueFactory<>("oDetails"));
-        //OQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("oQuantity"));
-       // OAdvancePayColumn.setCellValueFactory(new PropertyValueFactory<>("oAdvancePay"));
-       // OTotalColumn.setCellValueFactory(new PropertyValueFactory<>("oTotal"));
-        OStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oStatus"));
+        ODetailsColumn.setCellValueFactory(new PropertyValueFactory<>("oOMName"));
+        OQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("oQuantity"));
+        ODeliveryDateColumn.setCellValueFactory(new PropertyValueFactory<>("oDeliveredDate"));
+        ODeliveryTimeColumn.setCellValueFactory(new PropertyValueFactory<>("oDeliveredTime"));
+        OTakenDateColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenDate"));
+        OTakenTimeColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenTime"));
+         OTakenByColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenUID"));
+        OProcessingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oProcessingStatus"));
+        OPaymentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oStatus"));
 
         OrderTable.setItems(null);
         OrderTable.setItems(ordersData);

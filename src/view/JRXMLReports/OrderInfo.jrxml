@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrderInfo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21211885-98a9-4ced-8bad-c28fd0fab512">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="pStatus" class="java.lang.String"/>
+	<parameter name="pOID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT bms.ordermenuitem.`OMIID`,
+	bms.orders.`OID`,
+	bms.orders.`OOMID`,
+	bms.orders.`OType`,
+	bms.orders.`ODetails`,
+	bms.orders.`OQuantity`,
+	bms.orders.`ODeliveryDate`,
+	bms.orders.`ODeliveryTime`,
+	bms.orders.`OCustomerName`,
+	bms.orders.`OCustomerNIC`,
+	bms.orders.`OCustomerPhone`,
+	bms.orders.`OTakenDate`,
+	bms.orders.`OTakenTime`,
+	bms.user.`UID`,
+	bms.orders.`OTakenUID`,
+	bms.user.`UName`,
+	bms.orders.`ODeliveredDate`,
+	bms.orders.`ODeliveredTime`,
+	bms.ordermenuitem.`OMIName`,
+	bms.ordermenuitem.`OMIDescription`,
+	bms.ordermenuitem.`OMIWeight`,
+	bms.ordermenuitem.`OMIImage`
+FROM bms.orders
+	INNER JOIN bms.ordermenuitem ON 
+	 bms.ordermenuitem.`OMIID` = bms.orders.`OOMID` 
+	INNER JOIN bms.user ON 
+	 bms.user.`UID` = bms.orders.`OTakenUID`]]>
+	</queryString>
+	<field name="OMIID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OMIID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
+	</field>
+	<field name="OID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OOMID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OOMID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OType" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OType"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="ODetails" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ODetails"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OQuantity" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OQuantity"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="ODeliveryDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="ODeliveryDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="ODeliveryTime" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ODeliveryTime"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OCustomerName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OCustomerName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OCustomerNIC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OCustomerNIC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OCustomerPhone" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="OCustomerPhone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OTakenDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="OTakenDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OTakenTime" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OTakenTime"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="UID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="UID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="OTakenUID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="OTakenUID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="UName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="UName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="ODeliveredDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="ODeliveredDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="ODeliveredTime" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ODeliveredTime"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="OMIName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OMIName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
+	</field>
+	<field name="OMIDescription" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OMIDescription"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
+	</field>
+	<field name="OMIWeight" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="OMIWeight"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
+	</field>
+	<field name="OMIImage" class="java.io.InputStream">
+		<property name="com.jaspersoft.studio.field.label" value="OMIImage"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="5" width="536" height="43" backcolor="#000000" uuid="bffb20db-0a21-4000-b067-58c6b3e1469a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="148" y="11" width="259" height="30" forecolor="#FFFFFF" uuid="47375ad5-c541-49d7-a34f-a064b07e0ceb"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BMS - Order Info Slip]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="410" splitType="Stretch">
+			<rectangle>
+				<reportElement x="10" y="0" width="536" height="199" uuid="ab5841ad-7359-4c1a-97ad-ca84d76b1204"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="208" width="536" height="192" uuid="4c3302fe-f4ba-40d9-8f00-8c3fdf2cab25"/>
+			</rectangle>
+			<image>
+				<reportElement x="20" y="42" width="110" height="116" uuid="42376924-4c87-4085-b08e-9cc5e759c1b4"/>
+				<imageExpression><![CDATA[$F{OMIImage}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="140" y="34" width="103" height="15" uuid="f473254b-a69c-4bb5-9f38-c5d43d48d872">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8371899-e9e4-4a88-ae9f-f6c542093232"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Order Menu ID                 :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="34" width="280" height="15" uuid="3b3793ee-d4e3-4ef0-9485-8ded1a943e00">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8371899-e9e4-4a88-ae9f-f6c542093232"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OMIID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="57" width="102" height="15" uuid="2c3fd536-bdbf-499e-9afc-d4da590e3e40">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2840b805-e95f-4c1c-b3b9-1e76c5764217"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Order Product Name :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="57" width="280" height="15" uuid="edd6f723-0e2e-4c72-b85f-32e0aa8f0ee8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2840b805-e95f-4c1c-b3b9-1e76c5764217"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OMIName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="81" width="103" height="15" uuid="435e4a57-b0bd-4f27-a7e4-83755fd4b255">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87d5aa3d-e85c-4977-971a-0e6d8394b32a"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Order Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="79" width="280" height="15" uuid="f28c7499-2cde-432d-84e0-9625539b674f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87d5aa3d-e85c-4977-971a-0e6d8394b32a"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="143" y="123" width="100" height="70" uuid="2e6e6c31-fdf4-43bb-81b5-0cabe646da58">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac093a8e-f5ae-4cd5-a720-2a0688e938c9"/>
+				</reportElement>
+				<text><![CDATA[Menu Description]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="123" width="280" height="70" uuid="1675266c-f0d0-45f7-905b-c7906b214aec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac093a8e-f5ae-4cd5-a720-2a0688e938c9"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OMIDescription}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="101" width="104" height="15" uuid="0f850dce-02dc-4152-8954-040c558b85e3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e064d294-046a-4986-9e48-2fffa8c856de"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Product Weight]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="245" y="101" width="280" height="15" uuid="4a085b35-ba7f-4ce9-b5ac-9e5ebee8520f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e064d294-046a-4986-9e48-2fffa8c856de"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OMIWeight}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="82" y="260" width="100" height="15" uuid="ba5d7cf2-48b9-4e55-ab55-0d0e85f156f8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="121ef675-31cf-42e0-89a0-4642980d3fcd"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10"/>
+				<text><![CDATA[Order Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="214" width="200" height="24" uuid="73cd8c96-4b99-40f0-bf5b-25a0b5a9f268"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Specifications]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="260" width="340" height="15" uuid="8d6efcc1-2843-4a8f-9e89-495052487fe3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="121ef675-31cf-42e0-89a0-4642980d3fcd"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OQuantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="282" width="340" height="15" uuid="8583873c-a84c-4be9-8e2f-6d767ad58187">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a46aaf51-9b4c-4d99-b7db-611bf52e719c"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{ODeliveryDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="82" y="282" width="100" height="15" uuid="bdbef3c9-9e7a-4f98-a7d0-4412ed204f71">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a46aaf51-9b4c-4d99-b7db-611bf52e719c"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10"/>
+				<text><![CDATA[Order Delivery Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="304" width="100" height="15" uuid="00cccdd1-a764-4dd5-b760-0b81992164a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="abb257aa-62e9-40e0-b971-489b85ae703b"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10"/>
+				<text><![CDATA[Order Delivery Time]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="306" width="340" height="15" uuid="3c01064f-dd17-44b5-b6ad-9b21d8c00019">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="abb257aa-62e9-40e0-b971-489b85ae703b"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{ODeliveryTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="328" width="340" height="66" uuid="4d97fbe6-1d92-46b0-a841-cd7f98a7215e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c8a3bad4-eba4-4fd8-a14d-8649a1de96ac"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{ODetails}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="328" width="100" height="15" uuid="8585fd7d-0ba0-4de5-8b6e-e42e7244aea7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c8a3bad4-eba4-4fd8-a14d-8649a1de96ac"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10"/>
+				<text><![CDATA[Order Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="10" width="200" height="24" uuid="9bfbc30d-ee87-4597-ab18-a2c645f22203"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Menu Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="240" width="100" height="15" uuid="b8940971-6ab2-4bdb-88c3-84281fe499a4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="121ef675-31cf-42e0-89a0-4642980d3fcd"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10"/>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="240" width="340" height="15" uuid="f9e579ad-ed92-402c-9df4-1f6577f059e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8371899-e9e4-4a88-ae9f-f6c542093232"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="195" splitType="Stretch">
+			<rectangle>
+				<reportElement x="10" y="3" width="536" height="130" uuid="704d9296-3b6c-4ee5-820f-b5502d19a518">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="145" width="536" height="43" uuid="3c116095-7afc-4763-ac3a-67412c49a23b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="10" width="240" height="30" uuid="7620b551-aafc-414f-a548-d8bef5e47542">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Information ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="32" width="340" height="15" uuid="e63f47d1-f2ce-46f5-875e-b6a9a85a1221">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1c77fe9d-faa0-49fc-99e9-105805d36c27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OCustomerName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="32" width="100" height="15" uuid="f93f7e9b-63f5-44f6-9a8e-9508f7ccf4fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1c77fe9d-faa0-49fc-99e9-105805d36c27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Customer Name       : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="55" width="100" height="15" uuid="7fd66475-1dd6-44b7-b35d-ed6d6c283909">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3d8b65e8-1a7f-49f3-aeb7-b1a97c6d79df"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Customer NIC          :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="55" width="340" height="15" uuid="329f4770-2f00-4e4e-9112-c567829b0647">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3d8b65e8-1a7f-49f3-aeb7-b1a97c6d79df"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{OCustomerNIC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="79" y="88" width="100" height="15" uuid="ac9dd321-367f-445a-a308-c99e223aefe0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ff7dadb7-98f3-49ca-a363-d3fea5a45a03"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Taken Cashier ID    :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="88" width="340" height="15" uuid="1823972a-c101-4535-8349-4a3ddc7d545d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ff7dadb7-98f3-49ca-a363-d3fea5a45a03"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{UID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="110" width="100" height="15" uuid="bb4f4675-9a1a-4054-81b3-ec8ee1fab346">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ad50f97-cb54-46e1-9815-a55f61495b42"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Cashier Name         :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="111" width="340" height="15" uuid="d3645185-8999-487c-9acc-58292230a6af">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ad50f97-cb54-46e1-9815-a55f61495b42"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="10" rightPadding="10">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{UName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="22" y="170" width="60" height="22" uuid="1ab982a9-f160-43c0-bc6f-bdd388f53179"/>
+				<text><![CDATA[Generated :]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="81" y="170" width="100" height="20" uuid="ec086f6e-e9e1-4259-8eef-713780e0c8cd"/>
+				<textFieldExpression><![CDATA[new java.util.Date().toString() +  new java.util.Date().toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="151" width="367" height="19" uuid="4e7bef0c-2ed7-41cf-8bb1-c4a29890de7e"/>
+				<text><![CDATA[1. This is a Computer generated statement and does not need any signature]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

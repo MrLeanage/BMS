@@ -19,6 +19,8 @@ import model.ItemStock;
 import model.ItemWithdraw;
 import services.ItemStockServices;
 import services.ItemWithdrawServices;
+import util.authenticate.SupervisorSessionHandler;
+import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.validation.DataValidation;
 
@@ -100,96 +102,53 @@ public class ItemWithdrawController implements Initializable {
 
     private static ItemStock existingItemStockData;
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    //internal methods
+    private Label UserNameLabel;
     @FXML
-    private void ItemWithdraw(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemWithdraw.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void WithdrawedItems(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/WithdrawedItems.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void PendingOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/NewOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OnGoingOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OnGoingOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void CompletedOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/CompletedOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void CancelledOrders(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/CancelledOrders.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderMenu(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersMenuSupervisor.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
+    AnchorPane rootpane;
+    SupervisorSessionHandler supervisorSessionHandler = new SupervisorSessionHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
-
         loadData();
         //to auto refresh search results
         searchTable();
-
+        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
     }
+    @FXML
+    private void LogoutSession(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.endAuthenticatedSession(event);
+    }
+
+    @FXML
+    private void ItemWithdraw(ActionEvent event) {
+        supervisorSessionHandler.loadItemWithdraw(event);
+    }
+    @FXML
+    private void WithdrawedItems(ActionEvent event) {
+        supervisorSessionHandler.loadWithdrawedItems(rootpane);
+    }
+    @FXML
+    private void PendingOrders(ActionEvent event){
+        supervisorSessionHandler.loadPendingOrders(rootpane);
+    }
+    @FXML
+    private void OnGoingOrders(ActionEvent event) {
+        supervisorSessionHandler.loadOnGoingOrders(rootpane);
+    }
+    @FXML
+    private void CompletedOrders(ActionEvent event) {
+        supervisorSessionHandler.loadCompletedOrders(rootpane);
+    }
+    @FXML
+    private void CancelledOrders(ActionEvent event) {
+        supervisorSessionHandler.loadCancelledOrders(rootpane);
+    }
+    @FXML
+    private void OrderMenu(ActionEvent event) {
+        supervisorSessionHandler.loadOrderMenu(rootpane);
+    }
+    //internal methods
     @FXML
     private void clearFields(){
 
@@ -260,7 +219,7 @@ public class ItemWithdrawController implements Initializable {
         //Setting cell value factory to table view
         IIDColumn.setCellValueFactory(new PropertyValueFactory<>("iID"));
         INameColumn.setCellValueFactory(new PropertyValueFactory<>("iName"));
-        IWeightColumn.setCellValueFactory(new PropertyValueFactory<>("iWeight"));
+        IWeightColumn.setCellValueFactory(new PropertyValueFactory<>("iWeightPerBlock"));
         IQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("iAvailableQuantity"));
         IStatusColumn.setCellValueFactory(new PropertyValueFactory<>("iStatus"));
 
@@ -367,7 +326,7 @@ public class ItemWithdrawController implements Initializable {
                 itemWithdraw.setiWWeight(Float.parseFloat(IWeightTextBox.getText()));
                 itemWithdraw.setiWQuantity(Integer.parseInt(String.valueOf(IQuantitySpinner.getValue())));
                 itemWithdraw.setiWDescription((IWDescriptionTextArea.getText()));
-                itemWithdraw.setiWUser("U0001");
+                itemWithdraw.setiWUser(UserAuthentication.getAuthenticatedSession().getuID());
                 itemWithdraw.setiWDate(String.valueOf(LocalDate.now()));
                 itemWithdraw.setiWTime(String.valueOf(LocalTime.now().truncatedTo(ChronoUnit.SECONDS)));
 

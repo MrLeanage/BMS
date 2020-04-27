@@ -18,8 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.*;
+import net.sf.jasperreports.engine.JRException;
 import services.*;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.FinanceSessionHandler;
 import util.userAlerts.AlertPopUp;
+import util.utility.PrintReport;
 import util.utility.UtilityMethod;
 import view.EmployeeManagement.EmployeeAllowancePayPopUPController;
 import view.EmployeeManagement.EmployeeController;
@@ -98,6 +102,11 @@ public class PaySheetAdminController implements Initializable {
 
     private LinkedList<SalesItem> salesItemLinkedList = new LinkedList<>();
 
+    @FXML
+    private AnchorPane rootpane;
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private FinanceSessionHandler financeSessionHandler = new FinanceSessionHandler();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
@@ -105,118 +114,32 @@ public class PaySheetAdminController implements Initializable {
     }
 
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
+    private void SalesCounter(ActionEvent event){
+        adminManagementHandler.loadSalesCounter(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesReport(ActionEvent event){
+        financeSessionHandler.loadSalesReport(rootpane);
     }
     @FXML
-    private void SalesCounter(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/SalesCounterAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PurchasesReport(ActionEvent event){
+        financeSessionHandler.loadPurchasesReport(rootpane);
     }
     @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PaySheet(ActionEvent event){
+        financeSessionHandler.loadPaySheet(rootpane);
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-
-    //internal methods
-    @FXML
-    private void SalesReport(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/SalesReportAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PayRoll(ActionEvent event) {
+        financeSessionHandler.loadPayRoll(rootpane);
     }
     @FXML
-    private void PurchasesReport(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/PurchasesReportAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OtherExpenses(ActionEvent event){
+        financeSessionHandler.loadOtherExpenses(rootpane);
     }
     @FXML
-    private void PaySheet(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/PaySheetAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void PayRoll(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/PayRollAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OtherExpenses(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/OtherExpensesAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void IncomeStatement(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/IncomeStatementAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void IncomeStatement(ActionEvent event) {
+        financeSessionHandler.loadIncomeStatement(rootpane);
     }
     //Clear Fields
     private void clearFields(){
@@ -295,7 +218,7 @@ public class PaySheetAdminController implements Initializable {
         }
     }
     @FXML
-    private void addData(ActionEvent event){
+    private void addData(ActionEvent event) throws JRException {
         PaySheet paySheet = new PaySheet();
         if(!(EIDLabel.getText().isEmpty()) ){
             paySheet.setpSEID(EIDLabel.getText());
@@ -310,8 +233,12 @@ public class PaySheetAdminController implements Initializable {
             ObservableList<PaySheet> paySheetObservableList = FXCollections.observableArrayList();
             paySheetObservableList.add(paySheet);
             PaySheetServices paySheetServices = new PaySheetServices();
-            Boolean resultVal = paySheetServices.insertData(paySheetObservableList);
-            if(resultVal){
+            Integer resultVal = paySheetServices.insertData(paySheetObservableList);
+
+            if(resultVal != 0){
+                paySheet.setpSID(String.valueOf(resultVal));
+                PrintReport printReport =  new PrintReport();
+                printReport.printPaySheet(paySheet);
                 clearFields();
             }
         }else{
@@ -359,8 +286,10 @@ public class PaySheetAdminController implements Initializable {
             paySheetObservableList.add(paySheet);
         }
         PaySheetServices paySheetServices = new PaySheetServices();
-        Boolean resultVal = paySheetServices.insertData(paySheetObservableList);
-        if(resultVal){
+        Integer resultVal = paySheetServices.insertData(paySheetObservableList);
+        if(resultVal != 0){
+            PrintReport printReport =  new PrintReport();
+            printReport.printPaySheetList();
             clearFields();
         }
     }

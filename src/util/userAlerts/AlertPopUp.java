@@ -30,7 +30,14 @@ public class AlertPopUp {
         msg.showAndWait();
 
     }
-
+    public static Optional<ButtonType> sessionEndConfirmation(String text){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Do you want to Logout?");
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        Optional<ButtonType> action = alert.showAndWait();
+        return action;
+    }
     public static void insertSuccesfully(String text){
         Alert msg = new Alert(Alert.AlertType.INFORMATION);
         msg.setTitle("Successfull..");

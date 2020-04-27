@@ -25,7 +25,10 @@ import services.EmployeeServices;
 import services.SalarySchemeServices;
 import sun.java2d.pipe.OutlineTextRenderer;
 import sun.text.normalizer.Utility;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.FinanceSessionHandler;
 import util.userAlerts.AlertPopUp;
+import util.utility.PrintReport;
 import util.utility.UtilityMethod;
 
 import java.io.IOException;
@@ -69,6 +72,9 @@ public class SalesReportAdminController implements Initializable {
     private ComboBox<String> MonthChoiceBox;
 
     @FXML
+    private ComboBox<String> MonthlySalesReportComboBox;
+
+    @FXML
     private Label SoldItemsLabel;
 
     @FXML
@@ -93,6 +99,9 @@ public class SalesReportAdminController implements Initializable {
     @FXML
     private ComboBox<String> StatCategoryComboBox;
 
+    @FXML
+    private Button MonthlySalesReportButton;
+
 
     private LinkedList<SalesItem> salesItemLinkedList = new LinkedList<>();
     private ObservableList<String> sortedMonths;
@@ -103,125 +112,44 @@ public class SalesReportAdminController implements Initializable {
     private String month = UtilityMethod.getMonth(String.valueOf(LocalDate.now()));
     //defining "None" as default value to load all data, -> respectively "Agency Product", "Bakery Product",  other values results Orders
     private String category = "None";
+
+    @FXML
+    private AnchorPane rootpane;
+
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private FinanceSessionHandler financeSessionHandler = new FinanceSessionHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
         loadChoiceBoxes();
     }
-
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-
+    private void SalesCounter(ActionEvent event){
+        adminManagementHandler.loadSalesCounter(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesReport(ActionEvent event){
+        financeSessionHandler.loadSalesReport(rootpane);
     }
     @FXML
-    private void SalesCounter(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/SalesCounterAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PurchasesReport(ActionEvent event){
+        financeSessionHandler.loadPurchasesReport(rootpane);
     }
     @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PaySheet(ActionEvent event){
+        financeSessionHandler.loadPaySheet(rootpane);
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-
-    //internal methods
-    @FXML
-    private void SalesReport(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/SalesReportAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void PayRoll(ActionEvent event) {
+        financeSessionHandler.loadPayRoll(rootpane);
     }
     @FXML
-    private void PurchasesReport(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/PurchasesReportAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OtherExpenses(ActionEvent event){
+        financeSessionHandler.loadOtherExpenses(rootpane);
     }
     @FXML
-    private void PaySheet(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/PaySheetAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void PayRoll(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/PayRollAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OtherExpenses(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/OtherExpensesAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void IncomeStatement(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/IncomeStatementAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void IncomeStatement(ActionEvent event) {
+        financeSessionHandler.loadIncomeStatement(rootpane);
     }
     //load sales dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
@@ -284,6 +212,9 @@ public class SalesReportAdminController implements Initializable {
 
         //loading All Comparision data to chart for last 3 months
         getFilteredChartData(3, "All Comparision");
+
+        //Setting text on Sales report Generate Button
+        MonthlySalesReportButton.setText("Generate " +month + " " + year+" Sales Report");
     }
     //load data to View table
     @FXML
@@ -327,7 +258,9 @@ public class SalesReportAdminController implements Initializable {
             category = "Order";
         }
         SalesPeriodLabel.setText(MonthChoiceBox.getValue() + " "+ year + " - "+CategoryComboBox.getValue());
-
+        if(!month.equals("None")){
+            MonthlySalesReportButton.setText("Generate " + month + " " + year + " Sales Report");
+        }
         loadData();
 
     }
@@ -340,6 +273,15 @@ public class SalesReportAdminController implements Initializable {
         }
         TotalSalesLabel.setText("Rs : "+totalSales+"0");
         SoldItemsLabel.setText(totalItems +" Items");
+    }
+    @FXML
+    private void generateMonthlySalesReport(ActionEvent actionEvent) throws ParseException {
+        PrintReport printReport = new PrintReport();
+        if(!month.equals("None")){
+            printReport.printSalesReportt(year, month);
+        }else{
+            AlertPopUp.generalError("Please Select a valid Month to generate Report");
+        }
     }
 
     @FXML

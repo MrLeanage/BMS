@@ -18,6 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Employee;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.EmployeeSessionHandler;
+import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
@@ -140,93 +143,56 @@ public class EmployeeController implements Initializable {
     private ObservableList<String> genderChoiceboxList = FXCollections.observableArrayList( "Male", "Female");
     private ObservableList<String> jobTitleChoiceboxList = FXCollections.observableArrayList( "Permanent", "Trainee", "Temporary");
 
-
+    @FXML
+    public Label UserNameLabel;
+    @FXML
+    private AnchorPane rootpane;
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private EmployeeSessionHandler employeeSessionHandler = new EmployeeSessionHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         EGenderChoiceBox.setItems(genderChoiceboxList);
         ETitleChoiceBox.setItems(jobTitleChoiceboxList);
-
-
         loadData();
         //to auto refresh search results
         searchTable();
+        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
 
     }
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void LogoutSession(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.endAuthenticatedSession(event);
     }
     @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void ItemStock(ActionEvent event){
+        adminManagementHandler.loadItemStock(event);
     }
     @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalesCounter(ActionEvent event){
+        adminManagementHandler.loadSalesCounter(event);
     }
     @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void OrderStatus(ActionEvent event) {
+        adminManagementHandler.loadOrderStatus(event);
+    }
+    @FXML
+    private void Employees(ActionEvent event){
+        adminManagementHandler.loadEmployees(event);
     }
     //internal methods
     @FXML
-    private void SalarySchemes(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/SalarySchemes.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalarySchemes(ActionEvent event){
+        employeeSessionHandler.loadSalarySchemes(rootpane);
     }
     @FXML
-    private void Allowances(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Allowances.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Allowances(ActionEvent event){
+        employeeSessionHandler.loadAllowances(rootpane);
     }
     @FXML
-    private void SystemUsers(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/SystemUsers.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void playBeep(){
-        //play.AddItemPlay();
+    private void SystemUsers(ActionEvent event){
+        employeeSessionHandler.loadSystemUsers(rootpane);
     }
     @FXML
     private void clearFields(){

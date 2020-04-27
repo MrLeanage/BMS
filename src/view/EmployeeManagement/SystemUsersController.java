@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
 import services.UserServices;
+import util.authenticate.AdminManagementHandler;
+import util.authenticate.EmployeeSessionHandler;
 import util.userAlerts.AlertPopUp;
 import util.utility.DataEncryption;
 import util.utility.UtilityMethod;
@@ -86,9 +88,14 @@ public class SystemUsersController implements Initializable {
 
     private static User existingUserModel = null;
 
-    private ObservableList<String> uType = FXCollections.observableArrayList( "Cashier", "Supervisor");
+    private ObservableList<String> uType = FXCollections.observableArrayList( "Cashier", "Supervisor", "Admin");
     private ObservableList<String> uStatus = FXCollections.observableArrayList( "Active", "Disable");
 
+    @FXML
+    private AnchorPane rootpane;
+
+    private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
+    private EmployeeSessionHandler employeeSessionHandler = new EmployeeSessionHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -105,75 +112,21 @@ public class SystemUsersController implements Initializable {
     }
 
     @FXML
-    private void LogoutSession(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/AppHome/login.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void ItemStock(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void OrderStatus(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrderManagement/OrdersStatusAdmin.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void Employees(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Employee.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Employees(ActionEvent event){
+        adminManagementHandler.loadEmployees(event);
     }
     //internal methods
     @FXML
-    private void SalarySchemes(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/SalarySchemes.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SalarySchemes(ActionEvent event){
+        employeeSessionHandler.loadSalarySchemes(rootpane);
     }
     @FXML
-    private void Allowances(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/Allowances.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void Allowances(ActionEvent event){
+        employeeSessionHandler.loadAllowances(rootpane);
     }
     @FXML
-    private void SystemUsers(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/EmployeeManagement/SystemUsers.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    private void SystemUsers(ActionEvent event){
+        employeeSessionHandler.loadSystemUsers(rootpane);
     }
     @FXML
     private void clearFields(){
@@ -306,9 +259,7 @@ public class SystemUsersController implements Initializable {
         UserServices userServices = new UserServices();
 
         if(dataValidate()){
-            if(!userServices.DataNotExist(UIDTextField.getText())){
-                UIDLabel.setText("User ID Already Exist");
-            }else {
+            if(userServices.DataNotExist(UIDTextField.getText()).getuID().equals("Empty")){
                 userModel.setuID(UIDTextField.getText());
                 userModel.setuName(UNameTextField.getText());
                 userModel.setuType(UTypeChoiceBox.getValue());
@@ -318,6 +269,8 @@ public class SystemUsersController implements Initializable {
                 if(resultVal){
                     refreshTable();
                 }
+            }else {
+                UIDLabel.setText("User ID Already Exist");
             }
 
         }else{
@@ -371,7 +324,7 @@ public class SystemUsersController implements Initializable {
                         userModel.setuType(UTypeChoiceBox.getValue());
                         userModel.setuPassword(DataEncryption.passwordEncryption(UPasswordField.getText()));
                         userModel.setuStatus(UStatusChoiceBox.getValue());
-                        boolean resultVal = userServices.updateData(userModel);
+                        Boolean resultVal = userServices.updateData(userModel);
                         if(resultVal){
                             refreshTable();
                         }
