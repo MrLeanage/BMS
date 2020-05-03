@@ -8,38 +8,26 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.ChartData;
 import model.Purchase;
-import model.SalesItem;
-import model.Supplier;
-import services.BillingServices;
 import services.PurchaseServices;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.FinanceSessionHandler;
+import util.authenticate.FinanceHandler;
 import util.userAlerts.AlertPopUp;
+import util.utility.PrintReport;
 import util.utility.UtilityMethod;
-import view.InventoryManagement.AgencySupplierPopUPController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,7 +113,7 @@ public class PurchasesReportAdminController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private FinanceSessionHandler financeSessionHandler = new FinanceSessionHandler();
+    private FinanceHandler financeHandler = new FinanceHandler();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -140,27 +128,27 @@ public class PurchasesReportAdminController implements Initializable {
     }
     @FXML
     private void SalesReport(ActionEvent event){
-        financeSessionHandler.loadSalesReport(rootpane);
+        financeHandler.loadSalesReport(rootpane);
     }
     @FXML
     private void PurchasesReport(ActionEvent event){
-        financeSessionHandler.loadPurchasesReport(rootpane);
+        financeHandler.loadPurchasesReport(rootpane);
     }
     @FXML
     private void PaySheet(ActionEvent event){
-        financeSessionHandler.loadPaySheet(rootpane);
+        financeHandler.loadPaySheet(rootpane);
     }
     @FXML
     private void PayRoll(ActionEvent event) {
-        financeSessionHandler.loadPayRoll(rootpane);
+        financeHandler.loadPayRoll(rootpane);
     }
     @FXML
     private void OtherExpenses(ActionEvent event){
-        financeSessionHandler.loadOtherExpenses(rootpane);
+        financeHandler.loadOtherExpenses(rootpane);
     }
     @FXML
     private void IncomeStatement(ActionEvent event) {
-        financeSessionHandler.loadIncomeStatement(rootpane);
+        financeHandler.loadIncomeStatement(rootpane);
     }
     //load purchase dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
@@ -356,13 +344,49 @@ public class PurchasesReportAdminController implements Initializable {
         });
     }
     @FXML
-    private void payForSuppliers(){
-        PurchaseServices purchaseServices = new PurchaseServices();
-        Boolean resultVal = purchaseServices.updatePurchaseStatus(purchaseItemLinkedList);
-        if(resultVal){
-            loadData();
-            searchTable();
+    private void generateReportForSortedData(){
+        ObservableList<String> idStringList = FXCollections.observableArrayList();
+        ObservableList<String> sortedIDStringList = FXCollections.observableArrayList();
+        ObservableList<Purchase> sortedPurchaseList = FXCollections.observableArrayList();
+
+        Purchase sortedPurchaseData = new Purchase();
+        ObservableList<Purchase> purchaseObservableList = PurchaseTable.getItems();
+        if(purchaseObservableList.size() > 0){
+            for(Purchase purchase : purchaseItemLinkedList){
+                idStringList.add(purchase.getpSupplierID());
+            }
+            sortedIDStringList = UtilityMethod.removeStringDuplicates(idStringList);
+
+            for(String id : sortedIDStringList){
+                float totalAmount = 0;
+                for(Purchase purchase : purchaseItemLinkedList){
+                    if(id.equals(purchase.getpSupplierID())){
+                        totalAmount += purchase.getpItemTotal();
+                        sortedPurchaseData = purchase;
+                        sortedPurchaseData.setpItemTotal(totalAmount);
+                    }
+                }
+                sortedPurchaseList.add(sortedPurchaseData);
+            }
+            if(category.equals("Pending")){
+                PurchaseServices purchaseServices = new PurchaseServices();
+                Boolean resultVal = purchaseServices.updatePurchaseStatus(purchaseItemLinkedList);
+                if(resultVal){
+
+                    loadData();
+                    searchTable();
+                }
+            }
+            PrintReport printReport = new PrintReport();
+            printReport.printPurchaseReport(year,MonthChoiceBox.getValue(), CategoryChoiceBox.getValue(), status, sortedPurchaseList);
+
+        }else{
+            AlertPopUp.noRecordFound("No records found to generate Purchase Report");
         }
+
+
+
+
     }
 
     public void searchTable(){

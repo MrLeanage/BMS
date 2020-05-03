@@ -6,30 +6,23 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.ItemStock;
 import model.ItemWithdraw;
 import services.ItemStockServices;
 import services.ItemWithdrawServices;
-import util.authenticate.SupervisorSessionHandler;
+import util.authenticate.SupervisorHandler;
 import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.validation.DataValidation;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -94,59 +87,99 @@ public class ItemWithdrawController implements Initializable {
 
     @FXML
     private Label IQuantityLabel;
+
     @FXML
     private Label IDescriptionLabel;
 
+    @FXML
+    private MenuItem AdminPanelMenuItem;
+
+    @FXML
+    private MenuItem CashierPanelMenuItem;
+
+    @FXML
+    private MenuItem SupervisorPanelMenuItem;
+
+    @FXML
+    private  MenuButton OptionMenuButton;
+
+    @FXML
+    private AnchorPane rootpane;
     private LinkedList<ItemWithdraw> itemWithdrawsList = new LinkedList<ItemWithdraw>();
     private LinkedList<ItemStock> itemStocksList = new LinkedList<ItemStock>();
 
     private static ItemStock existingItemStockData;
-    @FXML
-    private Label UserNameLabel;
-    @FXML
-    AnchorPane rootpane;
-    SupervisorSessionHandler supervisorSessionHandler = new SupervisorSessionHandler();
+
+
+    private SupervisorHandler supervisorHandler = new SupervisorHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadData();
         //to auto refresh search results
         searchTable();
-        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        OptionMenuButton.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        setSupervisorInfo();
+
+    }
+    private void setSupervisorInfo(){
+        if(UserAuthentication.getCurrentAdminType().equals("default")){
+            AdminPanelMenuItem.setVisible(false);
+            CashierPanelMenuItem.setVisible(false);
+            SupervisorPanelMenuItem.setVisible(false);
+        }else{
+            AdminPanelMenuItem.setVisible(true);
+            CashierPanelMenuItem.setVisible(true);
+            SupervisorPanelMenuItem.setVisible(true);
+        }
     }
     @FXML
     private void LogoutSession(ActionEvent event){
         UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
+        userAuthentication.endAuthenticatedSession(OptionMenuButton);
     }
-
+    @FXML
+    private void adminPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getAdminMenu(OptionMenuButton);
+    }
+    @FXML
+    private void cashierPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getCashierMenu(OptionMenuButton);
+    }
+    @FXML
+    private void supervisorPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getSupervisorMenu(OptionMenuButton);
+    }
     @FXML
     private void ItemWithdraw(ActionEvent event) {
-        supervisorSessionHandler.loadItemWithdraw(event);
+        supervisorHandler.loadItemWithdraw(event);
     }
     @FXML
     private void WithdrawedItems(ActionEvent event) {
-        supervisorSessionHandler.loadWithdrawedItems(rootpane);
+        supervisorHandler.loadWithdrawedItems(rootpane);
     }
     @FXML
     private void PendingOrders(ActionEvent event){
-        supervisorSessionHandler.loadPendingOrders(rootpane);
+        supervisorHandler.loadPendingOrders(rootpane);
     }
     @FXML
     private void OnGoingOrders(ActionEvent event) {
-        supervisorSessionHandler.loadOnGoingOrders(rootpane);
+        supervisorHandler.loadOnGoingOrders(rootpane);
     }
     @FXML
     private void CompletedOrders(ActionEvent event) {
-        supervisorSessionHandler.loadCompletedOrders(rootpane);
+        supervisorHandler.loadCompletedOrders(rootpane);
     }
     @FXML
     private void CancelledOrders(ActionEvent event) {
-        supervisorSessionHandler.loadCancelledOrders(rootpane);
+        supervisorHandler.loadCancelledOrders(rootpane);
     }
     @FXML
     private void OrderMenu(ActionEvent event) {
-        supervisorSessionHandler.loadOrderMenu(rootpane);
+        supervisorHandler.loadOrderMenu(rootpane);
     }
     //internal methods
     @FXML
@@ -323,7 +356,7 @@ public class ItemWithdrawController implements Initializable {
 
                 itemWithdraw.setiWIID(IIDTextBox.getText());
                 itemWithdraw.setiWIName(INameTextBox.getText());
-                itemWithdraw.setiWWeight(Float.parseFloat(IWeightTextBox.getText()));
+                itemWithdraw.setiWWeight(IWeightTextBox.getText());
                 itemWithdraw.setiWQuantity(Integer.parseInt(String.valueOf(IQuantitySpinner.getValue())));
                 itemWithdraw.setiWDescription((IWDescriptionTextArea.getText()));
                 itemWithdraw.setiWUser(UserAuthentication.getAuthenticatedSession().getuID());

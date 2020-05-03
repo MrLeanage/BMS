@@ -4,23 +4,17 @@ import services.SupplierServices;
 import javafx.collections.transformation.SortedList;
 import model.Supplier;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.InventorySessionHandler;
-import util.authenticate.UserAuthentication;
+import util.authenticate.InventoryHandler;
 import util.playAudio.Audio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.util.Optional;
@@ -122,7 +116,7 @@ public class SupplierController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private InventorySessionHandler inventorySessionHandler = new InventorySessionHandler();
+    private InventoryHandler inventoryHandler = new InventoryHandler();
     //overriding methods and connections to load data on page visit
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -142,15 +136,15 @@ public class SupplierController implements Initializable {
     }
     @FXML
     private void FoodProducts(ActionEvent event) {
-        inventorySessionHandler.loadBakeryProducts(rootpane);
+        inventoryHandler.loadBakeryProducts(rootpane);
     }
     @FXML
     private void AgencyProduct(ActionEvent event)  {
-        inventorySessionHandler.loadAgencyProduct(rootpane);
+        inventoryHandler.loadAgencyProduct(rootpane);
     }
     @FXML
     private void Supplier(ActionEvent event) {
-        inventorySessionHandler.loadSupplier(rootpane);
+        inventoryHandler.loadSupplier(rootpane);
     }
     @FXML
     private void playBeep(){

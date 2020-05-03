@@ -1,30 +1,18 @@
 package view.OrderManagement;
 
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.Order;
-import model.OrderMenu;
 import services.OrderServices;
-import util.authenticate.AdminManagementHandler;
-import util.authenticate.OrderSessionHandler;
-import util.authenticate.UserAuthentication;
-import util.userAlerts.AlertPopUp;
-import util.utility.UtilityMethod;
-import util.validation.DataValidation;
+import util.authenticate.*;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -69,34 +57,48 @@ public class OrderStatusAdminController implements Initializable {
     @FXML
     private TextField SearchTextBox;
 
-    private static Order existingOrderModel;
-
-    private static OrderMenu orderMenu;
-    private ObservableList<String> orderTypeChoiceboxList = FXCollections.observableArrayList("Menu Item","Customized");
 
     @FXML
-    public Label UserNameLabel;
+    private MenuButton OptionMenuButton;
 
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private OrderSessionHandler orderSessionHandler = new OrderSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
+    private SupervisorHandler supervisorHandler = new SupervisorHandler();
+    private OrderHandler orderHandler = new OrderHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {;
         loadData();
         searchTable();
-        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        OptionMenuButton.setText(UserAuthentication.getAuthenticatedSession().getuName());
     }
 
     @FXML
     private void LogoutSession(ActionEvent event){
         UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
+        userAuthentication.endAuthenticatedSession(OptionMenuButton);
+    }
+    @FXML
+    private void adminPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getAdminMenu(OptionMenuButton);
+    }
+    @FXML
+    private void cashierPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getCashierMenu(OptionMenuButton);
+    }
+    @FXML
+    private void supervisorPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getSupervisorMenu(OptionMenuButton);
     }
     @FXML
     private void ItemStock(ActionEvent event){
         adminManagementHandler.loadItemStock(event);
     }
+
     @FXML
     private void SalesCounter(ActionEvent event){
         adminManagementHandler.loadSalesCounter(event);
@@ -113,16 +115,16 @@ public class OrderStatusAdminController implements Initializable {
     }
     @FXML
     private void OrderMenu(ActionEvent event){
-        orderSessionHandler.loadOrderMenu(rootpane);
+        orderHandler.loadOrderMenu(rootpane);
     }
     @FXML
     private void CompletedOrders(ActionEvent event) {
-        orderSessionHandler.loadCompletedOrder(rootpane);
+        orderHandler.loadCompletedOrder(rootpane);
     }
 
-    //load data from Main LoginController to View table
+    //load data  to View table
     private void loadData() {
-        //getting data from main LoginController
+        //getting data
         OrderServices orderServices = new OrderServices();
 
         ObservableList<Order> ordersData;
@@ -149,7 +151,7 @@ public class OrderStatusAdminController implements Initializable {
     public void searchTable(){
 
         OrderServices orderServices = new OrderServices();
-        //Retrieving sorted data from Main LoginController
+        //Retrieving sorted data
         SortedList<Order> sortedData = orderServices.searchTable(SearchTextBox);
 
         //binding the SortedList to TableView

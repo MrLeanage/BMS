@@ -12,5 +12,6 @@
     <orderEntry type="library" name="mysql-connector-java-5.1.46-bin" level="project" />
     <orderEntry type="library" name="Java-Utils" level="project" />
     <orderEntry type="library" name="JasperReportLibs" level="project" />
+    <orderEntry type="library" name="Controlsfx" level="project" />
   </component>
 </module>

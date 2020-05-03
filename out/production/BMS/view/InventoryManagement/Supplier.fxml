@@ -24,28 +24,21 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="55.0" onMouseClicked="#playBeep" prefHeight="40.0" prefWidth="155.0" style="-fx-border-radius: 0; -fx-background-color: #2b384b;" text="Notification" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="55.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="BELL" />
-                     </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="105.0" onAction="#ItemStock" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Stock Items" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="105.0" onAction="#ItemStock" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Stock Items" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="55.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="TASKS" />
                      </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" onAction="#FoodProducts" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Bakery Products" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" onAction="#FoodProducts" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Bakery Products" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="105.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="TH" />
                      </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="205.0" onAction="#AgencyProduct" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Agency Products" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="205.0" onAction="#AgencyProduct" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Agency Products" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="155.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -53,7 +46,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="TH" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="215.0" onAction="#Supplier" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Supplier" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="255.0">
+                  <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="215.0" onAction="#Supplier" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Supplier" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="205.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

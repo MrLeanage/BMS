@@ -8,23 +8,20 @@ import javafx.scene.image.ImageView;
 import model.Allowance;
 import model.ItemStock;
 import org.apache.commons.io.IOUtils;
+import org.joda.time.Days;
 import org.omg.CORBA.StringHolder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.YearMonth;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
 
 import static jdk.nashorn.internal.objects.Global.println;
@@ -224,5 +221,20 @@ public class UtilityMethod {
         }
 
         return stringNumber;
+    }
+    public static Integer[] getNoOfDates(String newDate, String oldDate) {
+        Integer[] date = new Integer[3];
+        LocalDate oDate = LocalDate.parse(oldDate);
+        LocalDate nDate = LocalDate.parse(newDate);
+
+        Period diff = Period.between( nDate, oDate);
+        date[0] = diff.getYears();//setting no of years
+        date[1] = diff.getMonths();//setting no of months
+        date[2] = diff.getDays();//setting no of days
+        return date;
+    }
+    public static Integer getTotalNoOfDays(String oldDate, String newDate){
+
+        return Integer.parseInt(String.valueOf(ChronoUnit.DAYS.between(LocalDate.parse(oldDate), LocalDate.parse(newDate))));
     }
 }

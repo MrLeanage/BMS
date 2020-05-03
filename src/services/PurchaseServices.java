@@ -43,10 +43,10 @@ public class PurchaseServices {
 
                 if(rsLoadPurchaseProduct.getString(4).equals("Stock")){
                     itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                 }else{
                     agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                 }
             }
         } catch (SQLException ex) {
@@ -82,10 +82,10 @@ public class PurchaseServices {
 
                 if(rsLoadPurchaseProduct.getString(4).equals("Stock")){
                     itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                 }else{
                     agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                    purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                 }
             }
         } catch (SQLException ex) {
@@ -127,10 +127,10 @@ public class PurchaseServices {
 
                     if(purchaseType.equals("Stock")){
                         itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                        purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                        purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                     }else{
                         agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                        purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                        purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                     }
                 //year match all month all category
                 }else if((year != 0) && (month.equals("None")) && (category.equals("None"))){
@@ -138,10 +138,10 @@ public class PurchaseServices {
                     if((UtilityMethod.getYear(purchaseDate).equals(year))){
                         if(purchaseType.equals("Stock")){
                             itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }else{
                             agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }
                     }
                  //getting matching year, matching month, all category
@@ -150,10 +150,10 @@ public class PurchaseServices {
                     if((UtilityMethod.getYear(purchaseDate).equals(year)) && (UtilityMethod.getMonth(purchaseDate).equals(month))){
                         if(purchaseType.equals("Stock")){
                             itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }else{
                             agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }
                     }
                 //getting matching year, all months, matching category
@@ -162,10 +162,10 @@ public class PurchaseServices {
                     if((UtilityMethod.getYear(purchaseDate).equals(year)) && (purchaseType).equals(category)){
                         if(purchaseType.equals("Stock")){
                             itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }else{
                             agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }
                     }
                  //getting data where matches all fields
@@ -174,10 +174,10 @@ public class PurchaseServices {
                     if (((UtilityMethod.getYear(purchaseDate).equals(year))  && (UtilityMethod.getMonth(purchaseDate).equals(month)) && (purchaseType).equals(category))) {
                         if(purchaseType.equals("Stock")){
                             itemStock = itemStockServices.loadSpecificData(UtilityMethod.addPrefix("I", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), itemStock.getiName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), itemStock.getiBuyingPrice(),  itemStock.getiBlocks() * itemStock.getiUnitsPerBlock(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }else{
                             agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
+                            purchasesData.add(new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8)));
                         }
                     }
                 }
@@ -263,7 +263,7 @@ public class PurchaseServices {
                 }else{
 
                     agencyProduct = agencyProductServices.loadSpecificData(UtilityMethod.addPrefix("AP", rsLoadPurchaseProduct.getString(2)));
-                    purchaseData = new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8));
+                    purchaseData = new Purchase(rsLoadPurchaseProduct.getString(1), rsLoadPurchaseProduct.getString(2), agencyProduct.getaPName(), rsLoadPurchaseProduct.getString(3), supplier.getsIName(), rsLoadPurchaseProduct.getString(4), rsLoadPurchaseProduct.getString(5), agencyProduct.getaPBuyingPricePerUnit(), agencyProduct.getaPTotalUnits(), rsLoadPurchaseProduct.getString(6),  supplier.getsIBank(), supplier.getsIAccNo(), rsLoadPurchaseProduct.getString(7), rsLoadPurchaseProduct.getString(8));
                 }
             }
         } catch (SQLException ex) {

@@ -6,26 +6,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import model.OrderMenu;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.OrderSessionHandler;
+import util.authenticate.OrderHandler;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -102,7 +97,7 @@ public class OrderMenuAdminController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private OrderSessionHandler orderSessionHandler = new OrderSessionHandler();
+    private OrderHandler orderHandler = new OrderHandler();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -119,11 +114,11 @@ public class OrderMenuAdminController implements Initializable {
     }
     @FXML
     private void OrderMenu(ActionEvent event) {
-        orderSessionHandler.loadOrderMenu(rootpane);
+        orderHandler.loadOrderMenu(rootpane);
     }
     @FXML
     private void CompletedOrders(ActionEvent event) {
-        orderSessionHandler.loadCompletedOrder(rootpane);
+        orderHandler.loadCompletedOrder(rootpane);
     }
 
 

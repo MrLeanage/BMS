@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,7 +18,7 @@ import model.Order;
 import model.OrderMenu;
 import services.OrderMenuServices;
 import services.OrderServices;
-import util.authenticate.CashierSessionHandler;
+import util.authenticate.CashierHandler;
 import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
@@ -38,7 +37,7 @@ public class OrderController implements Initializable {
 
     @FXML
     AnchorPane rootpane;
-    private CashierSessionHandler cashierSessionHandler = new CashierSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
 
     @FXML
     private TableView<Order> OrderTable;
@@ -140,33 +139,28 @@ public class OrderController implements Initializable {
         searchTable();
     }
     @FXML
-    private void LogoutSession(ActionEvent event){
-        UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
-    }
-    @FXML
     private void Billing(ActionEvent event){
-        cashierSessionHandler.loadBilling(event);
+        cashierHandler.loadBilling(event);
     }
     @FXML
     private void Products(ActionEvent event){
-        cashierSessionHandler.loadProducts(rootpane);
+        cashierHandler.loadProducts(rootpane);
     }
     @FXML
     private void OrderMenu(ActionEvent event){
-        cashierSessionHandler.loadOrderMenu(rootpane);
+        cashierHandler.loadOrderMenu(rootpane);
     }
     @FXML
     private void Order(ActionEvent event) {
-        cashierSessionHandler.loadOrder(rootpane);
+        cashierHandler.loadOrder(rootpane);
     }
     @FXML
     private void OrderStatus(ActionEvent event){
-        cashierSessionHandler.loadOrderStatus(rootpane);
+        cashierHandler.loadOrderStatus(rootpane);
     }
     @FXML
     private void SalesInfo(ActionEvent event) {
-        cashierSessionHandler.loadSalesInfo(rootpane);
+        cashierHandler.loadSalesInfo(rootpane);
     }
     @FXML
     private void clearFields(){
@@ -316,14 +310,14 @@ public class OrderController implements Initializable {
 
     //load data from Main LoginController to View table
     private void loadData() {
-        //getting data from main LoginController
+        //getting data
         OrderServices orderServices = new OrderServices();
         OrderMenuServices orderMenuServices = new OrderMenuServices();
 
         OrderMenu orderMenuModel;
         ObservableList<Order> ordersData;
 
-        ordersData = orderServices.loadData();
+        ordersData = orderServices.loadUnPaidData("Total Payment");
 
         //Setting cell value factory to table view
         OIDColumn.setCellValueFactory(new PropertyValueFactory<>("oID"));
@@ -369,7 +363,7 @@ public class OrderController implements Initializable {
             orderModel.setoCustomerPhone(OCustomerPhoneTextBox.getText());
             orderModel.setoTakenDate(String.valueOf(LocalDate.now()));
             orderModel.setoTakenTime(UtilityMethod.currentTime());
-            orderModel.setoTakenUID("U0001");
+            orderModel.setoTakenUID(UserAuthentication.getAuthenticatedSession().getuID());
             orderModel.setoStatus("Payment Pending");
             orderModel.setoProcessingStatus("Process Pending");
             Boolean resultVal = orderServices.insertData(orderModel);
@@ -446,7 +440,7 @@ public class OrderController implements Initializable {
                     orderModel.setoCustomerPhone(OCustomerPhoneTextBox.getText());
                     orderModel.setoTakenDate(String.valueOf(LocalDate.now()));
                     orderModel.setoTakenTime(UtilityMethod.currentTime());
-                    orderModel.setoTakenUID("U0001");
+                    orderModel.setoTakenUID(UserAuthentication.getAuthenticatedSession().getuID());
                     orderModel.setoStatus("Payment Pending");
                     orderModel.setoProcessingStatus("Process Pending");
 
@@ -495,7 +489,7 @@ public class OrderController implements Initializable {
 
         OrderServices orderServices = new OrderServices();
         //Retrieving sorted data from Main LoginController
-        SortedList<Order> sortedData = orderServices.searchTable(SearchTextBox);
+        SortedList<Order> sortedData = orderServices.searchUnPayedDataTable(SearchTextBox, "Total Payment");
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(OrderTable.comparatorProperty());

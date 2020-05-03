@@ -9,7 +9,7 @@ public class AgencyProduct {
     private StringProperty aPSupplierID = null;
     private StringProperty aPSupplierName = null;
     private IntegerProperty aPTotalUnits = null;
-    private FloatProperty aPWeightOfUnit = null;
+    private StringProperty aPWeightOfUnit = null;
     private FloatProperty aPBuyingPricePerUnit = null;
     private FloatProperty aPMarketPricePerUnit = null;
     private FloatProperty aPSellingPricePerUnit = null;
@@ -18,13 +18,13 @@ public class AgencyProduct {
     private StringProperty aPADate = null;
     private StringProperty aPDADate = null;
 
-    public AgencyProduct(String aPID, String aPName, String aPSupplierID, String aPSupplierName, Integer aPTotalUnits, Float aPWeightOfUnit, Float aPBuyingPricePerUnit, Float aPMarketPricePerUnit, Float aPSellingPricePerUnit, String aPMDate, String aPEDate, String aPADate, String aPDADate) {
+    public AgencyProduct(String aPID, String aPName, String aPSupplierID, String aPSupplierName, Integer aPTotalUnits, String aPWeightOfUnit, Float aPBuyingPricePerUnit, Float aPMarketPricePerUnit, Float aPSellingPricePerUnit, String aPMDate, String aPEDate, String aPADate, String aPDADate) {
         this.aPID = new SimpleStringProperty(UtilityMethod.addPrefix("AP", aPID));
         this.aPName = new SimpleStringProperty(aPName);
         this.aPSupplierID = new SimpleStringProperty(UtilityMethod.addPrefix("SI", aPSupplierID));
         this.aPSupplierName = new SimpleStringProperty(aPSupplierName);
         this.aPTotalUnits = new SimpleIntegerProperty(aPTotalUnits);
-        this.aPWeightOfUnit = new SimpleFloatProperty(aPWeightOfUnit);
+        this.aPWeightOfUnit = new SimpleStringProperty(aPWeightOfUnit);
         this.aPBuyingPricePerUnit = new SimpleFloatProperty(aPBuyingPricePerUnit);
         this.aPMarketPricePerUnit = new SimpleFloatProperty(aPMarketPricePerUnit);
         this.aPSellingPricePerUnit = new SimpleFloatProperty(aPSellingPricePerUnit);
@@ -98,16 +98,16 @@ public class AgencyProduct {
         this.aPTotalUnits = new SimpleIntegerProperty(aPTotalUnits);
     }
 
-    public float getaPWeightOfUnit() {
+    public String getaPWeightOfUnit() {
         return aPWeightOfUnit.get();
     }
 
-    public FloatProperty aPWeightOfUnitProperty() {
+    public StringProperty aPWeightOfUnitProperty() {
         return aPWeightOfUnit;
     }
 
-    public void setaPWeightOfUnit(float aPWeightOfUnit) {
-        this.aPWeightOfUnit = new SimpleFloatProperty(aPWeightOfUnit);
+    public void setaPWeightOfUnit(String aPWeightOfUnit) {
+        this.aPWeightOfUnit = new SimpleStringProperty(aPWeightOfUnit);
     }
 
     public float getaPBuyingPricePerUnit() {

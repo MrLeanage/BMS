@@ -4,19 +4,19 @@ import javafx.beans.property.*;
 import util.utility.UtilityMethod;
 
 public class BakeryProduct {
-    StringProperty bPID = null;
-    StringProperty bPName = null;
-    StringProperty bPType = null;
-    FloatProperty bPWeight = null;
-    StringProperty bPDescription = null;
-    FloatProperty bPPrice = null;
-    StringProperty bPStatus = null;
+    private StringProperty bPID = null;
+    private StringProperty bPName = null;
+    private StringProperty bPType = null;
+    private StringProperty bPWeight = null;
+    private StringProperty bPDescription = null;
+    private FloatProperty bPPrice = null;
+    private StringProperty bPStatus = null;
 
-    public BakeryProduct(String bPID, String bPName, String bPType, Float bPWeight, String bPDescription, Float bPPrice, String bPStatus) {
+    public BakeryProduct(String bPID, String bPName, String bPType, String bPWeight, String bPDescription, Float bPPrice, String bPStatus) {
         this.bPID = new SimpleStringProperty(UtilityMethod.addPrefix("BP", bPID)) ;
         this.bPName = new SimpleStringProperty(bPName) ;
         this.bPType = new SimpleStringProperty(bPType) ;
-        this.bPWeight = new SimpleFloatProperty(bPWeight);
+        this.bPWeight = new SimpleStringProperty(bPWeight);
         this.bPDescription = new SimpleStringProperty(bPDescription);
         this.bPPrice = new SimpleFloatProperty(bPPrice);
         this.bPStatus = new SimpleStringProperty(bPStatus);
@@ -62,16 +62,16 @@ public class BakeryProduct {
         this.bPType = new SimpleStringProperty(bPType);
     }
 
-    public float getbPWeight() {
+    public String getbPWeight() {
         return bPWeight.get();
     }
 
-    public FloatProperty bPWeightProperty() {
+    public StringProperty bPWeightProperty() {
         return bPWeight;
     }
 
-    public void setbPWeight(float bPWeight) {
-        this.bPWeight = new SimpleFloatProperty(bPWeight);
+    public void setbPWeight(String bPWeight) {
+        this.bPWeight = new SimpleStringProperty(bPWeight);
     }
 
     public String getbPDescription() {

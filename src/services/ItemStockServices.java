@@ -41,7 +41,7 @@ public class ItemStockServices {
                                 while (rsFindSupplierData.next()){
                                     if(!(rsFindSupplierData.getString(1).isEmpty() || rsFindSupplierData.getString(1).equals(null))){
 
-                                        itemStockData.add(new ItemStock(rsLoadItemStock.getString(1), rsLoadItemStock.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadItemStock.getInt(3),rsLoadItemStock.getInt(4),rsLoadItemStock.getFloat(5),rsLoadItemStock.getFloat(6), rsLoadItemStock.getString(7),rsLoadItemStock.getString(8),rsLoadItemStock.getInt(9),rsLoadItemStock.getInt(10)));
+                                        itemStockData.add(new ItemStock(rsLoadItemStock.getString(1), rsLoadItemStock.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadItemStock.getInt(3),rsLoadItemStock.getInt(4),rsLoadItemStock.getString(5),rsLoadItemStock.getFloat(6), rsLoadItemStock.getString(7),rsLoadItemStock.getString(8),rsLoadItemStock.getInt(9),rsLoadItemStock.getInt(10)));
 
                                     }else{
                                         AlertPopUp.sqlRecordNotFound("Supplier");
@@ -80,7 +80,7 @@ public class ItemStockServices {
                 itemStock.setiName(rsLoadItemStock.getString(2));
                 itemStock.setiUnitsPerBlock(rsLoadItemStock.getInt(3));
                 itemStock.setiBlocks(rsLoadItemStock.getInt(4));
-                itemStock.setiWeightPerBlock(rsLoadItemStock.getFloat(5));
+                itemStock.setiWeightPerBlock(rsLoadItemStock.getString(5));
                 itemStock.setiBuyingPrice(rsLoadItemStock.getFloat(6));
                 itemStock.setiExpireDate(rsLoadItemStock.getString(7));
                 itemStock.setiAddedDate(rsLoadItemStock.getString(8));
@@ -105,7 +105,7 @@ public class ItemStockServices {
             psItemStock.setString(1,itemStock.getiName());
             psItemStock.setInt(2,itemStock.getiUnitsPerBlock());
             psItemStock.setFloat(3, itemStock.getiBlocks());
-            psItemStock.setFloat(4, itemStock.getiWeightPerBlock());
+            psItemStock.setString(4, itemStock.getiWeightPerBlock());
             psItemStock.setFloat(5, itemStock.getiBuyingPrice());
             psItemStock.setFloat(6, itemStock.getiMinQuantityLimit());
             psItemStock.setString(7, itemStock.getiExpireDate());
@@ -153,7 +153,7 @@ public class ItemStockServices {
             psItemStock.setString(1,newItemStock.getiName());
             psItemStock.setInt(2,newItemStock.getiUnitsPerBlock());
             psItemStock.setInt(3, newItemStock.getiBlocks());
-            psItemStock.setFloat(4, newItemStock.getiWeightPerBlock());
+            psItemStock.setString(4, newItemStock.getiWeightPerBlock());
             psItemStock.setFloat(5, newItemStock.getiBuyingPrice());
             psItemStock.setInt(6, newItemStock.getiMinQuantityLimit());
             psItemStock.setString(7, newItemStock.getiExpireDate());
@@ -232,7 +232,7 @@ public class ItemStockServices {
                                 while (rsFindSupplierData.next()){
                                     if(!(rsFindSupplierData.getString(1).isEmpty() || rsFindSupplierData.getString(1).equals(null))){
 
-                                        itemStockData.add(new ItemStock(rsLoadItemStock.getString(1), rsLoadItemStock.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadItemStock.getInt(3),rsLoadItemStock.getInt(4),rsLoadItemStock.getFloat(5),rsLoadItemStock.getFloat(6), rsLoadItemStock.getString(7),rsLoadItemStock.getString(8),rsLoadItemStock.getInt(9),rsLoadItemStock.getInt(10)));
+                                        itemStockData.add(new ItemStock(rsLoadItemStock.getString(1), rsLoadItemStock.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadItemStock.getInt(3),rsLoadItemStock.getInt(4),rsLoadItemStock.getString(5),rsLoadItemStock.getFloat(6), rsLoadItemStock.getString(7),rsLoadItemStock.getString(8),rsLoadItemStock.getInt(9),rsLoadItemStock.getInt(10)));
 
                                     }else{
                                         AlertPopUp.sqlRecordNotFound("Supplier");

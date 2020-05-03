@@ -23,10 +23,10 @@ public class OrderServices {
 
 
     private ObservableList<Order> ordersData;
-
     public  ObservableList<Order> loadData(){
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
+        PreparedStatement psLoadOrder = null;
         try {
             Connection conn = DBConnection.Connect();
             ordersData = FXCollections.observableArrayList();
@@ -42,7 +42,28 @@ public class OrderServices {
         }
         return ordersData;
     }
-    public  ObservableList<Order> loadData(String  sortQuery) throws SQLException {
+    public  ObservableList<Order> loadUnPaidData(String paymentStatusNotEqual){
+        OrderMenu orderMenuData ;
+        OrderMenuServices orderMenuServices = new OrderMenuServices();
+        PreparedStatement psLoadOrder = null;
+        try {
+            Connection conn = DBConnection.Connect();
+            ordersData = FXCollections.observableArrayList();
+            psLoadOrder = conn.prepareStatement(OrderQueries.LOAD_ORDER_DATA_BY_PAYMENT_QUERY);
+            psLoadOrder.setString(1, paymentStatusNotEqual);
+            ResultSet rsLoadOrder = psLoadOrder.executeQuery();
+
+            while (rsLoadOrder.next()) {
+                orderMenuData = orderMenuServices.loadSpecificData(UtilityMethod.addPrefix("OM",rsLoadOrder.getString(2)));
+
+                ordersData.add(new Order(rsLoadOrder.getString(1), rsLoadOrder.getString(2), orderMenuData.getoMIName(), rsLoadOrder.getString(3), rsLoadOrder.getString(4), rsLoadOrder.getInt(5), rsLoadOrder.getString(6), rsLoadOrder.getString(7), rsLoadOrder.getString(8), rsLoadOrder.getString(9), rsLoadOrder.getString(10), rsLoadOrder.getString(11), rsLoadOrder.getString(12), rsLoadOrder.getString(13), rsLoadOrder.getString(14), rsLoadOrder.getString(15), rsLoadOrder.getString(16), rsLoadOrder.getString(17), orderMenuData.getoMIPrice()));
+            }
+        } catch (SQLException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        }
+        return ordersData;
+    }
+    public  ObservableList<Order> loadData(String  sortQuery) {
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;
@@ -63,8 +84,12 @@ public class OrderServices {
             AlertPopUp.sqlQueryError(ex);
         }
         finally {
-            psLoadOrder.close();
-            rsLoadOrder.close();
+            try{
+                psLoadOrder.close();
+                rsLoadOrder.close();
+            }catch(SQLException ex){
+                AlertPopUp.sqlQueryError(ex);
+            }
         }
         return ordersData;
     }
@@ -132,8 +157,9 @@ public class OrderServices {
         return orderModelData;
     }
     public boolean insertData(Order order) throws  Exception{
-        PreparedStatement psOrder = null;
         boolean resultval = false;
+        PreparedStatement psOrder = null;
+
         try {
             Connection conn = DBConnection.Connect();
             psOrder = conn.prepareStatement(OrderQueries.INSERT_ORDER_DATA_QUERY);
@@ -279,6 +305,44 @@ public class OrderServices {
     public SortedList<Order> searchTable(TextField searchTextField){
         //Retreiving all data from database
         ObservableList<Order> ordersData = loadData();
+        //Wrap the ObservableList in a filtered List (initially display all data)
+        FilteredList<Order> filteredData = new FilteredList<>(ordersData, b -> true);
+
+        searchTextField.textProperty().addListener((observable,oldValue,newValue) ->{
+            filteredData.setPredicate(order -> {
+                //if filter text is empty display all data
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                //comparing search text with table columns one by one
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(order.getoID().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    //return if filter matches data
+                    return true;
+                }else if(order.getoCustomerName().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    //return if filter matches data
+                    return true;
+                }else if(order.getoCustomerNIC().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    //return if filter matches data
+                    return true;
+                }else if(order.getoCustomerPhone().toLowerCase().indexOf(lowerCaseFilter) !=-1){
+                    //return if filter matches data
+                    return true;
+                }else{
+                    //have no matchings
+                    return false;
+                }
+            });
+        });
+        //wrapping the FilteredList in a SortedList
+        SortedList<Order> sortedData = new SortedList<>(filteredData);
+        return sortedData;
+    }
+    public SortedList<Order> searchUnPayedDataTable(TextField searchTextField, String paymentStatusNotEqual){
+        //Retreiving all data from database
+        ObservableList<Order> ordersData = FXCollections.observableArrayList();
+        ordersData = loadUnPaidData(paymentStatusNotEqual);
         //Wrap the ObservableList in a filtered List (initially display all data)
         FilteredList<Order> filteredData = new FilteredList<>(ordersData, b -> true);
 

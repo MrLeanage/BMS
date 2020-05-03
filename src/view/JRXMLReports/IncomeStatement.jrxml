@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IncomeStatement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c9eb8739-7f4e-46ec-9f4f-8c709189342a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="iSPeriod" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM  bms.incomestatement WHERE   bms.incomestatement.`ISPeriod` =  $P{iSPeriod} ]]>
+	</queryString>
+	<field name="ISID" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="ISID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="incomestatement"/>
+	</field>
+	<field name="ISType" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ISType"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="incomestatement"/>
+	</field>
+	<field name="ISPeriod" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ISPeriod"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="incomestatement"/>
+	</field>
+	<field name="ISAmount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ISAmount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="incomestatement"/>
+	</field>
+	<variable name="ISIncomeAmount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[IF(EQUALS($F{ISType}, "All Income"), $F{ISAmount}, 0)]]></variableExpression>
+	</variable>
+	<variable name="ISIncomePeriod" class="java.lang.String">
+		<variableExpression><![CDATA[IF(EQUALS($F{ISType}, "All Income"), $F{ISPeriod}, "")]]></variableExpression>
+	</variable>
+	<variable name="ISExpenseeAmount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[IF(EQUALS($F{ISType}, "All Expenses"), $F{ISAmount}, 0)]]></variableExpression>
+	</variable>
+	<variable name="ISExpensePeriod" class="java.lang.String">
+		<variableExpression><![CDATA[IF(EQUALS($F{ISType}, "All Expense"), $F{ISPeriod}, "")]]></variableExpression>
+	</variable>
+	<variable name="profitStatus" class="java.lang.String">
+		<variableExpression><![CDATA[IF( $V{ISExpenseeAmount}  > $V{ISIncomeAmount} , " (Loss) ", "")]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="80" backcolor="#006699" uuid="82803d08-0efa-4721-80c7-1b00b7b72aee"/>
+				<textField>
+					<reportElement x="22" y="25" width="558" height="30" forecolor="#FFFFFF" uuid="c6021606-db5b-4ea6-845f-d3f77d07bf1c"/>
+					<textElement>
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Monthly Income Report  - " + $P{iSPeriod}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="230">
+			<rectangle>
+				<reportElement x="2" y="10" width="557" height="211" uuid="ff37dc81-b9a7-4c3f-8024-58f57868614a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="50" y="15" width="440" height="200" uuid="1f39999f-723f-434b-a24c-f81e9d653f40"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ISType}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{ISPeriod}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{ISAmount}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#F76D02"/>
+						<seriesColor seriesOrder="1" color="#3CAB05"/>
+						<seriesColor seriesOrder="2" color="#FCCE00"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="163" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="94" width="557" height="43" uuid="8f65af53-5868-422a-aaca-a30514a616ae">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="558" height="86" backcolor="#182C49" uuid="132b32a4-004c-492a-b1bb-6f1481588800"/>
+				<staticText>
+					<reportElement x="83" y="14" width="188" height="16" forecolor="#FFFFFF" uuid="7bd74fca-7f69-4180-8cdc-baff33fb00e2"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Total Revenue for the Period        :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="81" y="37" width="190" height="16" forecolor="#FFFFFF" uuid="268298ba-dee0-4e13-88ab-dd92cc80c080"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Total Expenditure for the Period    :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="82" y="60" width="190" height="16" forecolor="#FFFFFF" uuid="89e7b88c-9fdd-4bfa-ad72-4f2db8a9ab59"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Total Profit balance for the Period :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="280" y="14" width="177" height="16" forecolor="#FFFB00" uuid="72071a3a-f5fc-4452-9a21-4a35643819e7"/>
+					<box leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ISIncomeAmount}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="280" y="37" width="177" height="16" forecolor="#FFFB00" uuid="66287992-ef93-4483-a29a-f0f2098f5801"/>
+					<box leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ISExpenseeAmount}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="280" y="60" width="177" height="16" forecolor="#FFFB00" uuid="0eaf7839-2b9b-4b6d-b911-2f73004d92e5"/>
+					<box leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ISIncomeAmount} - $V{ISExpenseeAmount} ]]></textFieldExpression>
+					<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
+				</textField>
+				<textField>
+					<reportElement x="460" y="60" width="70" height="16" forecolor="#FFFB00" uuid="242c0e40-022f-4a9a-9e8c-60b738e4f4fc"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[ $V{profitStatus}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="17" y="99" width="100" height="30" uuid="a4ae3a4b-e38f-47b0-b88f-f4fec697a6f2"/>
+				<text><![CDATA[Note :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="100" width="367" height="19" uuid="fb9f118e-752a-4dbe-8bdb-bcfcd498eb48"/>
+				<text><![CDATA[1. This is a Computer generated statement and does not need any signature]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="76" y="119" width="100" height="20" uuid="418e4ab5-db78-4484-a3e6-f8a2f20a9819"/>
+				<textFieldExpression><![CDATA[new java.util.Date().toString() +  new java.util.Date().toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="139" width="148" height="18" uuid="25cd3c07-b74d-4f3a-83cb-0164e10a527a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="420" y="139" width="131" height="18" uuid="97cc339d-ea3c-49b7-af10-2e22b1dcab0d"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="119" width="60" height="22" uuid="7ece5f18-b5a9-4555-9a8b-fbe7b92b7712"/>
+				<text><![CDATA[Generated :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

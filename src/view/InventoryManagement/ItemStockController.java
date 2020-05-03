@@ -1,5 +1,6 @@
 package view.InventoryManagement;
 
+import javafx.collections.FXCollections;
 import services.ItemStockServices;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -7,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,11 +17,10 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.ItemStock;
 import model.Supplier;
-import util.authenticate.AdminManagementHandler;
-import util.authenticate.InventorySessionHandler;
-import util.authenticate.UserAuthentication;
+import util.authenticate.*;
 import util.playAudio.Audio;
 import util.userAlerts.AlertPopUp;
+import util.userNotifications.Notification;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
 
@@ -105,8 +104,6 @@ public class ItemStockController implements Initializable {
     @FXML
     private TextField ISupplierNameTextField;
 
-    @FXML
-    private Button ISelectSupplierButton;
 
     @FXML
     private Label INameLabel;
@@ -138,18 +135,21 @@ public class ItemStockController implements Initializable {
     @FXML
     private Label IMinQuantityLimitLabel;
 
+    @FXML
+    private MenuButton OptionMenuButton;
+
     /**
      * Initializes the services class.
      * @param url
      * @param rb
      */
-    @FXML
-    public Label UserNameLabel;
 
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private InventorySessionHandler inventorySessionHandler = new InventorySessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
+    private SupervisorHandler supervisorHandler = new SupervisorHandler();
+    private InventoryHandler inventoryHandler = new InventoryHandler();
     //overriding methods and connections to load data on page visit
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -158,18 +158,35 @@ public class ItemStockController implements Initializable {
         //to auto refresh search results
         searchTable();
         dateValidation();
-        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        OptionMenuButton.setText(UserAuthentication.getAuthenticatedSession().getuName());
+
 
     }
     @FXML
     private void LogoutSession(ActionEvent event){
         UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
+        userAuthentication.endAuthenticatedSession(OptionMenuButton);
+    }
+    @FXML
+    private void adminPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getAdminMenu(OptionMenuButton);
+    }
+    @FXML
+    private void cashierPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getCashierMenu(OptionMenuButton);
+    }
+    @FXML
+    private void supervisorPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getSupervisorMenu(OptionMenuButton);
     }
     @FXML
     private void ItemStock(ActionEvent event){
         adminManagementHandler.loadItemStock(event);
     }
+
     @FXML
     private void SalesCounter(ActionEvent event){
         adminManagementHandler.loadSalesCounter(event);
@@ -185,15 +202,15 @@ public class ItemStockController implements Initializable {
     //internal methods
     @FXML
     private void FoodProducts(ActionEvent event){
-        inventorySessionHandler.loadBakeryProducts(rootpane);
+        inventoryHandler.loadBakeryProducts(rootpane);
     }
     @FXML
     private void AgencyProduct(ActionEvent event){
-        inventorySessionHandler.loadAgencyProduct(rootpane);
+        inventoryHandler.loadAgencyProduct(rootpane);
     }
     @FXML
     private void Supplier(ActionEvent event) {
-        inventorySessionHandler.loadSupplier(rootpane);
+        inventoryHandler.loadSupplier(rootpane);
     }
     @FXML
     private void playBeep(){
@@ -256,7 +273,6 @@ public class ItemStockController implements Initializable {
                 //Checking for Specific Data Validation
                 && DataValidation.isValidNumberFormat(IUnitsPerBlockTextField.getText())
                 && DataValidation.isValidNumberFormat(IBlocksTextField.getText())
-                && DataValidation.isValidNumberFormat(IWeightPerUnitTextField.getText())
                 && DataValidation.isValidNumberFormat(IBuyingPriceTextField.getText())
                 && DataValidation.isValidNumberFormat(IMinQuantityLimitTextField.getText())){
             returnVal = true;
@@ -310,14 +326,12 @@ public class ItemStockController implements Initializable {
         //checking for specific properties
         if(!(DataValidation.isValidNumberFormat(IUnitsPerBlockTextField.getText())
                 && DataValidation.isValidNumberFormat(IBlocksTextField.getText())
-                && DataValidation.isValidNumberFormat(IWeightPerUnitTextField.getText())
                 && DataValidation.isValidNumberFormat(IBuyingPriceTextField.getText())
                 && DataValidation.isValidNumberFormat(IMinQuantityLimitTextField.getText()))){
             //Checking for Specific Data Validation
 
             DataValidation.isValidNumberFormat(IUnitsPerBlockTextField.getText(), IUnitsPerBlockLabel,"No of Unit can contain only Digits");
             DataValidation.isValidNumberFormat(IBlocksTextField.getText(), IBlocksLabel, "No of Blocks can contain only Digits");
-            DataValidation.isValidNumberFormat(IWeightPerUnitTextField.getText(), IWeightPerUnitLabel,"Stock Item Weight/Volume can contain only Digits");
             DataValidation.isValidNumberFormat(IBuyingPriceTextField.getText(), IBuyingPriceLabel,"Purchasing Price per Unit can contain only Digits");
             DataValidation.isValidNumberFormat(IMinQuantityLimitTextField.getText(), IMinQuantityLimitLabel, "Min Stock Unit Qty Limit can contain only Digits");
         }
@@ -421,7 +435,7 @@ public class ItemStockController implements Initializable {
             itemStockModel.setiName(INameTextField.getText());
             itemStockModel.setiUnitsPerBlock(Integer.parseInt(IUnitsPerBlockTextField.getText()));
             itemStockModel.setiBlocks(Integer.parseInt(IBlocksTextField.getText()));
-            itemStockModel.setiWeightPerBlock(Float.parseFloat(IWeightPerUnitTextField.getText()));
+            itemStockModel.setiWeightPerBlock(IWeightPerUnitTextField.getText());
             itemStockModel.setiBuyingPrice(Float.parseFloat(IBuyingPriceTextField.getText()));
             itemStockModel.setiMinQuantityLimit(Integer.parseInt(IMinQuantityLimitTextField.getText()));
             itemStockModel.setiExpireDate(String.valueOf(IExpireDateDatePicker.getValue()));
@@ -492,7 +506,7 @@ public class ItemStockController implements Initializable {
                     itemStockModel.setiSISupplierName(ISupplierNameTextField.getText());
                     itemStockModel.setiUnitsPerBlock(Integer.parseInt(IUnitsPerBlockTextField.getText()));
                     itemStockModel.setiBlocks(Integer.parseInt(IBlocksTextField.getText()));
-                    itemStockModel.setiWeightPerBlock(Float.parseFloat(IWeightPerUnitTextField.getText()));
+                    itemStockModel.setiWeightPerBlock(IWeightPerUnitTextField.getText());
                     itemStockModel.setiBuyingPrice(Float.parseFloat(IBuyingPriceTextField.getText()));
                     itemStockModel.setiMinQuantityLimit(Integer.parseInt(IMinQuantityLimitTextField.getText()));
                     itemStockModel.setiExpireDate(String.valueOf(IExpireDateDatePicker.getValue()));
@@ -548,6 +562,11 @@ public class ItemStockController implements Initializable {
         sortedData.comparatorProperty().bind(ItemStockTable.comparatorProperty());
         //adding sorted and filtered data to the table
         ItemStockTable.setItems(sortedData);
+    }
+    @FXML
+    private void notificationAction(ActionEvent actionEvent){
+
+
 
 
     }

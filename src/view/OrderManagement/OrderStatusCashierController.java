@@ -7,28 +7,23 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.Order;
 import model.OrderMenu;
 import services.OrderServices;
-import util.authenticate.CashierSessionHandler;
+import util.authenticate.CashierHandler;
 import util.authenticate.UserAuthentication;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OrderStatusCashierController implements Initializable {
     @FXML
     AnchorPane rootpane;
-    private CashierSessionHandler cashierSessionHandler = new CashierSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
 
     @FXML
     private TableView<Order> OrderTable;
@@ -81,33 +76,28 @@ public class OrderStatusCashierController implements Initializable {
     }
 
     @FXML
-    private void LogoutSession(ActionEvent event){
-        UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
-    }
-    @FXML
     private void Billing(ActionEvent event){
-        cashierSessionHandler.loadBilling(event);
+        cashierHandler.loadBilling(event);
     }
     @FXML
     private void Products(ActionEvent event){
-        cashierSessionHandler.loadProducts(rootpane);
+        cashierHandler.loadProducts(rootpane);
     }
     @FXML
     private void OrderMenu(ActionEvent event){
-        cashierSessionHandler.loadOrderMenu(rootpane);
+        cashierHandler.loadOrderMenu(rootpane);
     }
     @FXML
     private void Order(ActionEvent event) {
-        cashierSessionHandler.loadOrder(rootpane);
+        cashierHandler.loadOrder(rootpane);
     }
     @FXML
     private void OrderStatus(ActionEvent event){
-        cashierSessionHandler.loadOrderStatus(rootpane);
+        cashierHandler.loadOrderStatus(rootpane);
     }
     @FXML
     private void SalesInfo(ActionEvent event) {
-        cashierSessionHandler.loadSalesInfo(rootpane);
+        cashierHandler.loadSalesInfo(rootpane);
     }
     //load data from Main LoginController to View table
     private void loadData() {

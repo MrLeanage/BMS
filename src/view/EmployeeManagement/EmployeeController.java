@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,9 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Employee;
-import util.authenticate.AdminManagementHandler;
-import util.authenticate.EmployeeSessionHandler;
-import util.authenticate.UserAuthentication;
+import util.authenticate.*;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
@@ -144,11 +141,13 @@ public class EmployeeController implements Initializable {
     private ObservableList<String> jobTitleChoiceboxList = FXCollections.observableArrayList( "Permanent", "Trainee", "Temporary");
 
     @FXML
-    public Label UserNameLabel;
+    private MenuButton OptionMenuButton;
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private EmployeeSessionHandler employeeSessionHandler = new EmployeeSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
+    private SupervisorHandler supervisorHandler = new SupervisorHandler();
+    private EmployeeHandler employeeHandler = new EmployeeHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -157,18 +156,34 @@ public class EmployeeController implements Initializable {
         loadData();
         //to auto refresh search results
         searchTable();
-        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        OptionMenuButton.setText(UserAuthentication.getAuthenticatedSession().getuName());
 
     }
     @FXML
     private void LogoutSession(ActionEvent event){
         UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
+        userAuthentication.endAuthenticatedSession(OptionMenuButton);
+    }
+    @FXML
+    private void adminPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getAdminMenu(OptionMenuButton);
+    }
+    @FXML
+    private void cashierPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getCashierMenu(OptionMenuButton);
+    }
+    @FXML
+    private void supervisorPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getSupervisorMenu(OptionMenuButton);
     }
     @FXML
     private void ItemStock(ActionEvent event){
         adminManagementHandler.loadItemStock(event);
     }
+
     @FXML
     private void SalesCounter(ActionEvent event){
         adminManagementHandler.loadSalesCounter(event);
@@ -184,15 +199,15 @@ public class EmployeeController implements Initializable {
     //internal methods
     @FXML
     private void SalarySchemes(ActionEvent event){
-        employeeSessionHandler.loadSalarySchemes(rootpane);
+        employeeHandler.loadSalarySchemes(rootpane);
     }
     @FXML
     private void Allowances(ActionEvent event){
-        employeeSessionHandler.loadAllowances(rootpane);
+        employeeHandler.loadAllowances(rootpane);
     }
     @FXML
     private void SystemUsers(ActionEvent event){
-        employeeSessionHandler.loadSystemUsers(rootpane);
+        employeeHandler.loadSystemUsers(rootpane);
     }
     @FXML
     private void clearFields(){

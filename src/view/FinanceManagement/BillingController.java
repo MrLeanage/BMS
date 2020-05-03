@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,13 +17,13 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.SalesItem;
-import model.User;
 import services.BillingServices;
 import services.ProductServices;
-import util.authenticate.CashierSessionHandler;
+import util.authenticate.CashierHandler;
 import util.authenticate.UserAuthentication;
 import util.userAlerts.AlertPopUp;
 import util.utility.PrintReport;
+import util.utility.UtilityMethod;
 import util.validation.DataValidation;
 
 import java.io.IOException;
@@ -117,44 +116,81 @@ public class BillingController implements Initializable {
 
     private LinkedList<SalesItem> salesItemLinkedList = new LinkedList<>();
 
+    @FXML
+    private MenuItem AdminPanelMenuItem;
 
     @FXML
-    public Label UserNameLabel;
+    private MenuItem CashierPanelMenuItem;
+
+    @FXML
+    private MenuItem SupervisorPanelMenuItem;
+
+    @FXML
+    private MenuButton OptionMenuButton;
 
     @FXML
     private AnchorPane rootpane;
 
-    private CashierSessionHandler cashierSessionHandler = new CashierSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
         searchTable();
-        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        OptionMenuButton.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        setSupervisorInfo();
+    }
+    private void setSupervisorInfo(){
+        if(UserAuthentication.getCurrentAdminType().equals("default")){
+            AdminPanelMenuItem.setVisible(false);
+            CashierPanelMenuItem.setVisible(false);
+            SupervisorPanelMenuItem.setVisible(false);
+        }else{
+            AdminPanelMenuItem.setVisible(true);
+            CashierPanelMenuItem.setVisible(true);
+            SupervisorPanelMenuItem.setVisible(true);
+        }
     }
     @FXML
     private void LogoutSession(ActionEvent event){
         UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
+        userAuthentication.endAuthenticatedSession(OptionMenuButton);
     }
     @FXML
-    private void Billing(ActionEvent event){ cashierSessionHandler.loadBilling(event); }
+    private void adminPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getAdminMenu(OptionMenuButton);
+    }
     @FXML
-    private void Products(ActionEvent event){ cashierSessionHandler.loadProducts(rootpane); }
+    private void cashierPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getCashierMenu(OptionMenuButton);
+    }
+    @FXML
+    private void supervisorPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getSupervisorMenu(OptionMenuButton);
+    }
+    @FXML
+    private void Billing(ActionEvent event){ cashierHandler.loadBilling(event); }
+    @FXML
+    private void Products(ActionEvent event){ cashierHandler.loadProducts(rootpane); }
     @FXML
     private void OrderMenu(ActionEvent event){
-        cashierSessionHandler.loadOrderMenu(rootpane);
+        cashierHandler.loadOrderMenu(rootpane);
     }
     @FXML
     private void Order(ActionEvent event) {
-        cashierSessionHandler.loadOrder(rootpane);
+        cashierHandler.loadOrder(rootpane);
     }
     @FXML
     private void OrderStatus(ActionEvent event){
-        cashierSessionHandler.loadOrderStatus(rootpane);
+        cashierHandler.loadOrderStatus(rootpane);
     }
     @FXML
     private void SalesInfo(ActionEvent event) {
-        cashierSessionHandler.loadSalesInfo(rootpane);
+        cashierHandler.loadSalesInfo(rootpane);
     }
 
     @FXML
@@ -372,7 +408,7 @@ public class BillingController implements Initializable {
             total += salesItem.getsITotalAmount();
         }
         TotalItemLabel.setText(String.valueOf(count));
-        TotalAmountLabel.setText("Rs : "+total+"0");
+        TotalAmountLabel.setText("Rs : "+ UtilityMethod.numberDisplayWithCommasAndDecimalPlaces(total));
         DateLabel.setText(String.valueOf(LocalDate.now()));
     }
     @FXML
@@ -435,7 +471,7 @@ public class BillingController implements Initializable {
             SpinnerValueFactory<Integer> quantityValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(existingSalesItemData.getsIPQuantity(), existingSalesItemData.getsIPQuantity(), existingSalesItemData.getsIPQuantity());
             PQuantitySpinner.setValueFactory(quantityValueFactory);
         }catch (Exception ex){
-            AlertPopUp.generalError(ex);
+            //AlertPopUp.generalError(ex);
         }
     }
     public void searchTable(){

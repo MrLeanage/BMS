@@ -84,9 +84,10 @@
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="565.0" layoutX="641.0" layoutY="7.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="409.0" layoutX="761.0" layoutY="40.0" stroke="WHITE" strokeType="INSIDE" width="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0" />
-                  <Button id="rbred" layoutX="722.0" layoutY="517.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="350.0" text="Generate Income Statement PDF" AnchorPane.leftAnchor="722.0" AnchorPane.topAnchor="517.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="108.0" layoutX="722.0" layoutY="457.0" stroke="TRANSPARENT" strokeType="INSIDE" width="350.0" />
+                  <Button id="rbred" layoutX="752.0" layoutY="518.0" mnemonicParsing="false" onAction="#generateIncomeStatement" prefHeight="37.0" prefWidth="301.0" text="Generate Income Statement " AnchorPane.leftAnchor="752.0" AnchorPane.topAnchor="518.0">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                   <BarChart fx:id="IncomeReportChart" alternativeColumnFillVisible="true" barGap="1.0" categoryGap="25.0" layoutX="623.0" layoutY="49.0" prefHeight="392.0" prefWidth="1076.0" title="Monthly Profit Statistics" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="49.0">
@@ -150,6 +151,12 @@
                   </Label>
                   <ComboBox fx:id="StatPeriodComboBox" layoutX="134.0" layoutY="479.0" onAction="#loadStatFilterData" prefWidth="182.0" AnchorPane.leftAnchor="134.0" />
                   <ComboBox fx:id="StatCategoryComboBox" layoutX="144.0" layoutY="489.0" onAction="#loadStatFilterData" prefWidth="182.0" AnchorPane.leftAnchor="134.0" AnchorPane.topAnchor="526.0" />
+                  <Label layoutX="755.0" layoutY="463.0" prefHeight="20.0" prefWidth="294.0" text="Select Month to Generate Income Statement" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="IncomeStatementMonthComboBox" layoutX="752.0" layoutY="485.0" prefHeight="25.0" prefWidth="301.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="580.0" prefWidth="1090.0" visible="false" AnchorPane.leftAnchor="170.0" />

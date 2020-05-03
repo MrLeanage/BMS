@@ -7,21 +7,16 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Order;
 import model.OrderMenu;
 import services.OrderServices;
-import util.authenticate.SupervisorSessionHandler;
+import util.authenticate.SupervisorHandler;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -70,7 +65,7 @@ public class CompletedOrdersController implements Initializable {
     private ObservableList<String> orderTypeChoiceboxList = FXCollections.observableArrayList("Menu Item","Customized");
     @FXML
     AnchorPane rootpane;
-    SupervisorSessionHandler supervisorSessionHandler = new SupervisorSessionHandler();
+    SupervisorHandler supervisorHandler = new SupervisorHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // OTypeChoiceBox.setValue("Menu Item");
@@ -86,31 +81,31 @@ public class CompletedOrdersController implements Initializable {
 
     @FXML
     private void ItemWithdraw(ActionEvent event) {
-        supervisorSessionHandler.loadItemWithdraw(event);
+        supervisorHandler.loadItemWithdraw(event);
     }
     @FXML
     private void WithdrawedItems(ActionEvent event) {
-        supervisorSessionHandler.loadWithdrawedItems(rootpane);
+        supervisorHandler.loadWithdrawedItems(rootpane);
     }
     @FXML
     private void PendingOrders(ActionEvent event){
-        supervisorSessionHandler.loadPendingOrders(rootpane);
+        supervisorHandler.loadPendingOrders(rootpane);
     }
     @FXML
     private void OnGoingOrders(ActionEvent event) {
-        supervisorSessionHandler.loadOnGoingOrders(rootpane);
+        supervisorHandler.loadOnGoingOrders(rootpane);
     }
     @FXML
     private void CompletedOrders(ActionEvent event) {
-        supervisorSessionHandler.loadCompletedOrders(rootpane);
+        supervisorHandler.loadCompletedOrders(rootpane);
     }
     @FXML
     private void CancelledOrders(ActionEvent event) {
-        supervisorSessionHandler.loadCancelledOrders(rootpane);
+        supervisorHandler.loadCancelledOrders(rootpane);
     }
     @FXML
     private void OrderMenu(ActionEvent event) {
-        supervisorSessionHandler.loadOrderMenu(rootpane);
+        supervisorHandler.loadOrderMenu(rootpane);
     }
     //load data from Main LoginController to View table
     private void loadData() throws SQLException {
@@ -129,40 +124,8 @@ public class CompletedOrdersController implements Initializable {
         ODeliveryTimeColumn.setCellValueFactory(new PropertyValueFactory<>("oDeliveryTime"));
         OTakenDateColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenDate"));
         OTakenTimeColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenTime"));
-        OActionColumn.setCellValueFactory(new PropertyValueFactory<>("Dummy"));
         OProcessingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oProcessingStatus"));
-        Callback<TableColumn<Order, String>, TableCell<Order, String>> parentCellFactory
-                =
-                new Callback<TableColumn<Order, String>, TableCell<Order, String>>() {
-                    @Override
-                    public TableCell call(final TableColumn<Order, String> param) {
-                        final TableCell<Order, String> cell = new TableCell<Order, String>() {
 
-                            final Button btn = new Button("Process Order");
-
-                            @Override
-                            public void updateItem(String item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                    setText(null);
-                                } else {
-                                    btn.setOnMouseClicked(event -> {
-                                        // student = StudentTable.getSelectionModel().getSelectedItem();
-                                        //String sID = student.getsID();
-                                    });
-                                    btn.setOnAction(event -> {
-                                        //pdf generate and status Update method here
-                                    });
-                                    setGraphic(btn);
-                                    setText(null);
-                                }
-                            }
-                        };
-                        return cell;
-                    }
-                };
-        OActionColumn.setCellFactory(parentCellFactory);
         OrderTable.setItems(null);
         OrderTable.setItems(ordersData);
 

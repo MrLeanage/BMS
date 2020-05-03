@@ -5,27 +5,20 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.User;
 import services.UserServices;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.EmployeeSessionHandler;
+import util.authenticate.EmployeeHandler;
 import util.userAlerts.AlertPopUp;
 import util.utility.DataEncryption;
-import util.utility.UtilityMethod;
 import util.validation.DataValidation;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SystemUsersController implements Initializable {
@@ -95,7 +88,7 @@ public class SystemUsersController implements Initializable {
     private AnchorPane rootpane;
 
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private EmployeeSessionHandler employeeSessionHandler = new EmployeeSessionHandler();
+    private EmployeeHandler employeeHandler = new EmployeeHandler();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -118,15 +111,15 @@ public class SystemUsersController implements Initializable {
     //internal methods
     @FXML
     private void SalarySchemes(ActionEvent event){
-        employeeSessionHandler.loadSalarySchemes(rootpane);
+        employeeHandler.loadSalarySchemes(rootpane);
     }
     @FXML
     private void Allowances(ActionEvent event){
-        employeeSessionHandler.loadAllowances(rootpane);
+        employeeHandler.loadAllowances(rootpane);
     }
     @FXML
     private void SystemUsers(ActionEvent event){
-        employeeSessionHandler.loadSystemUsers(rootpane);
+        employeeHandler.loadSystemUsers(rootpane);
     }
     @FXML
     private void clearFields(){

@@ -40,7 +40,7 @@ public class AgencyProductServices {
                                 while (rsFindSupplierData.next()){
                                     if(!(rsFindSupplierData.getString(1).isEmpty() || rsFindSupplierData.getString(1).equals(null))){
 
-                                        agencyProductsData.add(new AgencyProduct(rsLoadAgencyProduct.getString(1), rsLoadAgencyProduct.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadAgencyProduct.getInt(3),rsLoadAgencyProduct.getFloat(4),rsLoadAgencyProduct.getFloat(5),rsLoadAgencyProduct.getFloat(6), rsLoadAgencyProduct.getFloat(7),rsLoadAgencyProduct.getString(8),rsLoadAgencyProduct.getString(9),rsLoadAgencyProduct.getString(10),rsLoadAgencyProduct.getString(11)));
+                                        agencyProductsData.add(new AgencyProduct(rsLoadAgencyProduct.getString(1), rsLoadAgencyProduct.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadAgencyProduct.getInt(3),rsLoadAgencyProduct.getString(4),rsLoadAgencyProduct.getFloat(5),rsLoadAgencyProduct.getFloat(6), rsLoadAgencyProduct.getFloat(7),rsLoadAgencyProduct.getString(8),rsLoadAgencyProduct.getString(9),rsLoadAgencyProduct.getString(10),rsLoadAgencyProduct.getString(11)));
 
                                     }else{
                                         AlertPopUp.sqlRecordNotFound("Supplier");
@@ -88,7 +88,7 @@ public class AgencyProductServices {
                                         agencyProduct.setaPSupplierID(rsFindSupplierData.getString(1));
                                         agencyProduct.setaPSupplierName(rsFindSupplierData.getString(2));
                                         agencyProduct.setaPTotalUnits(rsLoadAgencyProduct.getInt(3));
-                                        agencyProduct.setaPWeightOfUnit(rsLoadAgencyProduct.getFloat(4));
+                                        agencyProduct.setaPWeightOfUnit(rsLoadAgencyProduct.getString(4));
                                         agencyProduct.setaPBuyingPricePerUnit(rsLoadAgencyProduct.getFloat(5));
                                         agencyProduct.setaPMarketPricePerUnit(rsLoadAgencyProduct.getFloat(6));
                                         agencyProduct.setaPSellingPricePerUnit(rsLoadAgencyProduct.getFloat(7));
@@ -128,7 +128,7 @@ public class AgencyProductServices {
 
             psAgencyProduct.setString(1,agencyProduct.getaPName());
             psAgencyProduct.setInt(2,agencyProduct.getaPTotalUnits());
-            psAgencyProduct.setFloat(3, agencyProduct.getaPWeightOfUnit());
+            psAgencyProduct.setString(3, agencyProduct.getaPWeightOfUnit());
             psAgencyProduct.setFloat(4, agencyProduct.getaPBuyingPricePerUnit());
             psAgencyProduct.setFloat(5, agencyProduct.getaPMarketPricePerUnit());
             psAgencyProduct.setFloat(6, agencyProduct.getaPSellingPricePerUnit());
@@ -176,7 +176,7 @@ public class AgencyProductServices {
             psAgencyProduct = conn.prepareStatement(AgencyProductQueries.UPDATE_AGENCY_PRODUCT_DATA_QUERY);
             psAgencyProduct.setString(1,agencyProduct.getaPName());
             psAgencyProduct.setInt(2,agencyProduct.getaPTotalUnits());
-            psAgencyProduct.setFloat(3, agencyProduct.getaPWeightOfUnit());
+            psAgencyProduct.setString(3, agencyProduct.getaPWeightOfUnit());
             psAgencyProduct.setFloat(4, agencyProduct.getaPBuyingPricePerUnit());
             psAgencyProduct.setFloat(5, agencyProduct.getaPMarketPricePerUnit());
             psAgencyProduct.setFloat(6, agencyProduct.getaPSellingPricePerUnit());
@@ -255,7 +255,7 @@ public class AgencyProductServices {
                                 while (rsFindSupplierData.next()){
                                     if(!(rsFindSupplierData.getString(1).isEmpty() || rsFindSupplierData.getString(1).equals(null))){
 
-                                        agencyProductData.add(new AgencyProduct(rsLoadAgencyProduct.getString(1), rsLoadAgencyProduct.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadAgencyProduct.getInt(3),rsLoadAgencyProduct.getFloat(4),rsLoadAgencyProduct.getFloat(5),rsLoadAgencyProduct.getFloat(6), rsLoadAgencyProduct.getFloat(7),rsLoadAgencyProduct.getString(8),rsLoadAgencyProduct.getString(9),rsLoadAgencyProduct.getString(10),rsLoadAgencyProduct.getString(11)));
+                                        agencyProductData.add(new AgencyProduct(rsLoadAgencyProduct.getString(1), rsLoadAgencyProduct.getString(2),rsFindSupplierData.getString(1), rsFindSupplierData.getString(2),rsLoadAgencyProduct.getInt(3),rsLoadAgencyProduct.getString(4),rsLoadAgencyProduct.getFloat(5),rsLoadAgencyProduct.getFloat(6), rsLoadAgencyProduct.getFloat(7),rsLoadAgencyProduct.getString(8),rsLoadAgencyProduct.getString(9),rsLoadAgencyProduct.getString(10),rsLoadAgencyProduct.getString(11)));
 
                                     }else{
                                         AlertPopUp.sqlRecordNotFound("Supplier");

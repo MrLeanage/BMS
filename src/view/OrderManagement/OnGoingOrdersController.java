@@ -7,22 +7,16 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Order;
 import model.OrderMenu;
 import services.OrderServices;
-import util.authenticate.SupervisorSessionHandler;
-import util.userAlerts.AlertPopUp;
+import util.authenticate.SupervisorHandler;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -75,7 +69,7 @@ public class OnGoingOrdersController implements Initializable {
     private ObservableList<String> orderTypeChoiceboxList = FXCollections.observableArrayList("Menu Item","Customized");
     @FXML
     AnchorPane rootpane;
-    SupervisorSessionHandler supervisorSessionHandler = new SupervisorSessionHandler();
+    SupervisorHandler supervisorHandler = new SupervisorHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // OTypeChoiceBox.setValue("Menu Item");
@@ -90,31 +84,31 @@ public class OnGoingOrdersController implements Initializable {
     }
     @FXML
     private void ItemWithdraw(ActionEvent event) {
-        supervisorSessionHandler.loadItemWithdraw(event);
+        supervisorHandler.loadItemWithdraw(event);
     }
     @FXML
     private void WithdrawedItems(ActionEvent event) {
-        supervisorSessionHandler.loadWithdrawedItems(rootpane);
+        supervisorHandler.loadWithdrawedItems(rootpane);
     }
     @FXML
     private void PendingOrders(ActionEvent event){
-        supervisorSessionHandler.loadPendingOrders(rootpane);
+        supervisorHandler.loadPendingOrders(rootpane);
     }
     @FXML
     private void OnGoingOrders(ActionEvent event) {
-        supervisorSessionHandler.loadOnGoingOrders(rootpane);
+        supervisorHandler.loadOnGoingOrders(rootpane);
     }
     @FXML
     private void CompletedOrders(ActionEvent event) {
-        supervisorSessionHandler.loadCompletedOrders(rootpane);
+        supervisorHandler.loadCompletedOrders(rootpane);
     }
     @FXML
     private void CancelledOrders(ActionEvent event) {
-        supervisorSessionHandler.loadCancelledOrders(rootpane);
+        supervisorHandler.loadCancelledOrders(rootpane);
     }
     @FXML
     private void OrderMenu(ActionEvent event) {
-        supervisorSessionHandler.loadOrderMenu(rootpane);
+        supervisorHandler.loadOrderMenu(rootpane);
     }
     //load data from Main LoginController to View table
     private void loadData() throws SQLException {

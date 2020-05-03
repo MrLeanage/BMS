@@ -2,7 +2,9 @@ package util.utility;
 
 
 import javafx.collections.ObservableList;
+import model.ChartData;
 import model.PaySheet;
+import model.Purchase;
 import model.SalesItem;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -11,6 +13,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JRViewer;
 import util.dbConnect.DBConnection;
 import util.userAlerts.AlertPopUp;
+import view.FinanceManagement.IncomeStatemetAdminController;
 
 import javax.swing.*;
 import java.io.File;
@@ -168,7 +171,7 @@ public class PrintReport extends JFrame{
         }
 
     }
-    public void printSalesReportt(int year, String month) throws ParseException {
+    public void printSalesReport(int year, String month) {
         DBConnection SqlConnection = new DBConnection();
         Connection conn = SqlConnection.Connect();// Database Connection
         String period = null;
@@ -203,6 +206,60 @@ public class PrintReport extends JFrame{
             }catch(SQLException ex){
                 AlertPopUp.connectionError(ex);
             }
+        }
+
+    }
+    public void printPurchaseReport(int year, String month, String category, String status, ObservableList<Purchase> purchaseLinkedList){
+
+
+        try {
+            HashMap parameter = new HashMap();
+            JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(purchaseLinkedList);
+
+            parameter.put("pPeriod", year + " " + month);
+            parameter.put("pCategory", category);
+            parameter.put("pStatus", status);
+            parameter.put("pPurchaseLinkedList", jrBeanCollectionDataSource);
+
+            JasperDesign jd = JRXmlLoader.load(new File("").getAbsolutePath()+"/src/view/JRXMLReports/PurchasePay.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jd);
+            JasperPrint JasperPrint = JasperFillManager.fillReport(jasperReport, parameter, new JREmptyDataSource());
+            JRViewer viewer = new JRViewer(JasperPrint);
+            //viewer.setOpaque(true);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+
+            this.add(viewer);
+            this.setSize(1300,800); // Frame size
+            this.setVisible(true);
+
+        } catch (Exception e) {
+            AlertPopUp.generalError(e);
+        }
+
+    }
+    public void printIncomeStatement(String period){
+        HashMap parameter = new HashMap();
+        DBConnection SqlConnection = new DBConnection();
+        Connection conn = SqlConnection.Connect();// Database Connection
+
+        parameter.put("iSPeriod", period);
+
+        try {
+            JasperDesign jd = JRXmlLoader.load(new File("").getAbsolutePath()+"/src/view/JRXMLReports/IncomeStatement.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jd);
+            JasperPrint JasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conn);
+            JRViewer viewer = new JRViewer(JasperPrint);
+            //viewer.setOpaque(true);
+            viewer.setOpaque(true);
+            viewer.setVisible(true);
+
+            this.add(viewer);
+            this.setSize(1300,800); // Frame size
+            this.setVisible(true);
+
+        } catch (Exception e) {
+            AlertPopUp.generalError(e);
         }
 
     }

@@ -22,20 +22,10 @@ public class UserServices {
 
 
     private ObservableList<User> usersData;
-
-    public  ObservableList<User> loadData(){
-        try {
-            Connection conn = DBConnection.Connect();
-            usersData = FXCollections.observableArrayList();
-            ResultSet rsLoadBakeryProduct = conn.createStatement().executeQuery(UserQueries.LOAD_USER_DATA_QUERY);
-
-            while (rsLoadBakeryProduct.next()) {
-                usersData.add(new User(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5)));
-            }
-        } catch (SQLException ex) {
-            AlertPopUp.sqlQueryError(ex);
-        }
+    public Boolean addDefaultAdminUser(){
+        Boolean resultVal = true;
         //Generating Admin Account if No Admin Account Exist
+        usersData = loadData();
         if(usersData.size() == 0){
             User user = new User();
             user.setuID("administrator");
@@ -43,11 +33,26 @@ public class UserServices {
             user.setuType("Admin");
             user.setuPassword("admin");
             user.setuStatus("Active");
-            Boolean resultVal = insertData(user);
-            if(resultVal){
-                loadData();
+            resultVal = insertData(user);
+            if(!resultVal){
+                AlertPopUp.generalError("User Authentication Error Occurred!! Try again ");
             }
         }
+        return resultVal;
+    }
+    public  ObservableList<User> loadData(){
+        try {
+            Connection conn = DBConnection.Connect();
+            usersData = FXCollections.observableArrayList();
+            ResultSet rsLoadUser = conn.createStatement().executeQuery(UserQueries.LOAD_USER_DATA_QUERY);
+
+            while (rsLoadUser.next()) {
+                usersData.add(new User(rsLoadUser.getString(1), rsLoadUser.getString(2), rsLoadUser.getString(3), rsLoadUser.getString(4), rsLoadUser.getString(5)));
+            }
+        } catch (SQLException ex) {
+            AlertPopUp.sqlQueryError(ex);
+        }
+
         return usersData;
     }
     public User userValidation(String uID,  String password) {
@@ -191,10 +196,10 @@ public class UserServices {
         try {
             Connection conn = DBConnection.Connect();
             usersData = FXCollections.observableArrayList();
-            ResultSet rsLoadBakeryProduct = conn.createStatement().executeQuery(UserQueries.LOAD_USER_DATA_QUERY);
+            ResultSet rsLoadUser = conn.createStatement().executeQuery(UserQueries.LOAD_USER_DATA_QUERY);
 
-            while (rsLoadBakeryProduct.next()) {
-                usersData.add(new User(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5)));
+            while (rsLoadUser.next()) {
+                usersData.add(new User(rsLoadUser.getString(1), rsLoadUser.getString(2), rsLoadUser.getString(3), rsLoadUser.getString(4), rsLoadUser.getString(5)));
             }
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);

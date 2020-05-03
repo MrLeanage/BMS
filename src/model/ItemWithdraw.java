@@ -8,18 +8,18 @@ public class ItemWithdraw {
     private StringProperty iWIID = null;
     private StringProperty iWIName = null;
     private StringProperty iWDescription = null;
-    private FloatProperty iWWeight = null;
+    private StringProperty iWWeight = null;
     private IntegerProperty iWQuantity = null;
     private StringProperty iWUser = null;
     private StringProperty iWDate = null;
     private StringProperty iWTime = null;
 
-    public ItemWithdraw(String iWID, String iWIID, String iWIName, String iWDescription, Float iWWeight, Integer iWQuantity, String iWUser, String iWDate, String iWTime) {
+    public ItemWithdraw(String iWID, String iWIID, String iWIName, String iWDescription, String iWWeight, Integer iWQuantity, String iWUser, String iWDate, String iWTime) {
         this.iWID = new SimpleStringProperty(UtilityMethod.addPrefix("WI", iWID));
         this.iWIID = new SimpleStringProperty(UtilityMethod.addPrefix("I", iWIID));
         this.iWIName = new SimpleStringProperty(iWIName);
         this.iWDescription = new SimpleStringProperty(iWDescription);
-        this.iWWeight = new SimpleFloatProperty(iWWeight);
+        this.iWWeight = new SimpleStringProperty(iWWeight);
         this.iWQuantity = new SimpleIntegerProperty(iWQuantity);
         this.iWUser = new SimpleStringProperty(iWUser);
         this.iWDate = new SimpleStringProperty(iWDate);
@@ -85,16 +85,16 @@ public class ItemWithdraw {
         this.iWDescription = new SimpleStringProperty(iWDescription);
     }
 
-    public float getiWWeight() {
+    public String getiWWeight() {
         return iWWeight.get();
     }
 
-    public FloatProperty iWWeightProperty() {
+    public StringProperty iWWeightProperty() {
         return iWWeight;
     }
 
-    public void setiWWeight(float iWWeight) {
-        this.iWWeight = new SimpleFloatProperty(iWWeight);
+    public void setiWWeight(String iWWeight) {
+        this.iWWeight = new SimpleStringProperty(iWWeight);
     }
 
     public int getiWQuantity() {

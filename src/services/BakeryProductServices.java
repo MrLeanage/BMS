@@ -29,7 +29,7 @@ public class BakeryProductServices {
             ResultSet rsLoadBakeryProduct = conn.createStatement().executeQuery(BakeryProductQueries.LOAD_BAKERY_PRODUCT_DATA_QUERY);
 
             while (rsLoadBakeryProduct.next()) {
-                bakeryProductsData.add(new BakeryProduct(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getFloat(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getFloat(6), rsLoadBakeryProduct.getString(7)));
+                bakeryProductsData.add(new BakeryProduct(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getFloat(6), rsLoadBakeryProduct.getString(7)));
             }
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);
@@ -48,7 +48,7 @@ public class BakeryProductServices {
                 bakeryProduct.setbPID(rsLoadBakeryProduct.getString(1));
                 bakeryProduct.setbPName(rsLoadBakeryProduct.getString(2));
                 bakeryProduct.setbPType(rsLoadBakeryProduct.getString(3));
-                bakeryProduct.setbPWeight(rsLoadBakeryProduct.getFloat(4));
+                bakeryProduct.setbPWeight(rsLoadBakeryProduct.getString(4));
                 bakeryProduct.setbPDescription(rsLoadBakeryProduct.getString(5));
                 bakeryProduct.setbPPrice(rsLoadBakeryProduct.getFloat(6));
                 bakeryProduct.setbPStatus(rsLoadBakeryProduct.getString(7));
@@ -68,7 +68,7 @@ public class BakeryProductServices {
 
             psBakeryProduct.setString(1,bakeryProduct.getbPName());
             psBakeryProduct.setString(2,bakeryProduct.getbPType());
-            psBakeryProduct.setFloat(3, bakeryProduct.getbPWeight());
+            psBakeryProduct.setString(3, bakeryProduct.getbPWeight());
             psBakeryProduct.setString(4, bakeryProduct.getbPDescription());
             psBakeryProduct.setFloat(5, bakeryProduct.getbPPrice());
             psBakeryProduct.setString(6, bakeryProduct.getbPStatus());
@@ -95,7 +95,7 @@ public class BakeryProductServices {
             psBackeryProduct = conn.prepareStatement(BakeryProductQueries.UPDATE_ITEM_STOCK_DATA_QUERY);
             psBackeryProduct.setString(1,bakeryProduct.getbPName());
             psBackeryProduct.setString(2,bakeryProduct.getbPType());
-            psBackeryProduct.setFloat(3, bakeryProduct.getbPWeight());
+            psBackeryProduct.setString(3, bakeryProduct.getbPWeight());
             psBackeryProduct.setString(4, bakeryProduct.getbPDescription());
             psBackeryProduct.setFloat(5, bakeryProduct.getbPPrice());
             psBackeryProduct.setString(6, bakeryProduct.getbPStatus());
@@ -141,7 +141,7 @@ public class BakeryProductServices {
             ResultSet rsLoadBakeryProduct = conn.createStatement().executeQuery(BakeryProductQueries.LOAD_BAKERY_PRODUCT_DATA_QUERY);
 
             while (rsLoadBakeryProduct.next()) {
-                bakeryProductsData.add(new BakeryProduct(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getFloat(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getFloat(6), rsLoadBakeryProduct.getString(7)));
+                bakeryProductsData.add(new BakeryProduct(rsLoadBakeryProduct.getString(1), rsLoadBakeryProduct.getString(2), rsLoadBakeryProduct.getString(3), rsLoadBakeryProduct.getString(4), rsLoadBakeryProduct.getString(5), rsLoadBakeryProduct.getFloat(6), rsLoadBakeryProduct.getString(7)));
             }
         } catch (SQLException ex) {
             AlertPopUp.sqlQueryError(ex);

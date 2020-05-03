@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.SalesItem;
 import services.BillingServices;
-import util.authenticate.CashierSessionHandler;
+import util.authenticate.CashierHandler;
 import util.authenticate.UserAuthentication;
 import util.utility.UtilityMethod;
 
@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 public class SalesInfoCashierController implements Initializable {
     @FXML
     AnchorPane rootpane;
-    private CashierSessionHandler cashierSessionHandler = new CashierSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
 
     @FXML
     private TableView<SalesItem> BillingTable;
@@ -75,27 +75,27 @@ public class SalesInfoCashierController implements Initializable {
 
     @FXML
     private void Billing(ActionEvent event){
-        cashierSessionHandler.loadBilling(event);
+        cashierHandler.loadBilling(event);
     }
     @FXML
     private void Products(ActionEvent event){
-        cashierSessionHandler.loadProducts(rootpane);
+        cashierHandler.loadProducts(rootpane);
     }
     @FXML
     private void OrderMenu(ActionEvent event){
-        cashierSessionHandler.loadOrderMenu(rootpane);
+        cashierHandler.loadOrderMenu(rootpane);
     }
     @FXML
     private void Order(ActionEvent event) {
-        cashierSessionHandler.loadOrder(rootpane);
+        cashierHandler.loadOrder(rootpane);
     }
     @FXML
     private void OrderStatus(ActionEvent event){
-        cashierSessionHandler.loadOrderStatus(rootpane);
+        cashierHandler.loadOrderStatus(rootpane);
     }
     @FXML
     private void SalesInfo(ActionEvent event) {
-        cashierSessionHandler.loadSalesInfo(rootpane);
+        cashierHandler.loadSalesInfo(rootpane);
     }
     //load data from Main LoginController to View table
     private void loadData(){

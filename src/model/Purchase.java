@@ -18,6 +18,8 @@ public class Purchase {
     private IntegerProperty pItemQuantity  = null;
     private FloatProperty pItemTotal  = null;
     private StringProperty pStatus = null;
+    private StringProperty pBankName = null;
+    private LongProperty pBankAccount = null;
     private StringProperty pBankInfo = null;
     private StringProperty pPaidDate = null;
 
@@ -33,7 +35,7 @@ public class Purchase {
         this.pStatus = new SimpleStringProperty(pStatus);
     }
 
-    public Purchase(String pID, String pItemID, String pItemName, String pSupplierID, String pSupplierName, String pType, String pPurchaseDate, Float pPricePerUnit, Integer pItemQuantity, String pStatus, String pBankInfo, String pPaidDate) {
+    public Purchase(String pID, String pItemID, String pItemName, String pSupplierID, String pSupplierName, String pType, String pPurchaseDate, Float pPricePerUnit, Integer pItemQuantity, String pStatus, String pBankName, Long pBankAccount, String pBankInfo, String pPaidDate) {
         this.pID = new SimpleStringProperty(UtilityMethod.addPrefix("P", pID));
         this.pItemID =  new SimpleStringProperty(UtilityMethod.addPrefix("I", pItemID));
         this.pItemName =  new SimpleStringProperty(pItemName);
@@ -45,6 +47,8 @@ public class Purchase {
         this.pItemQuantity = new SimpleIntegerProperty(pItemQuantity) ;
         this.pItemTotal =  new SimpleFloatProperty(pItemQuantity * pPricePerUnit);
         this.pStatus =  new SimpleStringProperty(pStatus);
+        this.pBankName =  new SimpleStringProperty(pBankName);
+        this.pBankAccount =  new SimpleLongProperty(pBankAccount);
         this.pBankInfo = new SimpleStringProperty(pBankInfo);
         this.pPaidDate = new SimpleStringProperty(pPaidDate);
     }
@@ -179,6 +183,30 @@ public class Purchase {
 
     public void setpPricePerUnit(float pPricePerUnit) {
         this.pPricePerUnit = new SimpleFloatProperty(pPricePerUnit);
+    }
+
+    public String getpBankName() {
+        return pBankName.get();
+    }
+
+    public StringProperty pBankNameProperty() {
+        return pBankName;
+    }
+
+    public void setpBankName(String pBankName) {
+        this.pBankName = new SimpleStringProperty(pBankName);
+    }
+
+    public long getpBankAccount() {
+        return pBankAccount.get();
+    }
+
+    public LongProperty pBankAccountProperty() {
+        return pBankAccount;
+    }
+
+    public void setpBankAccount(long pBankAccount) {
+        this.pBankAccount = new SimpleLongProperty(pBankAccount);
     }
 
     public String getpBankInfo() {

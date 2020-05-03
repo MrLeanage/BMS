@@ -12,7 +12,7 @@ public class ItemStock {
     private StringProperty iSISupplierName = null;
     private IntegerProperty iUnitsPerBlock = null;
     private IntegerProperty iBlocks = null;
-    private FloatProperty iWeightPerBlock = null;
+    private StringProperty iWeightPerBlock = null;
     private FloatProperty iBuyingPrice = null;
     private StringProperty iExpireDate = null;
     private StringProperty iAddedDate = null;
@@ -20,7 +20,7 @@ public class ItemStock {
     private IntegerProperty iAvailableQuantity = null;
     private StringProperty iStatus = null;
 
-    public ItemStock(String iID, String iName, String iSID, String iSISupplierName, Integer iUnitsPerBlock, Integer iBlocks, Float iWeightPerBlock, Float iBuyingPrice, String iExpireDate, String iAddedDate, Integer iMinQuantityLimit, Integer iAvailableQuantity) {
+    public ItemStock(String iID, String iName, String iSID, String iSISupplierName, Integer iUnitsPerBlock, Integer iBlocks, String iWeightPerBlock, Float iBuyingPrice, String iExpireDate, String iAddedDate, Integer iMinQuantityLimit, Integer iAvailableQuantity) {
 
         this.iID = new SimpleStringProperty(UtilityMethod.addPrefix("I", iID));
         this.iName = new SimpleStringProperty(iName);
@@ -28,7 +28,7 @@ public class ItemStock {
         this.iSISupplierName = new SimpleStringProperty(iSISupplierName);
         this.iUnitsPerBlock = new SimpleIntegerProperty(iUnitsPerBlock);
         this.iBlocks = new SimpleIntegerProperty(iBlocks);
-        this.iWeightPerBlock = new SimpleFloatProperty(iWeightPerBlock);
+        this.iWeightPerBlock = new SimpleStringProperty(iWeightPerBlock);
         this.iBuyingPrice = new SimpleFloatProperty(iBuyingPrice);
         this.iExpireDate = new SimpleStringProperty(iExpireDate);
         this.iAddedDate = new SimpleStringProperty(iAddedDate);
@@ -113,16 +113,16 @@ public class ItemStock {
         this.iBlocks = new SimpleIntegerProperty(iBlocks);
     }
 
-    public float getiWeightPerBlock() {
+    public String getiWeightPerBlock() {
         return iWeightPerBlock.get();
     }
 
-    public FloatProperty iWeightPerBlockProperty() {
+    public StringProperty iWeightPerBlockProperty() {
         return iWeightPerBlock;
     }
 
-    public void setiWeightPerBlock(float iWeightPerBlock) {
-        this.iWeightPerBlock = new SimpleFloatProperty(iWeightPerBlock);
+    public void setiWeightPerBlock(String iWeightPerBlock) {
+        this.iWeightPerBlock = new SimpleStringProperty(iWeightPerBlock);
     }
 
     public float getiBuyingPrice() {

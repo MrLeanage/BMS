@@ -87,9 +87,9 @@ public class PayOrderPopUPController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
-        searchTable();
         loadData();
+        searchTable();
+
 
     }
 
@@ -99,7 +99,7 @@ public class PayOrderPopUPController implements Initializable {
         OrderServices orderServices = new OrderServices();
 
         ObservableList<Order> ordersData;
-        ordersData = orderServices.loadData();
+        ordersData = orderServices.loadUnPaidData("Total Paid");
 
         //Setting cell value factory to table view
         OIDColumn.setCellValueFactory(new PropertyValueFactory<>("oID"));
@@ -151,7 +151,7 @@ public class PayOrderPopUPController implements Initializable {
 
         OrderServices orderServices = new OrderServices();
         //Retrieving sorted data from Main LoginController
-        SortedList<Order> sortedData = orderServices.searchTable(SearchTextBox);
+        SortedList<Order> sortedData = orderServices.searchUnPayedDataTable(SearchTextBox, "Total Paid");
 
         //binding the SortedList to TableView
         sortedData.comparatorProperty().bind(OrderTable.comparatorProperty());
@@ -204,7 +204,7 @@ public class PayOrderPopUPController implements Initializable {
                 }
             }
         }catch(NullPointerException ex){
-            AlertPopUp.generalError(ex);
+            //AlertPopUp.generalError(ex);
         }
 
     }

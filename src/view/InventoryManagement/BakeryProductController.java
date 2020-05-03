@@ -6,23 +6,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.BakeryProduct;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.InventorySessionHandler;
-import util.authenticate.UserAuthentication;
+import util.authenticate.InventoryHandler;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 import util.validation.DataValidation;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -100,7 +94,7 @@ public class BakeryProductController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private InventorySessionHandler inventorySessionHandler = new InventorySessionHandler();
+    private InventoryHandler inventoryHandler = new InventoryHandler();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,15 +116,15 @@ public class BakeryProductController implements Initializable {
     }
     @FXML
     private void FoodProducts(ActionEvent event) {
-        inventorySessionHandler.loadBakeryProducts(rootpane);
+        inventoryHandler.loadBakeryProducts(rootpane);
     }
     @FXML
     private void AgencyProduct(ActionEvent event)  {
-        inventorySessionHandler.loadAgencyProduct(rootpane);
+        inventoryHandler.loadAgencyProduct(rootpane);
     }
     @FXML
     private void Supplier(ActionEvent event) {
-        inventorySessionHandler.loadSupplier(rootpane);
+        inventoryHandler.loadSupplier(rootpane);
     }
     @FXML
     private void playBeep(){
@@ -178,7 +172,6 @@ public class BakeryProductController implements Initializable {
                 && DataValidation.isValidMaximumLength(BPDescriptionTextArea.getText(),250)
                 && DataValidation.isValidMaximumLength(BPPriceTextField.getText(),10)
                 //Checking for Specific Data Validation
-                && DataValidation.isValidNumberFormat(BPWeightTextField.getText())
                 && DataValidation.isValidNumberFormat(BPPriceTextField.getText())){
             returnVal = true;
         }
@@ -216,10 +209,8 @@ public class BakeryProductController implements Initializable {
 
         }
         //checking for specific properties
-        if(!(DataValidation.isValidNumberFormat(BPWeightTextField.getText())
-                && DataValidation.isValidNumberFormat(BPPriceTextField.getText()))){
+        if(!(DataValidation.isValidNumberFormat(BPPriceTextField.getText()))){
             //Checking for Specific Data Validation
-            DataValidation.isValidNumberFormat(BPWeightTextField.getText(), BPWeightLabel,"SalesItem Weight can contain only Digits");
             DataValidation.isValidNumberFormat(BPPriceTextField.getText(), BPPriceLabel, "SalesItem Price can contain only Digits");
         }
     }
@@ -265,7 +256,7 @@ public class BakeryProductController implements Initializable {
 
             bakeryProductModel.setbPName(BPNameTextField.getText());
             bakeryProductModel.setbPType(BPTypeChoiceBox.getValue());
-            bakeryProductModel.setbPWeight(Float.parseFloat(BPWeightTextField.getText()));
+            bakeryProductModel.setbPWeight(BPWeightTextField.getText());
             bakeryProductModel.setbPDescription(BPDescriptionTextArea.getText());
             bakeryProductModel.setbPPrice(Float.parseFloat(BPPriceTextField.getText()));
             bakeryProductModel.setbPStatus(BPStatusChoiceBox.getValue());
@@ -325,7 +316,7 @@ public class BakeryProductController implements Initializable {
                     bakeryProductModel.setbPID(existingBakeryProductModel.getbPID());
                     bakeryProductModel.setbPName(BPNameTextField.getText());
                     bakeryProductModel.setbPType(BPTypeChoiceBox.getValue());
-                    bakeryProductModel.setbPWeight(Float.parseFloat(BPWeightTextField.getText()));
+                    bakeryProductModel.setbPWeight(BPWeightTextField.getText());
                     bakeryProductModel.setbPDescription(BPDescriptionTextArea.getText());
                     bakeryProductModel.setbPPrice(Float.parseFloat(BPPriceTextField.getText()));
                     bakeryProductModel.setbPStatus(BPStatusChoiceBox.getValue());

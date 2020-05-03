@@ -2,8 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -23,12 +24,17 @@
                </children>
             </AnchorPane>
             <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="12.0" layoutY="51.57143020629883" size="45" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="13.0" />
-            <Label fx:id="UserNameLabel" alignment="CENTER_RIGHT" layoutX="43.0" layoutY="14.0" prefHeight="17.0" prefWidth="115.0" text="User " textFill="WHITE" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="14.0" />
-            <Button graphicTextGap="3.0" layoutX="55.0" layoutY="33.0" mnemonicParsing="false" onAction="#LogoutSession" prefHeight="20.0" prefWidth="103.0" style="-fx-background-color: #ff5e00;" text="Logout" textFill="WHITE">
+            <MenuButton fx:id="OptionMenuButton" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #ff5e00;" text="User" textFill="WHITE" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="29.0">
+               <items>
+                  <MenuItem fx:id="AdminPanelMenuItem" mnemonicParsing="false" onAction="#adminPanel" text="Admin Panel" visible="false" />
+                  <MenuItem fx:id="CashierPanelMenuItem" mnemonicParsing="false" onAction="#cashierPanel" text="Cashier Panel" />
+                  <MenuItem fx:id="SupervisorPanelMenuItem" mnemonicParsing="false" onAction="#supervisorPanel" text="Supervisor Panel" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#LogoutSession" text="Logout" />
+               </items>
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
-            </Button>
+            </MenuButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="rootpane" layoutX="-2.0" layoutY="90.0" prefHeight="580.0" prefWidth="1260.0" style="-fx-background-color: #c5cee4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">

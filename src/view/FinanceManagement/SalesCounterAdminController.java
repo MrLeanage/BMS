@@ -6,27 +6,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import model.Order;
-import model.OrderMenu;
 import model.SalesItem;
 import model.User;
 import services.BillingServices;
-import services.OrderServices;
 import services.UserServices;
-import util.authenticate.AdminManagementHandler;
-import util.authenticate.FinanceSessionHandler;
-import util.authenticate.UserAuthentication;
+import util.authenticate.*;
 import util.userAlerts.AlertPopUp;
 
 import java.io.IOException;
@@ -91,23 +79,40 @@ public class SalesCounterAdminController implements Initializable {
     private LinkedList<SalesItem> salesItemLinkedList = new LinkedList<>();
 
     @FXML
-    public Label UserNameLabel;
+    private MenuButton OptionMenuButton;
 
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private FinanceSessionHandler financeSessionHandler = new FinanceSessionHandler();
+    private CashierHandler cashierHandler = new CashierHandler();
+    private SupervisorHandler supervisorHandler = new SupervisorHandler();
+    private FinanceHandler financeHandler = new FinanceHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
         searchTable();
-        UserNameLabel.setText(UserAuthentication.getAuthenticatedSession().getuName());
+        OptionMenuButton.setText(UserAuthentication.getAuthenticatedSession().getuName());
     }
 
     @FXML
     private void LogoutSession(ActionEvent event){
         UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.endAuthenticatedSession(event);
+        userAuthentication.endAuthenticatedSession(OptionMenuButton);
+    }
+    @FXML
+    private void adminPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getAdminMenu(OptionMenuButton);
+    }
+    @FXML
+    private void cashierPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getCashierMenu(OptionMenuButton);
+    }
+    @FXML
+    private void supervisorPanel(ActionEvent event){
+        UserAuthentication userAuthentication = new UserAuthentication();
+        userAuthentication.getSupervisorMenu(OptionMenuButton);
     }
     @FXML
     private void ItemStock(ActionEvent event){
@@ -128,27 +133,27 @@ public class SalesCounterAdminController implements Initializable {
     //internal methods
     @FXML
     private void SalesReport(ActionEvent event){
-        financeSessionHandler.loadSalesReport(rootpane);
+        financeHandler.loadSalesReport(rootpane);
     }
     @FXML
     private void PurchasesReport(ActionEvent event){
-        financeSessionHandler.loadPurchasesReport(rootpane);
+        financeHandler.loadPurchasesReport(rootpane);
     }
     @FXML
     private void PaySheet(ActionEvent event){
-        financeSessionHandler.loadPaySheet(rootpane);
+        financeHandler.loadPaySheet(rootpane);
     }
     @FXML
     private void PayRoll(ActionEvent event) {
-        financeSessionHandler.loadPayRoll(rootpane);
+        financeHandler.loadPayRoll(rootpane);
     }
     @FXML
     private void OtherExpenses(ActionEvent event){
-        financeSessionHandler.loadOtherExpenses(rootpane);
+        financeHandler.loadOtherExpenses(rootpane);
     }
     @FXML
-    private void IncomeStatement(ActionEvent event) {
-        financeSessionHandler.loadIncomeStatement(rootpane);
+    private void IncomeStatement(ActionEvent event) throws IOException {
+        financeHandler.loadIncomeStatement1(rootpane);
     }
     @FXML
     private void clearField(){

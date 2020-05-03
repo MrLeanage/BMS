@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,8 +17,7 @@ import javafx.util.Callback;
 import model.AgencyProduct;
 import model.Supplier;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.InventorySessionHandler;
-import util.authenticate.UserAuthentication;
+import util.authenticate.InventoryHandler;
 import util.playAudio.Audio;
 import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
@@ -157,7 +155,7 @@ public class AgencyProductsController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private InventorySessionHandler inventorySessionHandler = new InventorySessionHandler();
+    private InventoryHandler inventoryHandler = new InventoryHandler();
     //overriding methods and connections to load data on page visit
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -176,15 +174,15 @@ public class AgencyProductsController implements Initializable {
     }
     @FXML
     private void FoodProducts(ActionEvent event) {
-        inventorySessionHandler.loadBakeryProducts(rootpane);
+        inventoryHandler.loadBakeryProducts(rootpane);
     }
     @FXML
     private void AgencyProduct(ActionEvent event)  {
-        inventorySessionHandler.loadAgencyProduct(rootpane);
+        inventoryHandler.loadAgencyProduct(rootpane);
     }
     @FXML
     private void Supplier(ActionEvent event) {
-        inventorySessionHandler.loadSupplier(rootpane);
+        inventoryHandler.loadSupplier(rootpane);
     }
     @FXML
     private void playBeep(){
@@ -257,7 +255,6 @@ public class AgencyProductsController implements Initializable {
                 && DataValidation.isValidMaximumLength(String.valueOf(APDiscontinueAlertDatePicker.getValue()),10)
                 //Checking for Specific Data Validation
                 && DataValidation.isValidNumberFormat(APUnitsTextBox.getText())
-                && DataValidation.isValidNumberFormat(APWeightTextBox.getText())
                 && DataValidation.isValidNumberFormat(APBuyingPriceTextBox.getText())
                 && DataValidation.isValidNumberFormat(APMarketPriceTextBox.getText())
                 && DataValidation.isValidNumberFormat(APSellingPriceTextBox.getText())){
@@ -317,14 +314,12 @@ public class AgencyProductsController implements Initializable {
         }
         //checking for specific properties
         if(!DataValidation.isValidNumberFormat(APUnitsTextBox.getText())
-                || DataValidation.isValidNumberFormat(APWeightTextBox.getText())
                 || DataValidation.isValidNumberFormat(APBuyingPriceTextBox.getText())
                 || DataValidation.isValidNumberFormat(APMarketPriceTextBox.getText())
                 || DataValidation.isValidNumberFormat(APSellingPriceTextBox.getText())){
             //Checking for Specific Data Validation
             System.out.println(APUnitsTextBox.getText());
             DataValidation.isValidNumberFormat(APUnitsTextBox.getText(), APUnitsLabel,"No of Unit can contain only Digits");
-            DataValidation.isValidNumberFormat(APWeightTextBox.getText(), APWeightLabel, "SalesItem Weight can contain only Digits");
             DataValidation.isValidNumberFormat(APBuyingPriceTextBox.getText(), APBuyingPriceLabel,"Buying Price can contain only Digits");
             DataValidation.isValidNumberFormat(APMarketPriceTextBox.getText(), APMarketPriceLabel,"Market Price can contain only Digits");
             DataValidation.isValidNumberFormat(APSellingPriceTextBox.getText(), APSellingPriceLabel, "Selling Price can contain only Digits");
@@ -436,7 +431,7 @@ public class AgencyProductsController implements Initializable {
             agencyProductModel.setaPSupplierID(APSupplierIDTextBox.getText());
             agencyProductModel.setaPSupplierName(APSupplierNameTextBox.getText());
             agencyProductModel.setaPTotalUnits(Integer.parseInt(APUnitsTextBox.getText()));
-            agencyProductModel.setaPWeightOfUnit(Float.parseFloat(APWeightTextBox.getText()));
+            agencyProductModel.setaPWeightOfUnit(APWeightTextBox.getText());
             agencyProductModel.setaPBuyingPricePerUnit(Float.parseFloat(APBuyingPriceTextBox.getText()));
             agencyProductModel.setaPMarketPricePerUnit(Float.parseFloat(APMarketPriceTextBox.getText()));
             agencyProductModel.setaPSellingPricePerUnit(Float.parseFloat(APSellingPriceTextBox.getText()));
@@ -497,7 +492,7 @@ public class AgencyProductsController implements Initializable {
             agencyProductModel.setaPSupplierID(APSupplierIDTextBox.getText());
             agencyProductModel.setaPSupplierName(APSupplierNameTextBox.getText());
             agencyProductModel.setaPTotalUnits(Integer.parseInt(APUnitsTextBox.getText()));
-            agencyProductModel.setaPWeightOfUnit(Float.parseFloat(APWeightTextBox.getText()));
+            agencyProductModel.setaPWeightOfUnit(APWeightTextBox.getText());
             agencyProductModel.setaPBuyingPricePerUnit(Float.parseFloat(APBuyingPriceTextBox.getText()));
             agencyProductModel.setaPMarketPricePerUnit(Float.parseFloat(APMarketPriceTextBox.getText()));
             agencyProductModel.setaPSellingPricePerUnit(Float.parseFloat(APSellingPriceTextBox.getText()));

@@ -6,37 +6,22 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.*;
-import net.sf.jasperreports.engine.JRException;
-import services.AllowancePayServices;
-import services.EmployeeServices;
 import services.PaySheetServices;
-import services.SalarySchemeServices;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.FinanceSessionHandler;
-import util.userAlerts.AlertPopUp;
+import util.authenticate.FinanceHandler;
 import util.utility.PrintReport;
 import util.utility.UtilityMethod;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PayRollAdminController implements Initializable {
 
@@ -100,7 +85,7 @@ public class PayRollAdminController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private FinanceSessionHandler financeSessionHandler = new FinanceSessionHandler();
+    private FinanceHandler financeHandler = new FinanceHandler();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadChoiceBoxes();
@@ -114,27 +99,27 @@ public class PayRollAdminController implements Initializable {
     }
     @FXML
     private void SalesReport(ActionEvent event){
-        financeSessionHandler.loadSalesReport(rootpane);
+        financeHandler.loadSalesReport(rootpane);
     }
     @FXML
     private void PurchasesReport(ActionEvent event){
-        financeSessionHandler.loadPurchasesReport(rootpane);
+        financeHandler.loadPurchasesReport(rootpane);
     }
     @FXML
     private void PaySheet(ActionEvent event){
-        financeSessionHandler.loadPaySheet(rootpane);
+        financeHandler.loadPaySheet(rootpane);
     }
     @FXML
     private void PayRoll(ActionEvent event) {
-        financeSessionHandler.loadPayRoll(rootpane);
+        financeHandler.loadPayRoll(rootpane);
     }
     @FXML
     private void OtherExpenses(ActionEvent event){
-        financeSessionHandler.loadOtherExpenses(rootpane);
+        financeHandler.loadOtherExpenses(rootpane);
     }
     @FXML
     private void IncomeStatement(ActionEvent event) {
-        financeSessionHandler.loadIncomeStatement(rootpane);
+        financeHandler.loadIncomeStatement(rootpane);
     }
     //load sales dates to choiceboxes and Chart
     private void loadChoiceBoxes(){

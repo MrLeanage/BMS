@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -15,30 +17,35 @@
       <AnchorPane fx:id="rootpane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1260.0" style="-fx-background-color: #182c49;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="630.0" layoutX="48.0" layoutY="90.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="1240.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Text fill="WHITE" layoutX="400.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bakery Management System">
+            <Text fill="WHITE" layoutX="488.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bakery Management System">
                <font>
                   <Font name="System Bold" size="35.0" />
                </font>
             </Text>
-            <Label layoutX="515.0" layoutY="318.0" prefHeight="28.0" prefWidth="119.0" text="User ID       :" textFill="WHITE">
+            <Label layoutX="603.0" layoutY="318.0" prefHeight="28.0" prefWidth="119.0" text="User ID       :" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="UIDTextField" layoutX="637.0" layoutY="319.0" onMouseClicked="#clearLabels" prefHeight="25.0" prefWidth="211.0" />
-            <PasswordField fx:id="UPasswordPasswordField" layoutX="637.0" layoutY="361.0" onMouseClicked="#clearLabels" prefHeight="25.0" prefWidth="211.0" />
-            <Label layoutX="515.0" layoutY="360.0" prefHeight="28.0" prefWidth="119.0" text="Password    :" textFill="WHITE">
+            <TextField fx:id="UIDTextField" layoutX="725.0" layoutY="319.0" onMouseClicked="#clearLabels" prefHeight="25.0" prefWidth="211.0" />
+            <PasswordField fx:id="UPasswordPasswordField" layoutX="725.0" layoutY="361.0" onMouseClicked="#clearLabels" prefHeight="25.0" prefWidth="211.0" />
+            <Label layoutX="603.0" layoutY="360.0" prefHeight="28.0" prefWidth="119.0" text="Password    :" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <JFXButton layoutX="681.0" layoutY="418.0" onAction="#validateLogin" prefHeight="45.0" prefWidth="167.0" ripplerFill="#ff5e00" style="-fx-background-color: #ff5e00;" text="Login" textFill="WHITE">
+            <JFXButton layoutX="769.0" layoutY="418.0" onAction="#validateLogin" prefHeight="45.0" prefWidth="167.0" ripplerFill="#ff5e00" style="-fx-background-color: #ff5e00;" text="Login" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
             </JFXButton>
-            <Label fx:id="LoginValidateLabel" layoutX="517.0" layoutY="392.0" prefHeight="17.0" prefWidth="332.0" textFill="#fffc00" />
-            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="418.0" layoutY="379.0" size="80" wrappingWidth="77.0" />
+            <Label fx:id="LoginValidateLabel" layoutX="605.0" layoutY="392.0" prefHeight="17.0" prefWidth="332.0" textFill="#fffc00" />
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="506.0" layoutY="379.0" size="80" wrappingWidth="77.0" />
+            <ImageView fitHeight="194.0" fitWidth="249.0" layoutX="256.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../lib/img/stage-icon.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

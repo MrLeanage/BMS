@@ -5,33 +5,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.ChartData;
 import model.OtherExpense;
 import model.Purchase;
 import model.SalesItem;
 import services.BillingServices;
+import services.IncomeStatementServices;
 import services.OtherExpenseServices;
 import services.PurchaseServices;
 import util.authenticate.AdminManagementHandler;
-import util.authenticate.FinanceSessionHandler;
+import util.authenticate.FinanceHandler;
+import util.utility.PrintReport;
 import util.utility.UtilityMethod;
 
-import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class IncomeStatemetAdminController implements Initializable {
@@ -65,6 +61,9 @@ public class IncomeStatemetAdminController implements Initializable {
     @FXML
     private ComboBox<String> StatCategoryComboBox;
 
+    @FXML
+    private ComboBox<String> IncomeStatementMonthComboBox;
+
 
     private ObservableList<SalesItem> salesItemsData;
     private ObservableList<Purchase> purchasesData;
@@ -75,7 +74,7 @@ public class IncomeStatemetAdminController implements Initializable {
     @FXML
     private AnchorPane rootpane;
     private AdminManagementHandler adminManagementHandler = new AdminManagementHandler();
-    private FinanceSessionHandler financeSessionHandler = new FinanceSessionHandler();
+    private FinanceHandler financeHandler = new FinanceHandler();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,27 +88,27 @@ public class IncomeStatemetAdminController implements Initializable {
     }
     @FXML
     private void SalesReport(ActionEvent event){
-        financeSessionHandler.loadSalesReport(rootpane);
+        financeHandler.loadSalesReport(rootpane);
     }
     @FXML
     private void PurchasesReport(ActionEvent event){
-        financeSessionHandler.loadPurchasesReport(rootpane);
+        financeHandler.loadPurchasesReport(rootpane);
     }
     @FXML
     private void PaySheet(ActionEvent event){
-        financeSessionHandler.loadPaySheet(rootpane);
+        financeHandler.loadPaySheet(rootpane);
     }
     @FXML
     private void PayRoll(ActionEvent event) {
-        financeSessionHandler.loadPayRoll(rootpane);
+        financeHandler.loadPayRoll(rootpane);
     }
     @FXML
     private void OtherExpenses(ActionEvent event){
-        financeSessionHandler.loadOtherExpenses(rootpane);
+        financeHandler.loadOtherExpenses(rootpane);
     }
     @FXML
     private void IncomeStatement(ActionEvent event) {
-        financeSessionHandler.loadIncomeStatement(rootpane);
+        financeHandler.loadIncomeStatement(rootpane);
     }
     private void clearLabels(){
         TotalIncomeLabel.setText("Rs : "+UtilityMethod.numberDisplayWithCommasAndDecimalPlaces(0.0));
@@ -163,6 +162,20 @@ public class IncomeStatemetAdminController implements Initializable {
 
         //loading All Comparision data to chart for last 3 months
         getFilteredChartData(3, "All Comparision");
+
+        //setting data for income statement Month Selection Combo Box
+        ObservableList<String> sortedIncomeStatementMonth = FXCollections.observableArrayList();
+        ObservableList<String> incomeStatementMonth = FXCollections.observableArrayList();
+        for(ChartData chartData : barChartData()){
+            incomeStatementMonth.add(chartData.getDataYearMonth());
+        }
+        sortedIncomeStatementMonth = UtilityMethod.removeStringDuplicates(incomeStatementMonth);
+        IncomeStatementMonthComboBox.setValue(sortedIncomeStatementMonth.get(sortedIncomeStatementMonth.size() - 1));
+        IncomeStatementMonthComboBox.setItems(sortedIncomeStatementMonth);
+
+        //Updating records in Income Statement
+        IncomeStatementServices incomeStatementServices = new IncomeStatementServices();
+        incomeStatementServices.UpdateIncomeStatementInfo(barChartData());
     }
     @FXML
     private void loadStatFilterData(ActionEvent actionEvent){
@@ -328,6 +341,38 @@ public class IncomeStatemetAdminController implements Initializable {
         chartDataLinkedList = new LinkedList<>(chartDataList);
         return chartDataLinkedList;
     }
+    public  ObservableList<ChartData> barChartData(){
+        ObservableList<ChartData> barChartDataList = FXCollections.observableArrayList();
 
+
+        for(ChartData chartData :getChartAllSalesData("All Products")){
+            chartData.setDataType("All Income");
+            barChartDataList.add(chartData);
+        }
+        barChartDataList.addAll(getChartAllExpendituresData());
+        for(ChartData expenseChartData  :getChartAllExpendituresData()){
+            double profit = 0;
+            ChartData chartData = new ChartData();
+            chartData.setDataType("Profit");
+            chartData.setDataYearMonth(expenseChartData.getDataYearMonth());
+            for(ChartData  incomeChartData: getChartAllSalesData("All Products")){
+                if(expenseChartData.getDataYearMonth().equals(incomeChartData.getDataYearMonth())){
+                    profit = incomeChartData.getDataValue() - expenseChartData.getDataValue();
+                }
+            }
+            chartData.setDataValue(profit);
+            barChartDataList.add(chartData);
+        }
+
+
+        return barChartDataList;
+    }
+    @FXML
+    private void generateIncomeStatement(){
+        IncomeStatementServices incomeStatementServices = new IncomeStatementServices();
+        incomeStatementServices.UpdateIncomeStatementInfo(barChartData());
+        PrintReport printReport = new PrintReport();
+        printReport.printIncomeStatement(IncomeStatementMonthComboBox.getValue());
+    }
 
 }

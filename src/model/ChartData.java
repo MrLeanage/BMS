@@ -5,12 +5,14 @@ public class ChartData {
     private String dataMonth = null;
     private Double dataValue = null;
     private String dataType = null;
+    private String dataYearMonth = null;
 
     public ChartData(Integer dataYear, String dataMonth, Double dataValue, String dataType) {
         this.dataYear = dataYear;
         this.dataMonth = dataMonth;
         this.dataValue = dataValue;
         this.dataType = dataType;
+        this.dataYearMonth =  dataMonth + " - " +  dataYear;
     }
 
     public ChartData() {
@@ -46,5 +48,13 @@ public class ChartData {
 
     public void setDataType(String dataType) {
         this.dataType = dataType;
+    }
+
+    public String getDataYearMonth() {
+        return dataYearMonth;
+    }
+
+    public void setDataYearMonth(String dataYearMonth) {
+        this.dataYearMonth = dataYearMonth;
     }
 }
