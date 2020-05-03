@@ -1,25 +1,55 @@
 package view.AppHome;
 
+import animatefx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.User;
 import services.UserServices;
 import util.authenticate.UserAuthentication;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
-public class LoginController {
+public class LoginController implements Initializable {
+    @FXML
+    private Circle Circle1;
+
+    @FXML
+    private Circle Circle2;
+
+    @FXML
+    private Circle Circle3;
+
+    @FXML
+    private Circle Circle4;
+
+    @FXML
+    private Circle Circle5;
+
+
     @FXML
     private AnchorPane rootpane;
+
+    @FXML
+    private AnchorPane LoadingAnchorPane;
     @FXML
     private TextField UIDTextField;
 
@@ -29,35 +59,24 @@ public class LoginController {
     @FXML
     private Label LoginValidateLabel;
     private UserAuthentication userAuthentication = new UserAuthentication();
-    @FXML
-    private void AdminHome(ActionEvent event) throws IOException {
-
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemStock.fxml"));
-
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        startUpAnimation();
     }
-    @FXML
-    private void CashierHome(ActionEvent event) throws IOException {
+    private void startUpAnimation(){
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/Billing.fxml"));
 
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
-    }
-    @FXML
-    private void SupervisorHome(ActionEvent event) throws IOException {
+        new Bounce(Circle1).setCycleCount(5).setDelay(Duration.valueOf("100ms")).play();
+        AnimationFX animationFX = new Bounce(Circle2);
+            animationFX.setCycleCount(5).setDelay(Duration.valueOf("300ms")).play();
+        new Bounce(Circle3).setCycleCount(5).setDelay(Duration.valueOf("400ms")).play();
+        new Bounce(Circle4).setCycleCount(5).setDelay(Duration.valueOf("150ms")).play();
+        new Bounce(Circle5).setCycleCount(5).setDelay(Duration.valueOf("100ms")).play();
 
-        AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemWithdraw.fxml"));
+        animationFX.setOnFinished((e -> {
+            LoadingAnchorPane.setVisible(false);
+        }));
 
-        Scene scene = new Scene(home_page);
-        Stage app=(Stage)((Node) event.getSource()).getScene().getWindow();
-        app.setScene(scene);
-        app.show();
     }
     @FXML
     private void clearLabels(){
@@ -85,5 +104,6 @@ public class LoginController {
             LoginValidateLabel.setText("Invalid User Name or Password Combination");
         }
     }
+
 
 }

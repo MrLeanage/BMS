@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserAuthentication {
-    private Scene scene;
+    public static Scene scene;
     private static User userSession = null;
     private static String currentAdminType = "default";
 

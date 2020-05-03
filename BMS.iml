@@ -13,5 +13,6 @@
     <orderEntry type="library" name="Java-Utils" level="project" />
     <orderEntry type="library" name="JasperReportLibs" level="project" />
     <orderEntry type="library" name="Controlsfx" level="project" />
+    <orderEntry type="library" name="AnimateFX" level="project" />
   </component>
 </module>
