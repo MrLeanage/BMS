@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -19,12 +20,28 @@
       <AnchorPane layoutX="11.0" layoutY="10.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutX="14.0" layoutY="12.0" stroke="TRANSPARENT" strokeType="INSIDE" width="160.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
-            <MenuButton fx:id="OptionMenuButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #ff5e00;" text="User" textFill="WHITE" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="29.0">
+            <MenuButton fx:id="OptionMenuButton" contentDisplay="CENTER" layoutX="60.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #ff5e00;" text="User" textFill="WHITE" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="29.0">
                <items>
-                  <MenuItem fx:id="AdminPanelMenuItem" mnemonicParsing="false" onAction="#adminPanel" text="Admin Panel" visible="false" />
-                  <MenuItem fx:id="CashierPanelMenuItem" mnemonicParsing="false" onAction="#cashierPanel" text="Cashier Panel" />
-                  <MenuItem fx:id="SupervisorPanelMenuItem" mnemonicParsing="false" onAction="#supervisorPanel" text="Supervisor Panel" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#LogoutSession" text="Logout" />
+                  <MenuItem fx:id="AdminPanelMenuItem" mnemonicParsing="false" onAction="#adminPanel" text="Admin Panel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem fx:id="CashierPanelMenuItem" mnemonicParsing="false" onAction="#cashierPanel" text="Cashier Panel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem fx:id="SupervisorPanelMenuItem" mnemonicParsing="false" onAction="#supervisorPanel" text="Supervisor Panel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#LogoutSession" text="Logout           ">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                </items>
                <font>
                   <Font name="System Bold" size="10.0" />

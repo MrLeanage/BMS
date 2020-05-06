@@ -28,7 +28,7 @@ public class OrderMenuServices {
 
             while (rsLoadOrderMenuProduct.next()) {
                InputStream inputStream = rsLoadOrderMenuProduct.getBinaryStream(2);
-                orderMenuData.add(new OrderMenu(rsLoadOrderMenuProduct.getString(1), UtilityMethod.convertInputStreamToImage(inputStream), rsLoadOrderMenuProduct.getString(3), rsLoadOrderMenuProduct.getString(4), rsLoadOrderMenuProduct.getFloat(5), rsLoadOrderMenuProduct.getFloat(6), rsLoadOrderMenuProduct.getString(7)));
+                orderMenuData.add(new OrderMenu(rsLoadOrderMenuProduct.getString(1), UtilityMethod.convertInputStreamToImage(inputStream), rsLoadOrderMenuProduct.getString(3), rsLoadOrderMenuProduct.getString(4), rsLoadOrderMenuProduct.getString(5), rsLoadOrderMenuProduct.getFloat(6), rsLoadOrderMenuProduct.getString(7)));
             }
         } catch (SQLException | FileNotFoundException ex) {
             AlertPopUp.sqlQueryError(ex);
@@ -53,7 +53,7 @@ public class OrderMenuServices {
                 orderMenuModelData.setoMIImage(UtilityMethod.convertInputStreamToImage(inputStream));
                 orderMenuModelData.setoMIName(rsLoadOrderMenuProduct.getString(3));
                 orderMenuModelData.setoMIDescription(rsLoadOrderMenuProduct.getString(4));
-                orderMenuModelData.setoMIWeight(rsLoadOrderMenuProduct.getFloat(5));
+                orderMenuModelData.setoMIWeight(rsLoadOrderMenuProduct.getString(5));
                 orderMenuModelData.setoMIPrice(rsLoadOrderMenuProduct.getFloat(6));
                 orderMenuModelData.setoMIStatus(rsLoadOrderMenuProduct.getString(7));
             }
@@ -74,7 +74,7 @@ public class OrderMenuServices {
                 psOrderMenu.setBinaryStream(1, UtilityMethod.convertImageToInputStream(orderMenu.getoMIImage()));
             psOrderMenu.setString(2,orderMenu.getoMIName());
             psOrderMenu.setString(3, orderMenu.getoMIDescription());
-            psOrderMenu.setFloat(4, orderMenu.getoMIWeight());
+            psOrderMenu.setString(4, orderMenu.getoMIWeight());
             psOrderMenu.setFloat(5, orderMenu.getoMIPrice());
             psOrderMenu.setString(6, orderMenu.getoMIStatus());
             psOrderMenu.execute();
@@ -100,7 +100,7 @@ public class OrderMenuServices {
             psOrderMenu.setBinaryStream(1, UtilityMethod.convertImageToInputStream(orderMenu.getoMIImage()));
             psOrderMenu.setString(2,orderMenu.getoMIName());
             psOrderMenu.setString(3, orderMenu.getoMIDescription());
-            psOrderMenu.setFloat(4, orderMenu.getoMIWeight());
+            psOrderMenu.setString(4, orderMenu.getoMIWeight());
             psOrderMenu.setFloat(5, orderMenu.getoMIPrice());
             psOrderMenu.setString(6, orderMenu.getoMIStatus());
             psOrderMenu.setInt(7, UtilityMethod.seperateID(orderMenu.getoMIID()));
@@ -146,7 +146,7 @@ public class OrderMenuServices {
 
             while (rsLoadOrderMenuProduct.next()) {
                 InputStream inputStream = rsLoadOrderMenuProduct.getBinaryStream(2);
-                orderMenuData.add(new OrderMenu(rsLoadOrderMenuProduct.getString(1), UtilityMethod.convertInputStreamToImage(inputStream), rsLoadOrderMenuProduct.getString(3), rsLoadOrderMenuProduct.getString(4), rsLoadOrderMenuProduct.getFloat(5), rsLoadOrderMenuProduct.getFloat(6), rsLoadOrderMenuProduct.getString(7)));
+                orderMenuData.add(new OrderMenu(rsLoadOrderMenuProduct.getString(1), UtilityMethod.convertInputStreamToImage(inputStream), rsLoadOrderMenuProduct.getString(3), rsLoadOrderMenuProduct.getString(4), rsLoadOrderMenuProduct.getString(5), rsLoadOrderMenuProduct.getFloat(6), rsLoadOrderMenuProduct.getString(7)));
             }
         } catch (SQLException | FileNotFoundException ex) {
             AlertPopUp.sqlQueryError(ex);

@@ -229,7 +229,7 @@ CREATE TABLE `ordermenuitem` (
   `OMIImage` longblob,
   `OMIName` varchar(80) DEFAULT NULL,
   `OMIDescription` varchar(250) DEFAULT NULL,
-  `OMIWeight` float DEFAULT NULL,
+  `OMIWeight` varchar(45) DEFAULT NULL,
   `OMIPrice` float DEFAULT NULL,
   `OMIStatus` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`OMIID`)
@@ -303,7 +303,7 @@ CREATE TABLE `paysheet` (
   `PSAccount` bigint(20) DEFAULT NULL,
   `PSGeneratedDate` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`PSID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -431,4 +431,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-03  5:43:01
+-- Dump completed on 2020-05-06  7:17:23

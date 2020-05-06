@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -17,12 +18,28 @@
       <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="1260.0" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="65.0" layoutX="14.0" layoutY="12.0" stroke="TRANSPARENT" strokeType="INSIDE" width="160.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
-            <MenuButton fx:id="OptionMenuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #ff5e00;" text="User" textFill="WHITE" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="29.0">
+            <MenuButton fx:id="OptionMenuButton" contentDisplay="CENTER" layoutX="70.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #ff5e00;" text="User" textFill="WHITE" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="29.0">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#adminPanel" text="Admin Panel" />
-                  <MenuItem mnemonicParsing="false" onAction="#cashierPanel" text="Cashier Panel" />
-                  <MenuItem mnemonicParsing="false" onAction="#supervisorPanel" text="Supervisor Panel" />
-                  <MenuItem mnemonicParsing="false" onAction="#LogoutSession" text="Logout" />
+                  <MenuItem mnemonicParsing="false" onAction="#adminPanel" text="Admin Panel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#cashierPanel" text="Cashier Panel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#supervisorPanel" text="Supervisor Panel">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#LogoutSession" text="Logout">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                </items>
                <font>
                   <Font name="System Bold" size="10.0" />
@@ -63,7 +80,7 @@
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="565.0" layoutX="10.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="37.0" layoutX="24.0" layoutY="9.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <Label layoutX="21.0" layoutY="15.0" text="Inventory Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                  <Label alignment="CENTER" layoutX="15.0" layoutY="15.0" prefHeight="17.0" prefWidth="145.0" text="Order Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
@@ -80,13 +97,6 @@
                      </font>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="BOOK" />
-                     </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" onAction="#CompletedOrders" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Completed Orders" textFill="WHITE" AnchorPane.leftAnchor="10.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
                      </graphic></JFXButton>
                </children>
             </AnchorPane>

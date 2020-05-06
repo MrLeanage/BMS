@@ -180,7 +180,6 @@ public class OrderMenuAdminController implements Initializable {
                 && DataValidation.isValidMaximumLength(OMIPriceTextField.getText(),10)
                 && DataValidation.isValidMaximumLength(OMIDescriptionTextArea.getText(),250)
                 //Checking for Specific Data Validation
-                && DataValidation.isValidNumberFormat(OMIWeightTextField.getText())
                 && DataValidation.isValidNumberFormat(OMIPriceTextField.getText())){
             returnVal = true;
         }
@@ -223,7 +222,6 @@ public class OrderMenuAdminController implements Initializable {
         if(!(DataValidation.isValidNumberFormat(OMIWeightTextField.getText())
                 && DataValidation.isValidNumberFormat(OMIPriceTextField.getText()))){
             //Checking for Specific Data Validation
-            DataValidation.isValidNumberFormat(OMIWeightTextField.getText(), OMIWeightLabel,"SalesItem Weight can contain only Digits");
             DataValidation.isValidNumberFormat(OMIPriceTextField.getText(), OMIPriceLabel, "SalesItem Price can contain only Digits");
         }
     }
@@ -290,7 +288,7 @@ public class OrderMenuAdminController implements Initializable {
             orderMenuModel.setoMIName(OMINameTextField.getText());
             orderMenuModel.setoMIImage(OMIImageView);
             orderMenuModel.setoMIDescription(OMIDescriptionTextArea.getText());
-            orderMenuModel.setoMIWeight(Float.parseFloat(OMIWeightTextField.getText()));
+            orderMenuModel.setoMIWeight(OMIWeightTextField.getText());
             orderMenuModel.setoMIPrice(Float.parseFloat(OMIPriceTextField.getText()));
             orderMenuModel.setoMIStatus(OMIStatusChoiceBox.getValue());
 
@@ -350,7 +348,7 @@ public class OrderMenuAdminController implements Initializable {
                     orderMenuModel.setoMIImage(OMIImageView);
                     orderMenuModel.setoMIName(OMINameTextField.getText());
                     orderMenuModel.setoMIDescription(OMIDescriptionTextArea.getText());
-                    orderMenuModel.setoMIWeight(Float.parseFloat(OMIWeightTextField.getText()));
+                    orderMenuModel.setoMIWeight(OMIWeightTextField.getText());
                     orderMenuModel.setoMIPrice(Float.parseFloat(OMIPriceTextField.getText()));
                     orderMenuModel.setoMIStatus(OMIStatusChoiceBox.getValue());
                     boolean resultVal = orderMenuServices.updateData(orderMenuModel);

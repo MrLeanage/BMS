@@ -14,16 +14,16 @@ public class OrderMenu {
     private ObjectProperty<ImageView> oMIImage;
     private StringProperty oMIName = null;
     private StringProperty oMIDescription = null;
-    private FloatProperty oMIWeight = null;
+    private StringProperty oMIWeight = null;
     private FloatProperty oMIPrice = null;
     private StringProperty oMIStatus = null;
 
-    public OrderMenu(String oMIID, ImageView oMIImage, String oMIName, String oMIDescription, Float oMIWeight, Float oMIPrice, String oMIStatus) {
+    public OrderMenu(String oMIID, ImageView oMIImage, String oMIName, String oMIDescription, String oMIWeight, Float oMIPrice, String oMIStatus) {
         this.oMIID = new SimpleStringProperty(UtilityMethod.addPrefix("OMP",oMIID));
         this.oMIImage = new SimpleObjectProperty<>(oMIImage);
         this.oMIName = new SimpleStringProperty(oMIName);
         this.oMIDescription = new SimpleStringProperty(oMIDescription);
-        this.oMIWeight = new SimpleFloatProperty(oMIWeight);
+        this.oMIWeight = new SimpleStringProperty(oMIWeight);
         this.oMIPrice = new SimpleFloatProperty(oMIPrice);
         this.oMIStatus = new SimpleStringProperty(oMIStatus);
     }
@@ -79,16 +79,16 @@ public class OrderMenu {
         this.oMIDescription = new SimpleStringProperty(oMIDescription);
     }
 
-    public float getoMIWeight() {
+    public String getoMIWeight() {
         return oMIWeight.get();
     }
 
-    public FloatProperty oMIWeightProperty() {
+    public StringProperty oMIWeightProperty() {
         return oMIWeight;
     }
 
-    public void setoMIWeight(float oMIWeight) {
-        this.oMIWeight = new SimpleFloatProperty(oMIWeight);
+    public void setoMIWeight(String oMIWeight) {
+        this.oMIWeight = new SimpleStringProperty(oMIWeight);
     }
 
     public float getoMIPrice() {

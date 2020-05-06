@@ -302,7 +302,7 @@ public class OrderMenuSupervisorController implements Initializable {
             orderMenuModel.setoMIName(OMINameTextField.getText());
             orderMenuModel.setoMIImage(OMIImageView);
             orderMenuModel.setoMIDescription(OMIDescriptionTextArea.getText());
-            orderMenuModel.setoMIWeight(Float.parseFloat(OMIWeightTextField.getText()));
+            orderMenuModel.setoMIWeight(OMIWeightTextField.getText());
             orderMenuModel.setoMIPrice(Float.parseFloat(OMIPriceTextField.getText()));
             orderMenuModel.setoMIStatus(OMIStatusChoiceBox.getValue());
 
@@ -362,7 +362,7 @@ public class OrderMenuSupervisorController implements Initializable {
                     orderMenuModel.setoMIImage(OMIImageView);
                     orderMenuModel.setoMIName(OMINameTextField.getText());
                     orderMenuModel.setoMIDescription(OMIDescriptionTextArea.getText());
-                    orderMenuModel.setoMIWeight(Float.parseFloat(OMIWeightTextField.getText()));
+                    orderMenuModel.setoMIWeight(OMIWeightTextField.getText());
                     orderMenuModel.setoMIPrice(Float.parseFloat(OMIPriceTextField.getText()));
                     orderMenuModel.setoMIStatus(OMIStatusChoiceBox.getValue());
                     boolean resultVal = orderMenuServices.updateData(orderMenuModel);

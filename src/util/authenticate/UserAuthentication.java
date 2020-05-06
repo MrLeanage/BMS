@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class UserAuthentication {
     public static Scene scene;
     private static User userSession = null;
-    private static String currentAdminType = "default";
+    private static String currentAdminType;
 
     public UserAuthentication(Scene scene){
         this.scene = scene;
@@ -100,7 +100,7 @@ public class UserAuthentication {
                 AlertPopUp.generalError(ex);
             }
         }else if(userSession.getuType().equals("Supervisor")){
-
+            setCurrentAdminType("default");
             try {
                 AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/InventoryManagement/ItemWithdraw.fxml"));
 
@@ -115,6 +115,7 @@ public class UserAuthentication {
 
 
         }else if(userSession.getuType().equals("Cashier")){
+            setCurrentAdminType("default");
             try {
                 AnchorPane home_page = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FinanceManagement/Billing.fxml"));
 

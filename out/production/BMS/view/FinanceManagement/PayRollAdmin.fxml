@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -22,7 +21,7 @@
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="565.0" layoutX="10.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="37.0" layoutX="24.0" layoutY="9.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <Label layoutX="21.0" layoutY="15.0" text="Inventory Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="17.0" prefWidth="155.0" text="Finance Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
@@ -83,11 +82,11 @@
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="1090.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="75.0" stroke="#00000001" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="49.0" stroke="#00000001" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="37.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
                   <TextField fx:id="SearchTextBox" layoutX="20.0" layoutY="46.0" prefHeight="25.0" prefWidth="1080.0" promptText="Search for NIC" AnchorPane.leftAnchor="0.0" />
                   <FontAwesomeIconView fill="#374b8d" glyphName="SEARCH" layoutX="607.0" layoutY="65.0" size="20" AnchorPane.leftAnchor="1055.0" />
-                  <TableView fx:id="PayRollTable" layoutX="20.0" layoutY="73.0" prefHeight="418.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
+                  <TableView fx:id="PayRollTable" layoutX="20.0" layoutY="73.0" prefHeight="444.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
                      <columns>
                         <TableColumn fx:id="PayIDColumn" prefWidth="83.00003051757812" text="Pay ID" />
                         <TableColumn fx:id="PayEIDColumn" prefWidth="66.0" text="Emp ID" />
@@ -103,30 +102,25 @@
                         <TableColumn fx:id="PayActionColumn" prefWidth="71.0" text="Action" />
                      </columns>
                   </TableView>
-                  <Button id="rbred" layoutX="663.0" layoutY="504.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="395.0" text="Generate Pay Roll Report" AnchorPane.leftAnchor="663.0" AnchorPane.topAnchor="504.0">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Button>
-                  <Text fill="WHITE" layoutX="27.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort By Year         :" wrappingWidth="135.77778315544128">
+                  <Text fill="WHITE" layoutX="24.0" layoutY="559.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort By Year         :" wrappingWidth="135.77778315544128" AnchorPane.topAnchor="535.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="YearChoiceBox" layoutX="165.0" layoutY="505.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Year" />
-                  <Text fill="WHITE" layoutX="28.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort By Month     :" wrappingWidth="135.77778315544128">
+                  <ComboBox fx:id="YearChoiceBox" layoutX="162.0" layoutY="540.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Year" AnchorPane.topAnchor="535.0" />
+                  <Text fill="WHITE" layoutX="342.0" layoutY="552.265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort By Month     :" wrappingWidth="135.77778315544128" AnchorPane.topAnchor="535.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="MonthChoiceBox" layoutX="166.0" layoutY="538.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Month" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="63.0" layoutX="324.0" layoutY="501.0" stroke="TRANSPARENT" strokeType="INSIDE" width="330.0" />
-                  <Text fill="WHITE" layoutX="350.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Paid     :" wrappingWidth="107.25000482518226">
+                  <ComboBox fx:id="MonthChoiceBox" layoutX="480.0" layoutY="535.0" onAction="#loadFilteredData" prefWidth="150.0" promptText="Month" AnchorPane.topAnchor="535.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#121d2c" height="37.0" layoutX="683.0" layoutY="527.0" stroke="TRANSPARENT" strokeType="INSIDE" width="392.0" />
+                  <Text fill="WHITE" layoutX="705.0" layoutY="552.265625" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Paid     :" wrappingWidth="107.25000482518226" AnchorPane.topAnchor="535.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Label fx:id="TotalPaidLabel" layoutX="455.0" layoutY="521.0" prefHeight="26.0" prefWidth="188.0" textFill="#fffb00">
+                  <Label fx:id="TotalPaidLabel" layoutX="810.0" layoutY="535.0" prefHeight="26.0" prefWidth="255.0" textFill="#fffb00" AnchorPane.topAnchor="535.0">
                      <font>
                         <Font size="17.0" />
                      </font>

@@ -23,7 +23,7 @@
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b384b" height="565.0" layoutX="10.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="37.0" layoutX="24.0" layoutY="9.0" stroke="TRANSPARENT" strokeType="INSIDE" width="155.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <Label layoutX="21.0" layoutY="15.0" text="Inventory Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+                  <Label alignment="CENTER" layoutX="13.0" layoutY="15.0" prefHeight="17.0" prefWidth="146.0" text="Order Management" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
@@ -40,13 +40,6 @@
                      </font>
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="BOOK" />
-                     </graphic></JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="154.0" onAction="#CompletedOrders" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Completed Orders" textFill="WHITE" AnchorPane.leftAnchor="10.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
                      </graphic></JFXButton>
                </children>
             </AnchorPane>

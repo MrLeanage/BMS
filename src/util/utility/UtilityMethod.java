@@ -195,8 +195,16 @@ public class UtilityMethod {
         }
         return result;
     }
-    public static int getMonthNumber(String monthName) {
-        return Month.valueOf(monthName.toUpperCase()).getValue();
+    public static String getMonthNumber(String monthName) {
+        String number = String.valueOf(Month.valueOf(monthName.toUpperCase()).getValue());
+        String monthNumber = null;
+
+        if(number.length() < 2){
+            monthNumber =  "0" + number;
+        }else{
+            monthNumber = number;
+        }
+        return monthNumber;
     }
     public static Integer seperateIntegerFromString(String stringIntegerMixedText){
 
