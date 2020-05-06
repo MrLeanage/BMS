@@ -118,64 +118,68 @@ public class IncomeStatemetAdminController implements Initializable {
     //load sales dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
 
-        ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
-        ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
+       try{
+           ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
+           ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
 
-        BillingServices billingServices = new BillingServices();
-        PurchaseServices purchaseServices = new PurchaseServices();
-        OtherExpenseServices otherExpenseServices = new OtherExpenseServices();
+           BillingServices billingServices = new BillingServices();
+           PurchaseServices purchaseServices = new PurchaseServices();
+           OtherExpenseServices otherExpenseServices = new OtherExpenseServices();
 
 
-        //getting all purchases
-        purchasesData = purchaseServices.loadData("Paid");
-        //getting all purchases
-        otherExpensesData = otherExpenseServices.loadData();
+           //getting all purchases
+           purchasesData = purchaseServices.loadData("Paid");
+           //getting all purchases
+           otherExpensesData = otherExpenseServices.loadData();
 
-        //getting all Sales Items with billing Date
-        salesItemsData = billingServices.loadSortedDateData(0, "None", "None", "Claimed");
-        for(SalesItem salesItem : salesItemsData){
-            //Adding dates to observable list
-            unSortedYears.add(UtilityMethod.getYear(salesItem.getsIBDate()));
-            unSortedMonths.add(UtilityMethod.getMonth(salesItem.getsIBDate()));
-        }
-        //setting sorted data for Table sorting choice boxes
-        sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
-        sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
+           //getting all Sales Items with billing Date
+           salesItemsData = billingServices.loadSortedDateData(0, "None", "None", "Claimed");
+           for(SalesItem salesItem : salesItemsData){
+               //Adding dates to observable list
+               unSortedYears.add(UtilityMethod.getYear(salesItem.getsIBDate()));
+               unSortedMonths.add(UtilityMethod.getMonth(salesItem.getsIBDate()));
+           }
+           //setting sorted data for Table sorting choice boxes
+           sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
+           sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
 
-        //setting data for stat table choice boxes
-        ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
-        choiceBoxTimePeriod.add("This Month");
-        choiceBoxTimePeriod.add("Last 2 Months");
-        for(int i = 3; i <= getChartAllSalesData("All Products").size(); i++){
-            //adding Month Sorting lists up to 18 months from 3 months to 3 months
-            if((i % 3 == 0) && (i <= 18)){
-                choiceBoxTimePeriod.add("Last "+i + " Months");
-            }
-        }
-        //default value
-        StatPeriodComboBox.setValue("Last 3 Months");
-        StatPeriodComboBox.setItems(choiceBoxTimePeriod);
+           //setting data for stat table choice boxes
+           ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
+           choiceBoxTimePeriod.add("This Month");
+           choiceBoxTimePeriod.add("Last 2 Months");
+           for(int i = 3; i <= getChartAllSalesData("All Products").size(); i++){
+               //adding Month Sorting lists up to 18 months from 3 months to 3 months
+               if((i % 3 == 0) && (i <= 18)){
+                   choiceBoxTimePeriod.add("Last "+i + " Months");
+               }
+           }
+           //default value
+           StatPeriodComboBox.setValue("Last 3 Months");
+           StatPeriodComboBox.setItems(choiceBoxTimePeriod);
 
-        ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Expenses","All Income", "Profit", "All Comparision");
-        StatCategoryComboBox.setValue("All Comparision");
-        StatCategoryComboBox.setItems(chartCategoryList);
+           ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Expenses","All Income", "Profit", "All Comparision");
+           StatCategoryComboBox.setValue("All Comparision");
+           StatCategoryComboBox.setItems(chartCategoryList);
 
-        //loading All Comparision data to chart for last 3 months
-        getFilteredChartData(3, "All Comparision");
+           //loading All Comparision data to chart for last 3 months
+           getFilteredChartData(3, "All Comparision");
 
-        //setting data for income statement Month Selection Combo Box
-        ObservableList<String> sortedIncomeStatementMonth = FXCollections.observableArrayList();
-        ObservableList<String> incomeStatementMonth = FXCollections.observableArrayList();
-        for(ChartData chartData : barChartData()){
-            incomeStatementMonth.add(chartData.getDataYearMonth());
-        }
-        sortedIncomeStatementMonth = UtilityMethod.removeStringDuplicates(incomeStatementMonth);
-        IncomeStatementMonthComboBox.setValue(sortedIncomeStatementMonth.get(sortedIncomeStatementMonth.size() - 1));
-        IncomeStatementMonthComboBox.setItems(sortedIncomeStatementMonth);
+           //setting data for income statement Month Selection Combo Box
+           ObservableList<String> sortedIncomeStatementMonth = FXCollections.observableArrayList();
+           ObservableList<String> incomeStatementMonth = FXCollections.observableArrayList();
+           for(ChartData chartData : barChartData()){
+               incomeStatementMonth.add(chartData.getDataYearMonth());
+           }
+           sortedIncomeStatementMonth = UtilityMethod.removeStringDuplicates(incomeStatementMonth);
+           IncomeStatementMonthComboBox.setValue(sortedIncomeStatementMonth.get(sortedIncomeStatementMonth.size() - 1));
+           IncomeStatementMonthComboBox.setItems(sortedIncomeStatementMonth);
 
-        //Updating records in Income Statement
-        IncomeStatementServices incomeStatementServices = new IncomeStatementServices();
-        incomeStatementServices.UpdateIncomeStatementInfo(barChartData());
+           //Updating records in Income Statement
+           IncomeStatementServices incomeStatementServices = new IncomeStatementServices();
+           incomeStatementServices.UpdateIncomeStatementInfo(barChartData());
+       }catch(NullPointerException ex){
+
+       }
     }
     @FXML
     private void loadStatFilterData(ActionEvent actionEvent){

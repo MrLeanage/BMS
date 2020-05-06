@@ -31,7 +31,7 @@ public class UserServices {
             user.setuID("administrator");
             user.setuName("administrator");
             user.setuType("Admin");
-            user.setuPassword("admin");
+            user.setuPassword(DataEncryption.passwordEncryption("admin"));
             user.setuStatus("Active");
             resultVal = insertData(user);
             if(!resultVal){

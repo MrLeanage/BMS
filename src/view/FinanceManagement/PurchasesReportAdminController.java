@@ -153,49 +153,53 @@ public class PurchasesReportAdminController implements Initializable {
     //load purchase dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
 
-        ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
-        ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
+        try{
+            ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
+            ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
 
-        ObservableList<Integer> choiceBoxYears = FXCollections.observableArrayList();
-        ObservableList<String> choiceBoxMonths = FXCollections.observableArrayList();
+            ObservableList<Integer> choiceBoxYears = FXCollections.observableArrayList();
+            ObservableList<String> choiceBoxMonths = FXCollections.observableArrayList();
 
-        ObservableList<String> categoryList = FXCollections.observableArrayList("All Items","Agency Items", "Stock Items");
-        PurchaseServices purchaseServices = new PurchaseServices();
-        //getting all purchases
-        ObservableList<Purchase> dateObservableList;
-        dateObservableList = purchaseServices.loadData();
+            ObservableList<String> categoryList = FXCollections.observableArrayList("All Items","Agency Items", "Stock Items");
+            PurchaseServices purchaseServices = new PurchaseServices();
+            //getting all purchases
+            ObservableList<Purchase> dateObservableList;
+            dateObservableList = purchaseServices.loadData();
 
-        for(Purchase purchase : dateObservableList){
-            //Adding dates to observable list
-            unSortedYears.add(UtilityMethod.getYear(purchase.getpPurchaseDate()));
-            unSortedMonths.add(UtilityMethod.getMonth(purchase.getpPurchaseDate()));
+            for(Purchase purchase : dateObservableList){
+                //Adding dates to observable list
+                unSortedYears.add(UtilityMethod.getYear(purchase.getpPurchaseDate()));
+                unSortedMonths.add(UtilityMethod.getMonth(purchase.getpPurchaseDate()));
+            }
+            //setting sorted data for Table sorting choice boxes
+            sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
+            sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
+
+            choiceBoxMonths.addAll(sortedMonths);
+            choiceBoxYears.addAll(sortedYears);
+
+            //default value
+            MonthChoiceBox.setValue(UtilityMethod.getMonth(String.valueOf(LocalDate.now())));
+            choiceBoxMonths.add("All Months");
+            MonthChoiceBox.setItems(choiceBoxMonths);
+
+            //default value
+            YearChoiceBox.setValue(UtilityMethod.getYear(String.valueOf(LocalDate.now())));
+            YearChoiceBox.setItems(choiceBoxYears);
+
+            //default value
+            CategoryChoiceBox.setValue("All Purchases");
+            CategoryChoiceBox.setItems(categoryList);
+
+            PurchasePeriodLabel.setText(month + " "+ year + " - "+"Payment Pending(All Purchases)");
+
+            //Adding Values to Payment Status ChoiceBox
+            ObservableList<String> paymentStatusList = FXCollections.observableArrayList("Pending Payment", "Processing Payment","Paid Payment" );
+            PaymentStatusChoiceBox.setValue("Pending Payment");
+            PaymentStatusChoiceBox.setItems(paymentStatusList);
+        }catch(NullPointerException ex){
+
         }
-        //setting sorted data for Table sorting choice boxes
-        sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
-        sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
-
-        choiceBoxMonths.addAll(sortedMonths);
-        choiceBoxYears.addAll(sortedYears);
-
-        //default value
-        MonthChoiceBox.setValue(UtilityMethod.getMonth(String.valueOf(LocalDate.now())));
-        choiceBoxMonths.add("All Months");
-        MonthChoiceBox.setItems(choiceBoxMonths);
-
-        //default value
-        YearChoiceBox.setValue(UtilityMethod.getYear(String.valueOf(LocalDate.now())));
-        YearChoiceBox.setItems(choiceBoxYears);
-
-        //default value
-        CategoryChoiceBox.setValue("All Purchases");
-        CategoryChoiceBox.setItems(categoryList);
-
-        PurchasePeriodLabel.setText(month + " "+ year + " - "+"Payment Pending(All Purchases)");
-
-        //Adding Values to Payment Status ChoiceBox
-        ObservableList<String> paymentStatusList = FXCollections.observableArrayList("Pending Payment", "Processing Payment","Paid Payment" );
-        PaymentStatusChoiceBox.setValue("Pending Payment");
-        PaymentStatusChoiceBox.setItems(paymentStatusList);
 
     }
 

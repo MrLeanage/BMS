@@ -139,67 +139,71 @@ public class SalesReportAdminController implements Initializable {
     //load sales dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
 
-        ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
-        ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
+        try{
+            ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
+            ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
 
-        ObservableList<Integer> choiceBoxYears = FXCollections.observableArrayList();
-        ObservableList<String> choiceBoxMonths = FXCollections.observableArrayList();
+            ObservableList<Integer> choiceBoxYears = FXCollections.observableArrayList();
+            ObservableList<String> choiceBoxMonths = FXCollections.observableArrayList();
 
-        ObservableList<String> categoryList = FXCollections.observableArrayList("All Products","Agency Products", "Bakery Products", "Orders");
-        BillingServices billingServices = new BillingServices();
-        //getting all Sales Items with billing Date
-        salesItemsData = billingServices.loadSortedDateData(0, "None", "None", "Claimed");
+            ObservableList<String> categoryList = FXCollections.observableArrayList("All Products","Agency Products", "Bakery Products", "Orders");
+            BillingServices billingServices = new BillingServices();
+            //getting all Sales Items with billing Date
+            salesItemsData = billingServices.loadSortedDateData(0, "None", "None", "Claimed");
 
-        for(SalesItem salesItem : salesItemsData){
-            //Adding dates to observable list
-            unSortedYears.add(UtilityMethod.getYear(salesItem.getsIBDate()));
-            unSortedMonths.add(UtilityMethod.getMonth(salesItem.getsIBDate()));
-        }
-        //setting sorted data for Table sorting choice boxes
-        sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
-        sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
-
-        choiceBoxMonths.addAll(sortedMonths);
-        choiceBoxYears.addAll(sortedYears);
-
-        //default value
-        MonthChoiceBox.setValue(UtilityMethod.getMonth(String.valueOf(LocalDate.now())));
-        choiceBoxMonths.add("All Months");
-        MonthChoiceBox.setItems(choiceBoxMonths);
-
-        //default value
-        YearChoiceBox.setValue(UtilityMethod.getYear(String.valueOf(LocalDate.now())));
-        YearChoiceBox.setItems(choiceBoxYears);
-
-        //default value
-        CategoryComboBox.setValue("All Products");
-        CategoryComboBox.setItems(categoryList);
-
-        SalesPeriodLabel.setText(month + " "+ year + " - "+"All Products");
-
-        //setting data for stat table choice boxes
-        ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
-        choiceBoxTimePeriod.add("This Month");
-        choiceBoxTimePeriod.add("Last 2 Months");
-        for(int i = 3; i <= getChartData("All Products").size(); i++){
-            //adding Month Sorting lists up to 18 months from 3 months to 3 months
-            if((i % 3 == 0) && (i <= 18)){
-                choiceBoxTimePeriod.add("Last "+i + " Months");
+            for(SalesItem salesItem : salesItemsData){
+                //Adding dates to observable list
+                unSortedYears.add(UtilityMethod.getYear(salesItem.getsIBDate()));
+                unSortedMonths.add(UtilityMethod.getMonth(salesItem.getsIBDate()));
             }
+            //setting sorted data for Table sorting choice boxes
+            sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
+            sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
+
+            choiceBoxMonths.addAll(sortedMonths);
+            choiceBoxYears.addAll(sortedYears);
+
+            //default value
+            MonthChoiceBox.setValue(UtilityMethod.getMonth(String.valueOf(LocalDate.now())));
+            choiceBoxMonths.add("All Months");
+            MonthChoiceBox.setItems(choiceBoxMonths);
+
+            //default value
+            YearChoiceBox.setValue(UtilityMethod.getYear(String.valueOf(LocalDate.now())));
+            YearChoiceBox.setItems(choiceBoxYears);
+
+            //default value
+            CategoryComboBox.setValue("All Products");
+            CategoryComboBox.setItems(categoryList);
+
+            SalesPeriodLabel.setText(month + " "+ year + " - "+"All Products");
+
+            //setting data for stat table choice boxes
+            ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
+            choiceBoxTimePeriod.add("This Month");
+            choiceBoxTimePeriod.add("Last 2 Months");
+            for(int i = 3; i <= getChartData("All Products").size(); i++){
+                //adding Month Sorting lists up to 18 months from 3 months to 3 months
+                if((i % 3 == 0) && (i <= 18)){
+                    choiceBoxTimePeriod.add("Last "+i + " Months");
+                }
+            }
+            //default value
+            StatPeriodComboBox.setValue("Last 3 Months");
+            StatPeriodComboBox.setItems(choiceBoxTimePeriod);
+
+            ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Products","Agency Products", "Bakery Products", "Orders", "All Comparision");
+            StatCategoryComboBox.setValue("All Comparision");
+            StatCategoryComboBox.setItems(chartCategoryList);
+
+            //loading All Comparision data to chart for last 3 months
+            getFilteredChartData(3, "All Comparision");
+
+            //Setting text on Sales report Generate Button
+            MonthlySalesReportButton.setText("Generate " +month + " " + year+" Sales Report");
+        }catch(NullPointerException ex){
+
         }
-        //default value
-        StatPeriodComboBox.setValue("Last 3 Months");
-        StatPeriodComboBox.setItems(choiceBoxTimePeriod);
-
-        ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Products","Agency Products", "Bakery Products", "Orders", "All Comparision");
-        StatCategoryComboBox.setValue("All Comparision");
-        StatCategoryComboBox.setItems(chartCategoryList);
-
-        //loading All Comparision data to chart for last 3 months
-        getFilteredChartData(3, "All Comparision");
-
-        //Setting text on Sales report Generate Button
-        MonthlySalesReportButton.setText("Generate " +month + " " + year+" Sales Report");
     }
     //load data to View table
     @FXML
