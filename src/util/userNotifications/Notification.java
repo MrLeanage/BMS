@@ -25,6 +25,7 @@ import util.userAlerts.AlertPopUp;
 import util.utility.UtilityMethod;
 
 import javax.management.monitor.Monitor;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Notification extends Thread{
@@ -179,7 +180,11 @@ public class Notification extends Thread{
             public void handle(ActionEvent event) {
                 ObservableList<Order> orderObservableList = FXCollections.observableArrayList();
                 OrderServices orderServices = new OrderServices();
-                orderObservableList = orderServices.loadData("Process Pending");
+                try {
+                    orderObservableList = orderServices.loadData("Process Pending", "Payment Pending");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 for(Order order : orderObservableList){
                     if(UserAuthentication.getAuthenticatedSession().getuType().equals("Supervisor")){
                         informationNotificationStage("New Order : " + order.getoID() + " has been Placed for "+order.getoOMName(),

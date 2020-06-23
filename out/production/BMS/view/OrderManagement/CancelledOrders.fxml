@@ -85,11 +85,10 @@
                         <TableColumn fx:id="OTypeColumn" prefWidth="68.66668701171875" text="Order Type" />
                         <TableColumn fx:id="ODetailsColumn" minWidth="0.0" prefWidth="277.666748046875" text="Order Details" />
                         <TableColumn fx:id="ODeliveryDateColumn" prefWidth="92.333251953125" text="OD-Date" />
-                        <TableColumn fx:id="ODeliveryTimeColumn" prefWidth="83.0" text="OD-Time" />
-                        <TableColumn fx:id="OTakenDateColumn" prefWidth="87.0" text="OT-Date" />
-                        <TableColumn fx:id="OTakenTimeColumn" prefWidth="86.0" text="OT-Time" />
-                        <TableColumn fx:id="OProcessingStatusColumn" prefWidth="104.0" text="Process Status" />
-                        <TableColumn fx:id="OActionColumn" prefWidth="100.0" text="Action" />
+                        <TableColumn fx:id="ODeliveryTimeColumn" prefWidth="104.0" text="OD-Time" />
+                        <TableColumn fx:id="OTakenDateColumn" prefWidth="122.0" text="OT-Date" />
+                        <TableColumn fx:id="OTakenTimeColumn" prefWidth="88.0" text="OT-Time" />
+                        <TableColumn fx:id="OProcessingStatusColumn" prefWidth="145.0" text="Process Status" />
                      </columns>
                   </TableView>
                   <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="19.0" prefHeight="30.0" prefWidth="1080.0" promptText="Search in Here" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">

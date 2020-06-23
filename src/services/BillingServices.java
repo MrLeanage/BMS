@@ -96,7 +96,7 @@ public class BillingServices {
         return SalesItemData;
     }
     public ObservableList<SalesItem> loadSortedDateData(Integer year, String month, String category, String clearance){
-        ObservableList<SalesItem> salesItemData = null;
+        ObservableList<SalesItem> salesItemData = FXCollections.observableArrayList();
         ResultSet rsLoadBilling = null;
         ResultSet rsLoadItem = null;
         PreparedStatement psLoadBilling = null;
@@ -116,6 +116,7 @@ public class BillingServices {
             String salesType = null;
 
             while(rsLoadBilling.next()){
+                System.out.println("load biling Info : "+rsLoadBilling.getInt(1));
                 //getting billing Info and executing Query to get Sales Item for that bill
                 psLoadItem.setInt(1, rsLoadBilling.getInt(1));
                 rsLoadItem = psLoadItem.executeQuery();

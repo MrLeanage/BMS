@@ -190,7 +190,7 @@
                   <TextField fx:id="INameTextBox" editable="false" layoutX="870.0" layoutY="328.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" />
                   <TextField fx:id="IIDTextBox" editable="false" layoutX="870.0" layoutY="295.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" />
                   <FontAwesomeIconView glyphName="SEARCH" layoutX="1056.0" layoutY="31.0" size="20" />
-                  <TableView fx:id="ItemTable" layoutX="608.0" layoutY="41.0" onMouseClicked="#loadSelectedData" onMousePressed="#loadSelectedDataModel" prefHeight="245.0" prefWidth="472.0">
+                  <TableView fx:id="ItemTable" layoutX="608.0" layoutY="41.0" onMouseClicked="#loadSelectedData" onMousePressed="#loadSelectedDataModel" prefHeight="245.0" prefWidth="472.0" stylesheets="@../../lib/css/bss-ui.css">
                     <columns>
                       <TableColumn fx:id="IIDColumn" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="INameColumn" prefWidth="176.00006103515625" text="Item Name" />

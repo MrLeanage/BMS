@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Paysheet" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="946ee1a4-c8a1-4983-a016-a215bba6bcea">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Paysheet" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="946ee1a4-c8a1-4983-a016-a215bba6bcea">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
 	<parameter name="pSID" class="java.lang.String"/>
@@ -79,14 +79,14 @@
 				</textElement>
 				<text><![CDATA[Name of Staff Member             :]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="197" y="12" width="163" height="18" uuid="01ca3e4e-4318-4f52-b308-9f992a18ff93"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pSEName}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="197" y="33" width="162" height="17" uuid="6b26254a-0066-453f-8e57-f237c1f02a9f"/>
 				<textElement>
 					<font size="11"/>
@@ -128,7 +128,7 @@
 				</textElement>
 				<text><![CDATA[Salary Scheme Type            :]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="360" y="121" width="180" height="18" uuid="fd3cf3f4-ffed-47a3-bcd6-58db3d5f761f"/>
 				<box topPadding="2" leftPadding="0" bottomPadding="0" rightPadding="10">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -148,7 +148,7 @@
 				</textElement>
 				<text><![CDATA[Basic Salary Amount            :]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="360" y="144" width="180" height="18" uuid="bef6f249-eada-4f6c-aa22-13c2610bccfe"/>
 				<box topPadding="2" leftPadding="0" bottomPadding="0" rightPadding="10">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -186,7 +186,7 @@
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{ATitle}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="360" y="0" width="180" height="19" uuid="8e7cc265-15e6-441b-a305-bf499b433832"/>
 				<box topPadding="2" leftPadding="0" bottomPadding="0" rightPadding="10">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -310,7 +310,7 @@
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $P{pSBSSAmount} +$V{pAllowance} ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[IF(EQUALS(T($V{pAllowance}),""),$P{pSBSSAmount} +$V{pAllowance} ,$P{pSBSSAmount})]]></textFieldExpression>
 				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
 			</textField>
 		</band>

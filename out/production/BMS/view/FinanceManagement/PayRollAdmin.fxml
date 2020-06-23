@@ -44,14 +44,14 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="TAG" />
                      </graphic></JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="204.0" onAction="#PaySheet" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="PaySheets" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="FILE" />
                      </graphic>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="254.0" onAction="#PayRoll" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #029206;" text="Pay Roll" textFill="WHITE">
@@ -59,7 +59,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="COPY" />
                      </graphic>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="305.0" onAction="#OtherExpenses" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Other Expenses" textFill="WHITE">
@@ -67,7 +67,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="PAPERCLIP" />
                      </graphic>
                   </JFXButton>
                   <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="355.0" onAction="#IncomeStatement" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #2b384b;" text="Income Statement" textFill="WHITE">
@@ -75,7 +75,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="TABLE" />
                      </graphic>
                   </JFXButton>
                </children>

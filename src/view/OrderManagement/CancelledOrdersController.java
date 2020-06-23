@@ -54,9 +54,6 @@ public class CancelledOrdersController implements Initializable {
     private TableColumn<Order, String> OProcessingStatusColumn;
 
     @FXML
-    private TableColumn<Order, String> OActionColumn;
-
-    @FXML
     private TextField SearchTextBox;
 
     private static Order existingOrderModel;
@@ -124,40 +121,8 @@ public class CancelledOrdersController implements Initializable {
         ODeliveryTimeColumn.setCellValueFactory(new PropertyValueFactory<>("oDeliveryTime"));
         OTakenDateColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenDate"));
         OTakenTimeColumn.setCellValueFactory(new PropertyValueFactory<>("oTakenTime"));
-        OActionColumn.setCellValueFactory(new PropertyValueFactory<>("Dummy"));
         OProcessingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oProcessingStatus"));
-        Callback<TableColumn<Order, String>, TableCell<Order, String>> parentCellFactory
-                =
-                new Callback<TableColumn<Order, String>, TableCell<Order, String>>() {
-                    @Override
-                    public TableCell call(final TableColumn<Order, String> param) {
-                        final TableCell<Order, String> cell = new TableCell<Order, String>() {
 
-                            final Button btn = new Button("Process Order");
-
-                            @Override
-                            public void updateItem(String item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                    setText(null);
-                                } else {
-                                    btn.setOnMouseClicked(event -> {
-                                        // student = StudentTable.getSelectionModel().getSelectedItem();
-                                        //String sID = student.getsID();
-                                    });
-                                    btn.setOnAction(event -> {
-                                        //pdf generate and status Update method here
-                                    });
-                                    setGraphic(btn);
-                                    setText(null);
-                                }
-                            }
-                        };
-                        return cell;
-                    }
-                };
-        OActionColumn.setCellFactory(parentCellFactory);
         OrderTable.setItems(null);
         OrderTable.setItems(ordersData);
 

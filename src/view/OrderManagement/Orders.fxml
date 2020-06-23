@@ -81,14 +81,16 @@
                   <TableView fx:id="OrderTable" layoutX="7.0" layoutY="50.0" onMouseClicked="#loadSelectedData" onMousePressed="#loadSelectedModelData" prefHeight="314.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                     <columns>
                       <TableColumn fx:id="OIDColumn" prefWidth="64.00003051757812" text="ID" />
-                        <TableColumn fx:id="OCustomerNameColumn" prefWidth="153.33331298828125" text="Customer Name" />
-                        <TableColumn fx:id="OCustomerNICColumn" prefWidth="97.3333740234375" text="Customer NIC" />
-                        <TableColumn fx:id="OTypeColumn" prefWidth="93.888916015625" text="Order Type" />
-                        <TableColumn fx:id="ODetailsColumn" prefWidth="295.111083984375" text="Details" />
-                        <TableColumn fx:id="OQuantityColumn" prefWidth="92.6666259765625" text="Quantity" />
-                        <TableColumn fx:id="OAdvancePayColumn" prefWidth="84.666748046875" text="Advance Pay" />
-                        <TableColumn fx:id="OTotalColumn" prefWidth="84.666748046875" text="Total Amount" />
-                        <TableColumn fx:id="OStatusColumn" prefWidth="109.0" text="Payment Status" />
+                        <TableColumn fx:id="OCustomerNameColumn" prefWidth="139.33331298828125" text="Customer Name" />
+                        <TableColumn fx:id="OCustomerNICColumn" prefWidth="86.33334350585938" text="Customer NIC" />
+                        <TableColumn fx:id="OTypeColumn" prefWidth="87.66668701171875" text="Order Type" />
+                        <TableColumn fx:id="ODetailsColumn" prefWidth="178.0" text="Details" />
+                        <TableColumn fx:id="OQuantityColumn" prefWidth="35.0" text="Qty" />
+                        <TableColumn fx:id="OAdvancePayColumn" prefWidth="88.0" text="Advance Pay" />
+                        <TableColumn fx:id="OTotalColumn" prefWidth="84.33331298828125" text="Total Amount" />
+                        <TableColumn fx:id="OStatusColumn" prefWidth="106.6666259765625" text="Payment Status" />
+                        <TableColumn fx:id="OProcessingStatusColumn" prefWidth="103.3333740234375" text="Processing Status" />
+                        <TableColumn fx:id="OActionColumn" prefWidth="103.6666259765625" text="Action" />
                     </columns>
                   </TableView>
                   <TextField fx:id="SearchTextBox" layoutX="9.0" layoutY="19.0" prefHeight="30.0" prefWidth="1080.0" promptText="Search in Here" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">

@@ -22,8 +22,9 @@ public class OrderServices {
 
 
 
-    private ObservableList<Order> ordersData;
+   
     public  ObservableList<Order> loadData(){
+        ObservableList<Order> ordersData = null;
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;
@@ -43,6 +44,7 @@ public class OrderServices {
         return ordersData;
     }
     public  ObservableList<Order> loadUnPaidData(String paymentStatusNotEqual){
+        ObservableList<Order> ordersData = null;
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;
@@ -64,6 +66,7 @@ public class OrderServices {
         return ordersData;
     }
     public  ObservableList<Order> loadData(String  sortQuery) {
+        ObservableList<Order> ordersData = null;
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;
@@ -94,6 +97,7 @@ public class OrderServices {
         return ordersData;
     }
     public  ObservableList<Order> loadData(String  processQuery, String notPayQuery) throws SQLException {
+        ObservableList<Order> ordersData = null;
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;
@@ -121,6 +125,7 @@ public class OrderServices {
         return ordersData;
     }
     public Order loadSpecificData(int oID){
+        ObservableList<Order> ordersData = null;
         Order orderModelData = new Order();
         PreparedStatement psSpecificOrderData;
         try {
@@ -175,7 +180,7 @@ public class OrderServices {
             psOrder.setString(9, order.getoCustomerPhone());
             psOrder.setString(10,order.getoTakenDate());
             psOrder.setString(11,order.getoTakenTime());
-            psOrder.setInt(12, UtilityMethod.seperateID(order.getoTakenUID()));
+            psOrder.setString(12, order.getoTakenUID());
             psOrder.setString(13,order.getoStatus());
             psOrder.setString(14,order.getoProcessingStatus());
             psOrder.execute();
@@ -341,8 +346,7 @@ public class OrderServices {
     }
     public SortedList<Order> searchUnPayedDataTable(TextField searchTextField, String paymentStatusNotEqual){
         //Retreiving all data from database
-        ObservableList<Order> ordersData = FXCollections.observableArrayList();
-        ordersData = loadUnPaidData(paymentStatusNotEqual);
+        ObservableList<Order> ordersData = loadUnPaidData(paymentStatusNotEqual);
         //Wrap the ObservableList in a filtered List (initially display all data)
         FilteredList<Order> filteredData = new FilteredList<>(ordersData, b -> true);
 
@@ -367,6 +371,9 @@ public class OrderServices {
                 }else if(order.getoCustomerPhone().toLowerCase().indexOf(lowerCaseFilter) !=-1){
                     //return if filter matches data
                     return true;
+                }else if(order.getoDetails().toLowerCase().indexOf(lowerCaseFilter) !=-1){
+                    //return if filter matches data
+                    return true;
                 }else{
                     //have no matchings
                     return false;
@@ -379,6 +386,7 @@ public class OrderServices {
     }
     public SortedList<Order> searchTable(TextField searchTextField, String  processQuery, String notPayQuery) throws SQLException {
         //Retreiving all data from database
+        ObservableList<Order> ordersData = null;
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;
@@ -439,6 +447,7 @@ public class OrderServices {
     }
     public SortedList<Order> searchTable(TextField searchTextField, String sortQuery) throws SQLException {
         //Retreiving all data from database
+        ObservableList<Order> ordersData = null;
         OrderMenu orderMenuData ;
         OrderMenuServices orderMenuServices = new OrderMenuServices();
         PreparedStatement psLoadOrder = null;

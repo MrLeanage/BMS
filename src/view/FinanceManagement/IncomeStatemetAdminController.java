@@ -12,20 +12,17 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import model.ChartData;
-import model.OtherExpense;
-import model.Purchase;
-import model.SalesItem;
-import services.BillingServices;
-import services.IncomeStatementServices;
-import services.OtherExpenseServices;
-import services.PurchaseServices;
+import model.*;
+import services.*;
 import util.authenticate.AdminManagementHandler;
 import util.authenticate.FinanceHandler;
+import util.userAlerts.AlertPopUp;
 import util.utility.PrintReport;
 import util.utility.UtilityMethod;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -118,68 +115,70 @@ public class IncomeStatemetAdminController implements Initializable {
     //load sales dates to choiceboxes and Chart
     private void loadChoiceBoxes(){
 
-       try{
-           ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
-           ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
+        try{
+            ObservableList<Integer> unSortedYears = FXCollections.observableArrayList();
+            ObservableList<String> unSortedMonths = FXCollections.observableArrayList();
 
-           BillingServices billingServices = new BillingServices();
-           PurchaseServices purchaseServices = new PurchaseServices();
-           OtherExpenseServices otherExpenseServices = new OtherExpenseServices();
+            BillingServices billingServices = new BillingServices();
+            PurchaseServices purchaseServices = new PurchaseServices();
+            OtherExpenseServices otherExpenseServices = new OtherExpenseServices();
 
 
-           //getting all purchases
-           purchasesData = purchaseServices.loadData("Paid");
-           //getting all purchases
-           otherExpensesData = otherExpenseServices.loadData();
+            //getting all purchases
+            purchasesData = purchaseServices.loadData("Paid", UtilityMethod.getYear(String.valueOf(LocalDate.now())), UtilityMethod.getMonth(String.valueOf(LocalDate.now())), "None");
+            //getting all purchases
+            otherExpensesData = otherExpenseServices.loadData();
 
-           //getting all Sales Items with billing Date
-           salesItemsData = billingServices.loadSortedDateData(0, "None", "None", "Claimed");
-           for(SalesItem salesItem : salesItemsData){
-               //Adding dates to observable list
-               unSortedYears.add(UtilityMethod.getYear(salesItem.getsIBDate()));
-               unSortedMonths.add(UtilityMethod.getMonth(salesItem.getsIBDate()));
-           }
-           //setting sorted data for Table sorting choice boxes
-           sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
-           sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
+            //getting all Sales Items with billing Date
+            salesItemsData = billingServices.loadSortedDateData(0, "None", "None", "Claimed");
+            for(SalesItem salesItem : salesItemsData){
+                //Adding dates to observable list
+                unSortedYears.add(UtilityMethod.getYear(salesItem.getsIBDate()));
+                unSortedMonths.add(UtilityMethod.getMonth(salesItem.getsIBDate()));
+            }
+            //setting sorted data for Table sorting choice boxes
+            sortedYears = UtilityMethod.removeIntegerDuplicates(unSortedYears);
+            sortedMonths = UtilityMethod.removeStringDuplicates(unSortedMonths);
 
-           //setting data for stat table choice boxes
-           ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
-           choiceBoxTimePeriod.add("This Month");
-           choiceBoxTimePeriod.add("Last 2 Months");
-           for(int i = 3; i <= getChartAllSalesData("All Products").size(); i++){
-               //adding Month Sorting lists up to 18 months from 3 months to 3 months
-               if((i % 3 == 0) && (i <= 18)){
-                   choiceBoxTimePeriod.add("Last "+i + " Months");
-               }
-           }
-           //default value
-           StatPeriodComboBox.setValue("Last 3 Months");
-           StatPeriodComboBox.setItems(choiceBoxTimePeriod);
+            //setting data for stat table choice boxes
+            ObservableList<String> choiceBoxTimePeriod = FXCollections.observableArrayList();
+            choiceBoxTimePeriod.add("This Month");
+            if(getChartAllSalesData("All Products").size() > 1){
+                choiceBoxTimePeriod.add("Last 2 Months");
+            }
+            for(int i = 3; i <= getChartAllSalesData("All Products").size(); i++){
+                //adding Month Sorting lists up to 18 months from 3 months to 3 months
+                if((i % 3 == 0) && (i <= 18)){
+                    choiceBoxTimePeriod.add("Last "+i + " Months");
+                }
+            }
+            //default value
+            StatPeriodComboBox.setValue("This Month");
+            StatPeriodComboBox.setItems(choiceBoxTimePeriod);
 
-           ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Expenses","All Income", "Profit", "All Comparision");
-           StatCategoryComboBox.setValue("All Comparision");
-           StatCategoryComboBox.setItems(chartCategoryList);
+            ObservableList<String> chartCategoryList = FXCollections.observableArrayList("All Expenses","All Income", "Profit", "All Comparision");
+            StatCategoryComboBox.setValue("All Comparision");
+            StatCategoryComboBox.setItems(chartCategoryList);
 
-           //loading All Comparision data to chart for last 3 months
-           getFilteredChartData(3, "All Comparision");
+            //loading All Comparision data to chart for last 3 months
+            getFilteredChartData(1, "All Comparision");
 
-           //setting data for income statement Month Selection Combo Box
-           ObservableList<String> sortedIncomeStatementMonth = FXCollections.observableArrayList();
-           ObservableList<String> incomeStatementMonth = FXCollections.observableArrayList();
-           for(ChartData chartData : barChartData()){
-               incomeStatementMonth.add(chartData.getDataYearMonth());
-           }
-           sortedIncomeStatementMonth = UtilityMethod.removeStringDuplicates(incomeStatementMonth);
-           IncomeStatementMonthComboBox.setValue(sortedIncomeStatementMonth.get(sortedIncomeStatementMonth.size() - 1));
-           IncomeStatementMonthComboBox.setItems(sortedIncomeStatementMonth);
+            //setting data for income statement Month Selection Combo Box
+            ObservableList<String> sortedIncomeStatementMonth = FXCollections.observableArrayList();
+            ObservableList<String> incomeStatementMonth = FXCollections.observableArrayList();
+            for(ChartData chartData : barChartData()){
+                incomeStatementMonth.add(chartData.getDataYearMonth());
+            }
+            sortedIncomeStatementMonth = UtilityMethod.removeStringDuplicates(incomeStatementMonth);
+            IncomeStatementMonthComboBox.setValue(sortedIncomeStatementMonth.get(sortedIncomeStatementMonth.size() - 1));
+            IncomeStatementMonthComboBox.setItems(sortedIncomeStatementMonth);
 
-           //Updating records in Income Statement
-           IncomeStatementServices incomeStatementServices = new IncomeStatementServices();
-           incomeStatementServices.UpdateIncomeStatementInfo(barChartData());
-       }catch(NullPointerException ex){
+            //Updating records in Income Statement
+            IncomeStatementServices incomeStatementServices = new IncomeStatementServices();
+            incomeStatementServices.UpdateIncomeStatementInfo(barChartData());
+        }catch(NullPointerException ex){
 
-       }
+        }
     }
     @FXML
     private void loadStatFilterData(ActionEvent actionEvent){
@@ -330,6 +329,12 @@ public class IncomeStatemetAdminController implements Initializable {
                     if((UtilityMethod.getYear(otherExpense.geteXPPaidDate()).equals(dataYears)) && (UtilityMethod.getMonth(otherExpense.geteXPPaidDate()).equals(dataMonths))){
                         totalExpenditure += otherExpense.geteXPAmount();
                     }
+                }
+                ObservableList<PaySheet> paySheetObservableList = null;
+                PaySheetServices paySheetServices = new PaySheetServices();
+                paySheetObservableList = paySheetServices.loadData(dataYears, dataMonths);
+                for(PaySheet paySheet : paySheetObservableList){
+                    totalExpenditure += paySheet.getpSNetSalary();
                 }
                 //setting chart data to a ChartData object ex:
                 // "2020", "January", 11000, "All Expenses"

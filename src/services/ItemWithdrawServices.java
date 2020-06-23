@@ -51,7 +51,7 @@ public class ItemWithdrawServices {
             Connection conn = DBConnection.Connect();
             itemWithdrawsData = FXCollections.observableArrayList();
             psLoadItemWithdraw = conn.prepareStatement(ItemWithdrawQueries.LOAD_SPECIFIC_USER_ITEM_WITHDRAW_DATA_QUERY);
-            psLoadItemWithdraw.setInt(1, UtilityMethod.seperateID(id));
+            psLoadItemWithdraw.setString(1, id);
             rsLoadItemWithdraw = psLoadItemWithdraw.executeQuery();
 
             while (rsLoadItemWithdraw.next()) {
@@ -79,7 +79,7 @@ public class ItemWithdrawServices {
                 psItemWithdraw.setInt(1, UtilityMethod.seperateID(itemWithdraw.getiWIID()));
                 psItemWithdraw.setString(2, itemWithdraw.getiWDescription());
                 psItemWithdraw.setInt(3, itemWithdraw.getiWQuantity());
-                psItemWithdraw.setInt(4, UtilityMethod.seperateID(itemWithdraw.getiWUser()));
+                psItemWithdraw.setString(4, itemWithdraw.getiWUser());
                 psItemWithdraw.setString(5, itemWithdraw.getiWDate());
                 psItemWithdraw.setString(6, itemWithdraw.getiWTime());
 

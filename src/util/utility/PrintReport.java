@@ -114,6 +114,7 @@ public class PrintReport extends JFrame{
 
         try {
             HashMap parameter = new HashMap();
+            System.out.println("ID : " +oID);
             parameter.put("pOID", UtilityMethod.seperateID(oID));
             parameter.put("pStatus", "Process Pending");
 
@@ -130,7 +131,8 @@ public class PrintReport extends JFrame{
             this.setVisible(true);
 
         } catch (Exception e) {
-            AlertPopUp.generalError(e);
+            System.out.println(e);
+            //AlertPopUp.generalError(e);
         }finally {
             try{
                 conn.close();

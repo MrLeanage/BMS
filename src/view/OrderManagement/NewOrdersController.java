@@ -164,7 +164,7 @@ public class NewOrdersController implements Initializable {
                                                 printReport.printNewOrderInfo(order.getoID());
                                                 loadData();
                                             } catch ( Exception ex) {
-                                                ex.printStackTrace();
+                                                System.out.println(ex);
                                             }
                                         }
                                     });

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrderInfo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21211885-98a9-4ced-8bad-c28fd0fab512">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="pStatus" class="java.lang.String"/>
 	<parameter name="pOID" class="java.lang.Integer"/>
@@ -90,7 +90,7 @@ FROM bms.orders
 		<property name="com.jaspersoft.studio.field.label" value="UID"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
 	</field>
-	<field name="OTakenUID" class="java.lang.Long">
+	<field name="OTakenUID" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="OTakenUID"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
 	</field>
@@ -114,7 +114,7 @@ FROM bms.orders
 		<property name="com.jaspersoft.studio.field.label" value="OMIDescription"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
 	</field>
-	<field name="OMIWeight" class="java.lang.Float">
+	<field name="OMIWeight" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="OMIWeight"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="ordermenuitem"/>
 	</field>
