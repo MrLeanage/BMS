@@ -125,7 +125,7 @@
             <AnchorPane layoutX="169.0" layoutY="-2.0" prefHeight="580.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#182c49" height="225.0" layoutX="56.0" layoutY="411.0" stroke="BLACK" strokeType="INSIDE" width="1080.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="345.0" />
-                  <TableView fx:id="EmployeeTable" layoutX="7.0" layoutY="50.0" onMouseClicked="#loadSelectedModelData" onMousePressed="#loadSelectedData" prefHeight="300.0" prefWidth="1080.0" stylesheets="@../../lib/css/bss-ui.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <TableView fx:id="EmployeeTable" layoutX="7.0" layoutY="50.0" onMouseClicked="#loadSelectedModelData" onMousePressed="#loadSelectedData" prefHeight="300.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                     <columns>
                       <TableColumn fx:id="EIDColumn" prefWidth="45.000030517578125" text="ID" />
                       <TableColumn fx:id="ENameColumn" prefWidth="129.0" text="Full Name" />

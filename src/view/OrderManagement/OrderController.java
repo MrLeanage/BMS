@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Order;
 import model.OrderMenu;
 import services.OrderMenuServices;
@@ -70,11 +69,6 @@ public class OrderController implements Initializable {
     @FXML
     private TableColumn<Order, String> OStatusColumn;
 
-    @FXML
-    private TableColumn<Order, String> OProcessingStatusColumn;
-
-    @FXML
-    private TableColumn<Order, String> OActionColumn;
     @FXML
     private TextField SearchTextBox;
 
@@ -335,81 +329,6 @@ public class OrderController implements Initializable {
         OAdvancePayColumn.setCellValueFactory(new PropertyValueFactory<>("oAdvancePay"));
         OTotalColumn.setCellValueFactory(new PropertyValueFactory<>("oTotal"));
         OStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oStatus"));
-        OProcessingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("oProcessingStatus"));
-        OActionColumn.setCellValueFactory(new PropertyValueFactory<>("Dummy"));
-
-        Callback<TableColumn<Order, String>, TableCell<Order, String>> parentCellFactory
-                =
-                new Callback<TableColumn<Order, String>, TableCell<Order, String>>() {
-                    @Override
-                    public TableCell call(final TableColumn<Order, String> param) {
-                        final TableCell<Order, String> cell = new TableCell<Order, String>() {
-
-                            final Button btn = new Button("Order Action");
-
-                            @Override
-                            public void updateItem(String item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                    setText(null);
-                                } else {
-                                    btn.setOnMouseClicked(event -> {
-                                        // student = StudentTable.getSelectionModel().getSelectedItem();
-                                        //String sID = student.getsID();
-                                    });
-                                    btn.setOnAction(event -> {
-                                        //pdf generate and status Update method here
-                                        Order order = getTableView().getItems().get(getIndex());
-                                        OrderServices orderServices = new OrderServices();
-
-                                        Alert action = new Alert(Alert.AlertType.CONFIRMATION);
-                                        action.setTitle("Select Your Action");
-                                        action.setHeaderText("You Selected a Request with");
-                                        action.setContentText(order.getoType()+" item of "+order.getoOMName());
-
-                                        ButtonType cancelOrderBtn = new ButtonType("Cancel Order");
-                                        ButtonType processPendingBtn = new ButtonType("set Process Pending");
-                                        ButtonType cancelBtn = new ButtonType("Cancel");
-                                        if(order.getoProcessingStatus().equals("Completed")){
-                                            action.getButtonTypes().setAll(cancelBtn);
-                                        }else{
-                                            if(order.getoProcessingStatus().equals("Cancelled")){
-                                                action.getButtonTypes().setAll(processPendingBtn, cancelBtn);
-                                            }else{
-                                                action.getButtonTypes().setAll(cancelOrderBtn, cancelBtn);
-                                            }
-
-                                        }
-
-                                        Optional<ButtonType> clickAction = action.showAndWait();
-                                        if(clickAction.isPresent() && clickAction.get() == processPendingBtn){
-                                            try {
-                                                orderServices.updateOrderStatus(order.getoID(),"Process Pending");
-                                                loadData();
-                                            } catch ( Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                        }
-                                        if(clickAction.isPresent() && clickAction.get() == cancelOrderBtn){
-                                            try {
-                                                orderServices.updateOrderStatus(order.getoID(),"Cancelled");
-                                                loadData();
-                                            } catch ( Exception ex) {
-                                                ex.printStackTrace();
-                                            }
-                                        }
-
-                                    });
-                                    setGraphic(btn);
-                                    setText(null);
-                                }
-                            }
-                        };
-                        return cell;
-                    }
-                };
-        OActionColumn.setCellFactory(parentCellFactory);
 
         OrderTable.setItems(null);
         OrderTable.setItems(ordersData);
@@ -569,7 +488,7 @@ public class OrderController implements Initializable {
     public void searchTable(){
 
         OrderServices orderServices = new OrderServices();
-        //Retrieving sorted data
+        //Retrieving sorted data from Main LoginController
         SortedList<Order> sortedData = orderServices.searchUnPayedDataTable(SearchTextBox, "Total Payment");
 
         //binding the SortedList to TableView

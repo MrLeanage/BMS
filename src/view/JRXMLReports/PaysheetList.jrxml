@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Paysheet" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="946ee1a4-c8a1-4983-a016-a215bba6bcea">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
 	<parameter name="pPeriod" class="java.lang.String"/>
 	<parameter name="pYear" class="java.lang.Integer"/>
 	<parameter name="pMonth" class="java.lang.String"/>
@@ -50,9 +50,6 @@
 		<property name="com.jaspersoft.studio.field.tree.path" value="paysheet"/>
 	</field>
 	<variable name="Variable_1" class="java.lang.String"/>
-	<variable name="TotalExpense" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{PSBSSAmount} + $F{PSTotalAllowances}]]></variableExpression>
-	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -165,7 +162,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Allowances]]></text>
+				<text><![CDATA[Total Allowances]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="313" y="61" width="63" height="15" uuid="abe60d63-9199-48c0-afe7-d025948a874e"/>
@@ -265,7 +262,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{PSTotalAllowances}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{PSBSSAmount}]]></textFieldExpression>
 				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -350,7 +347,7 @@
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{TotalExpense}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{PSBSSAmount} + $F{PSTotalAllowances}]]></textFieldExpression>
 				<patternExpression><![CDATA["#,##0.00"]]></patternExpression>
 			</textField>
 			<staticText>

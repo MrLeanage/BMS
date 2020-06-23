@@ -470,7 +470,7 @@ public class ItemStockController implements Initializable {
 
             clearLabels();
         }catch(Exception ex){
-            //AlertPopUp.generalError(ex);
+            AlertPopUp.generalError(ex);
         }
     }
 

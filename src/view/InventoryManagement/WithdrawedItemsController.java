@@ -11,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import model.ItemWithdraw;
 import services.ItemWithdrawServices;
 import util.authenticate.SupervisorHandler;
-import util.authenticate.UserAuthentication;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -89,11 +88,11 @@ public class WithdrawedItemsController implements Initializable {
     }
     //load data to View table
     private void loadData() throws SQLException {
-        //getting data fr
+        //getting data from main LoginController
         ItemWithdrawServices itemWithdrawServices = new ItemWithdrawServices();
 
         ObservableList<ItemWithdraw> itemWithdrawsData;
-        itemWithdrawsData = itemWithdrawServices.loadSpecificUserData(UserAuthentication.getAuthenticatedSession().getuID());
+        itemWithdrawsData = itemWithdrawServices.loadSpecificUserData("U0001");
 
         //Setting cell value factory to table view
         WIDColumn.setCellValueFactory(new PropertyValueFactory<>("iWID"));

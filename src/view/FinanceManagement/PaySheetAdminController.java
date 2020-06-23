@@ -239,11 +239,10 @@ public class PaySheetAdminController implements Initializable {
         ObservableList<Allowance> allowanceObservableList = FXCollections.observableArrayList();
         ObservableList<PaySheet> paySheetObservableList = FXCollections.observableArrayList();
         PaySheet paySheet = new PaySheet();
-
+        double totalAllowancesValue = 0;
         double totalNetSalary = 0;
 
         for(Employee employee : employeeObservableList){
-            double totalAllowancesValue = 0;
             SalarySchemeServices salarySchemeServices = new SalarySchemeServices();
             SalaryScheme salaryScheme = new SalaryScheme();
             salaryScheme = salarySchemeServices.loadSpecificData(employee.geteBSSID());
@@ -255,15 +254,13 @@ public class PaySheetAdminController implements Initializable {
 
             allowanceObservableList.addAll(allowancesList);
 
-
-            for(Allowance allowance : allowancesList){
+            for(Allowance allowance : allowanceObservableList){
                 if(allowance.getaType().equals("Fixed Value")){
                     totalAllowancesValue += allowance.getaValue();
-                }else {
-                    totalAllowancesValue += (salaryScheme.getbSSAmount() * allowance.getaValue() / 100);
+                }else{
+                    totalAllowancesValue += salaryScheme.getbSSAmount() * allowance.getaValue() / 100;
                 }
             }
-
             paySheet.setpSEID(employee.geteID());
             paySheet.setpSEName(employee.geteName());
             paySheet.setpSNIC(employee.geteNIC());
@@ -273,7 +270,6 @@ public class PaySheetAdminController implements Initializable {
             paySheet.setpSDate(String.valueOf(LocalDate.now()));
             paySheet.setpSBankName(employee.geteBankName());
             paySheet.setpSAccountNo(employee.geteAccNo());
-
 
             paySheetObservableList.add(paySheet);
         }
