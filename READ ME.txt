@@ -1,0 +1,4 @@
+
+Setup the followings before using the system :
+		1. Create MYSQL database using the Script at : \src\lib\SQL Script and name the Schema as "bms"
+		2. Change MYSQL server user name and password at : \src\util\dbConnect\DBConnection.java
